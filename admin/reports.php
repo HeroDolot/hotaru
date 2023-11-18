@@ -71,7 +71,7 @@ include './components/navbar.php';
                                     </td>
                                     <td>
                                         <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                            <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
+                                            <button type="submit" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
                                                 <i class="fa-solid fa-eye text-white"></i>
                                             </button>
                                         </div>

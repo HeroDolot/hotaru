@@ -155,10 +155,10 @@ include './components/navbar.php';
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-12">
+      <div class="col-md-8 col-12">
         <div class="fw-bolder text-danger" id='calendar'></div>
       </div>
-      <div class="col-md-6 col-12 mt-4 mt-md-0">
+      <div class="col-md-4 col-12 mt-4 mt-md-0">
         <div class="flex-fill">
           <canvas id="myLineChart"></canvas>
         </div>
@@ -316,7 +316,7 @@ include './components/navbar.php';
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth',
+        right: 'dayGridMonth,timeGridWeek,listWeek',
       },
       events: [
         <?php
