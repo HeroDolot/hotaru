@@ -2,8 +2,6 @@
 session_start();
 
 include '../connection.php';
-include './includes/header.php';
-include './components/navbar.php';
 
 
 // Check if the user is logged in
@@ -15,7 +13,7 @@ if (!isset($_SESSION['user_email'])) {
 
 function fetchInquiries($conn)
 {
-  $sql = "SELECT inquiry_id, client_name, client_number, client_region, client_wo FROM inquiry";
+  $sql = "SELECT inquiry_id, client_name, client_number, client_region, client_wo, inquiry_status FROM inquiry";
   $result = mysqli_query($conn, $sql);
 
   $inquiries = array();
@@ -28,6 +26,44 @@ function fetchInquiries($conn)
 
 $inquiries = fetchInquiries($conn);
 
+if (isset($_POST["submit_contract"])) {
+  var_dump($_POST);
+  $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
+  $name = mysqli_real_escape_string($conn, $_POST["name"]);
+  $location = mysqli_real_escape_string($conn, $_POST["location"]);
+  $contract = mysqli_real_escape_string($conn, $_POST["contract"]);
+
+  $startDate = strtotime(mysqli_real_escape_string($conn, $_POST["start_date"]));
+
+  $sql = "INSERT INTO accepted (accepted_inquiry_id,accepted_client_name,accepted_contract,accepted_start_date) VALUES($inquiry_id,'$name',$contract,$startDate)";
+  mysqli_query($conn, $sql);
+  if (mysqli_affected_rows($conn) == 1) {
+    $sql = "UPDATE inquiry SET inquiry_status = 1 WHERE inquiry_id = $inquiry_id";
+    mysqli_query($conn, $sql);
+    if (mysqli_affected_rows($conn) == 1) {
+      header("location:./?success=Inquiry Approved!");
+    } else {
+      header("location:./?error=Failed to update status!");
+    }
+  } else {
+    header("location:./?error=Failed to approved!");
+  }
+}
+
+if (isset($_POST["inquiry_decline"])) {
+  var_dump($_POST);
+  $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
+  $sql = "UPDATE inquiry SET inquiry_status = -1 WHERE inquiry_id = $inquiry_id";
+  mysqli_query($conn, $sql);
+  if (mysqli_affected_rows($conn) == 1) {
+    header("location:./?success=Inquiry decline!");
+  } else {
+    header("location:./?error=Inquiry failed to decline!");
+  }
+}
+
+include './includes/header.php';
+include './components/navbar.php';
 ?>
 
 <div class="container-fluid py-5 p-5">
@@ -157,66 +193,91 @@ $inquiries = fetchInquiries($conn);
               </thead>
               <tbody class="align-middle">
                 <?php foreach ($inquiries as $inquiry) {
+                  $inq_id = $inquiry['inquiry_id'];
                   $modalId = 'myModal_' . $inquiry['inquiry_id']; // Unique modal ID for each record
+                  if ($inquiry["inquiry_status"] == 0) :
                 ?>
-                  <tr>
-                    <td><?php echo $inquiry['client_name']; ?></td>
-                    <td><?php echo $inquiry['client_number']; ?></td>
-                    <td><?php echo $inquiry['client_region']; ?></td>
-                    <td><?php echo $inquiry['client_wo']; ?></td>
-                    <td>
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
-                          <i class="fa fa-check fa-solid"></i>
-                        </button>
-                        <!-- Check Modal -->
-                        <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <!-- Form inside the modal -->
-                                <form>
-                                  <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control fw-bolder" id="clientName" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
-                                    <label for="clientName">Client Name</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control fw-bolder" id="clientLocation" placeholder="Location">
-                                    <label for="clientLocation">Location</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="date" class="form-control fw-bolder" id="dateStart">
-                                    <label for="dateStart">Date Start</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="date" class="form-control fw-bolder" id="dateEnd">
-                                    <label for="dateEnd">Date End</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control fw-bolder" id="contractAmount" placeholder="Contract Amount">
-                                    <label for="contractAmount">Contract Amount</label>
-                                  </div>
-                                </form>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                    <tr>
+                      <td><?php echo $inquiry['client_name']; ?></td>
+                      <td><?php echo $inquiry['client_number']; ?></td>
+                      <td><?php echo $inquiry['client_region']; ?></td>
+                      <td><?php echo $inquiry['client_wo']; ?></td>
+                      <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+                            <i class="fa fa-check fa-solid"></i>
+                          </button>
+                          <!-- Check Modal -->
+                          <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- Form inside the modal -->
+                                  <form method="POST">
+                                    <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                                    <div class="mb-3 form-floating">
+                                      <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
+                                      <label for="clientName">Client Name</label>
+                                    </div>
+                                    <div class="mb-3 form-floating">
+                                      <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
+                                      <label for="clientLocation">Location</label>
+                                    </div>
+                                    <div class="mb-3 form-floating">
+                                      <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
+                                      <label for="dateStart">Date Start</label>
+                                    </div>
+                                    <div class="mb-3 form-floating">
+                                      <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
+                                      <label for="contractAmount">Contract Amount</label>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
+                                  </form>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <!-- Check Modal -->
+                          <form method="POST">
+                            <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                            <button class="btn btn-danger" type="submit" name="inquiry_decline">
+                              <li class="fa fa-trash fa-solid"></li>
+                            </button>
+                          </form>
                         </div>
-                        <!-- Check Modal -->
-                        <button class="btn btn-danger">
-                          <li class="fa fa-trash fa-solid"></li>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                <?php } ?>
+                      </td>
+                    <?php endif;
+                  if ($inquiry["inquiry_status"] == 1) {
+                    echo '<tr>
+                      <td>' . $inquiry['client_name'] . '</td>
+                      <td>' . $inquiry['client_number'] . ' </td>
+                      <td>' . $inquiry['client_region'] . '</td>
+                      <td>' . $inquiry['client_wo'] . '</td>  
+                      <td><p class="text-success">Approved</p></td>
+                    </tr>';
+                  }
+
+                  if ($inquiry["inquiry_status"] == -1) {
+                    echo '<tr>
+                      <td>' . $inquiry['client_name'] . '</td>
+                      <td>' . $inquiry['client_number'] . ' </td>
+                      <td>' . $inquiry['client_region'] . '</td>
+                      <td>' . $inquiry['client_wo'] . '</td>  
+                      <td><p class="text-danger">Decline</p></td>
+                    </tr>';
+                  }
+                    ?>
+                    </tr>
+                  <?php } ?>
               </tbody>
             </table>
           </div>
@@ -327,21 +388,6 @@ $inquiries = fetchInquiries($conn);
 
   // Create and render the Line Chart
   const myLineChart = new Chart(lineCtx, lineConfig);
-
-  // Get a reference to the input element
-  var contractAmountInput = document.getElementById("contractAmount");
-
-  // Add an event listener for the input event
-  contractAmountInput.addEventListener("input", function() {
-    // Remove any existing commas and non-numeric characters
-    var inputValue = contractAmountInput.value.replace(/[^\d.]/g, "");
-
-    // Format the input with commas
-    var formattedValue = Number(inputValue).toLocaleString();
-
-    // Set the input value to the formatted value
-    contractAmountInput.value = formattedValue;
-  });
 </script>
 <?php
 include './includes/footer.php';
