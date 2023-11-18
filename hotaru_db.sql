@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 02:07 AM
+-- Generation Time: Nov 18, 2023 at 07:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,15 +32,18 @@ CREATE TABLE `accepted` (
   `accepted_inquiry_id` int(11) NOT NULL,
   `accepted_client_name` text NOT NULL,
   `accepted_contract` int(11) NOT NULL,
-  `accepted_start_date` int(11) NOT NULL
+  `accepted_start_date` int(11) NOT NULL,
+  `accepted_location` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accepted`
 --
 
-INSERT INTO `accepted` (`accepted_id`, `accepted_inquiry_id`, `accepted_client_name`, `accepted_contract`, `accepted_start_date`) VALUES
-(3, 12, 'm4k1b0y Desu ka', 50000, 1699916400);
+INSERT INTO `accepted` (`accepted_id`, `accepted_inquiry_id`, `accepted_client_name`, `accepted_contract`, `accepted_start_date`, `accepted_location`) VALUES
+(5, 12, 'm4k1b0y Desu ka', 35000, 1700866800, '185 Angeles II Pasolo Valenzuela City, Philippines'),
+(6, 12, 'm4k1b0y Desu ka', 55000, 1700953200, '185 Angeles II Pasolo Valenzuela City, Philippines'),
+(7, 10, 'May anne dolot', 49000, 1701039600, '275 Dreamland St. Pasolo Valenzuela City');
 
 -- --------------------------------------------------------
 
@@ -66,9 +69,9 @@ CREATE TABLE `inquiry` (
 INSERT INTO `inquiry` (`inquiry_id`, `client_email`, `client_name`, `client_number`, `client_region`, `client_wo`, `client_comment`, `inquiry_status`) VALUES
 (8, 'test@mail.com', '123', '123', 'Kanto', 'Relocation', '123', 0),
 (9, 'dolot.hero@gmail.com', 'ヒーロードロット', '09055270361', 'Kanto', 'Things Throw', 'やれやれだぜ', 0),
-(10, 'mayannedolot@gmail.com', 'May anne dolot', '012312987', 'Kanto', 'Relocation', 'blabal', 0),
+(10, 'mayannedolot@gmail.com', 'May anne dolot', '012312987', 'Kanto', 'Relocation', 'blabal', 1),
 (11, 'macmac0804@gmail.com', 'MakMak Atendido', '1234456932', 'Kanto', 'House Cleaning', 'aaaa', -1),
-(12, 'testing@test.com', 'm4k1b0y Desu ka', '09458513800', 'Kanto', 'Things Throw', 'please throw my corps in the ocean, thanks :)', 1);
+(12, 'testing@test.com', 'm4k1b0y Desu ka', '09458513800', 'Kanto', 'Things Throw', 'please throw my corps in the ocean, thanks :)', 2);
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `accepted`
 --
 ALTER TABLE `accepted`
-  MODIFY `accepted_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `accepted_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `inquiry`

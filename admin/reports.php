@@ -1,4 +1,7 @@
 <?php
+session_start();
+include '../connection.php';
+
 include './includes/header.php';
 include './components/navbar.php';
 ?>
@@ -41,27 +44,44 @@ include './components/navbar.php';
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-success">
-                                        Completed
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-eye text-white"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
+                            <?php
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 OR inquiry_status = 2");
+                            while ($row = $result->fetch_assoc()) :
+                                $inq_id = $row["inquiry_id"];
+                                $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                            ?>
+
+                                <tr>
+                                    <td><?php echo $inq_id ?></td>
+                                    <td><?php echo date('M d, Y', $info["accepted_start_date"]) ?></td>
+                                    <td><?php echo $info["accepted_client_name"] ?></td>
+                                    <td><?php echo $row["client_number"] ?></td>
+                                    <td><?php echo $info["accepted_location"] ?></td>
+                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td>
+                                        <?php
+                                        if ($row["inquiry_status"] == 2) {
+                                            echo '<div class="badge text-bg-success">Completed</div>';
+                                        }
+
+                                        if ($row["inquiry_status"] == 1) {
+                                            echo '<div class="badge text-bg-danger">Pending</div>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="wrapper d-md-flex justify-content-around d-sm-none">
+                                            <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
+                                                <i class="fa-solid fa-eye text-white"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <?php endwhile; ?>
+
+
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>Oct 27, 2023</td>
                                 <td>Ken Suzuki</td>
@@ -83,7 +103,7 @@ include './components/navbar.php';
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -116,7 +136,44 @@ include './components/navbar.php';
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr>
+
+                            <?php
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1");
+                            while ($row = $result->fetch_assoc()) :
+                                $inq_id = $row["inquiry_id"];
+                                $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                            ?>
+
+                                <tr>
+                                    <td><?php echo $inq_id ?></td>
+                                    <td><?php echo date('M d, Y', $info["accepted_start_date"]) ?></td>
+                                    <td><?php echo $info["accepted_client_name"] ?></td>
+                                    <td><?php echo $row["client_number"] ?></td>
+                                    <td><?php echo $info["accepted_location"] ?></td>
+                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td>
+                                        <?php
+                                        if ($row["inquiry_status"] == 2) {
+                                            echo '<div class="badge text-bg-success">Completed</div>';
+                                        }
+
+                                        if ($row["inquiry_status"] == 1) {
+                                            echo '<div class="badge text-bg-danger">Pending</div>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="wrapper d-md-flex justify-content-around d-sm-none">
+                                            <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
+                                                <i class="fa-solid fa-eye text-white"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <?php endwhile; ?>
+
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>Oct 27, 2023</td>
                                 <td>Ken Suzuki</td>
@@ -138,30 +195,7 @@ include './components/navbar.php';
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-danger">
-                                        Pending
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger col-12 col-md-5">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -193,7 +227,43 @@ include './components/navbar.php';
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr>
+                            <?php
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 2");
+                            while ($row = $result->fetch_assoc()) :
+                                $inq_id = $row["inquiry_id"];
+                                $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                            ?>
+
+                                <tr>
+                                    <td><?php echo $inq_id ?></td>
+                                    <td><?php echo date('M d, Y', $info["accepted_start_date"]) ?></td>
+                                    <td><?php echo $info["accepted_client_name"] ?></td>
+                                    <td><?php echo $row["client_number"] ?></td>
+                                    <td><?php echo $info["accepted_location"] ?></td>
+                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td>
+                                        <?php
+                                        if ($row["inquiry_status"] == 2) {
+                                            echo '<div class="badge text-bg-success">Completed</div>';
+                                        }
+
+                                        if ($row["inquiry_status"] == 1) {
+                                            echo '<div class="badge text-bg-danger">Pending</div>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="wrapper d-md-flex justify-content-around d-sm-none">
+                                            <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
+                                                <i class="fa-solid fa-eye text-white"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <?php endwhile; ?>
+
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>Oct 27, 2023</td>
                                 <td>Ken Suzuki</td>
@@ -212,27 +282,7 @@ include './components/navbar.php';
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-success">
-                                        Completed
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-eye text-white"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">

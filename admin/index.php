@@ -35,7 +35,7 @@ if (isset($_POST["submit_contract"])) {
 
   $startDate = strtotime(mysqli_real_escape_string($conn, $_POST["start_date"]));
 
-  $sql = "INSERT INTO accepted (accepted_inquiry_id,accepted_client_name,accepted_contract,accepted_start_date) VALUES($inquiry_id,'$name',$contract,$startDate)";
+  $sql = "INSERT INTO accepted (accepted_inquiry_id,accepted_client_name,accepted_contract,accepted_start_date,accepted_location) VALUES($inquiry_id,'$name',$contract,$startDate,'$location')";
   mysqli_query($conn, $sql);
   if (mysqli_affected_rows($conn) == 1) {
     $sql = "UPDATE inquiry SET inquiry_status = 1 WHERE inquiry_id = $inquiry_id";
@@ -105,7 +105,7 @@ include './components/navbar.php';
                 <h4>Pending</h4>
               </div>
               <div class="col-md-3 col-3">
-                <h4 class="fw-bolder" style="margin-left: 10px;">4</h4>
+                <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn,"SELECT COUNT(*) as total FROM inquiry WHERE inquiry_status = 1")->fetch_assoc()["total"];?></h4>
               </div>
             </div>
             <div class="card-footer p-0">
@@ -255,27 +255,7 @@ include './components/navbar.php';
                           </form>
                         </div>
                       </td>
-                    <?php endif;
-                  if ($inquiry["inquiry_status"] == 1) {
-                    echo '<tr>
-                      <td>' . $inquiry['client_name'] . '</td>
-                      <td>' . $inquiry['client_number'] . ' </td>
-                      <td>' . $inquiry['client_region'] . '</td>
-                      <td>' . $inquiry['client_wo'] . '</td>  
-                      <td><p class="text-success">Approved</p></td>
-                    </tr>';
-                  }
-
-                  if ($inquiry["inquiry_status"] == -1) {
-                    echo '<tr>
-                      <td>' . $inquiry['client_name'] . '</td>
-                      <td>' . $inquiry['client_number'] . ' </td>
-                      <td>' . $inquiry['client_region'] . '</td>
-                      <td>' . $inquiry['client_wo'] . '</td>  
-                      <td><p class="text-danger">Decline</p></td>
-                    </tr>';
-                  }
-                    ?>
+                    <?php endif;?>
                     </tr>
                   <?php } ?>
               </tbody>
