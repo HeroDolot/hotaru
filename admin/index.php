@@ -105,7 +105,7 @@ include './components/navbar.php';
                 <h4>Pending</h4>
               </div>
               <div class="col-md-3 col-3">
-                <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn,"SELECT COUNT(*) as total FROM inquiry WHERE inquiry_status = 1")->fetch_assoc()["total"];?></h4>
+                <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn, "SELECT COUNT(*) as total FROM inquiry WHERE inquiry_status = 1")->fetch_assoc()["total"]; ?></h4>
               </div>
             </div>
             <div class="card-footer p-0">
@@ -255,7 +255,7 @@ include './components/navbar.php';
                           </form>
                         </div>
                       </td>
-                    <?php endif;?>
+                    <?php endif; ?>
                     </tr>
                   <?php } ?>
               </tbody>
@@ -316,8 +316,21 @@ include './components/navbar.php';
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek'
+        right: 'dayGridMonth',
       },
+      events: [
+        <?php
+          $result = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_status = 1 or inquiry_status = 2");
+          while ($row = $result->fetch_assoc()):
+            $inq_id = $row["inquiry_id"];
+            $info = mysqli_query($conn,"SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+        ?> {
+          title: '<?php echo $row["client_wo"];?>',
+          start: '<?php echo date("Y-m-d", $info["accepted_start_date"]);?>', // Event start date
+          color: '<?php if ($row["inquiry_status"] == 1){echo 'red';} else {echo 'green';}?>',
+        },
+        <?php endwhile;?>
+      ],
 
     });
 
