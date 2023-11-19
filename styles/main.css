@@ -1,3 +1,8 @@
+.index-first {
+  background: url(../../hotaru/img/hero-img.jpg) no-repeat center center fixed;
+}
+
+
 .card-custom {
   border: none; /* Remove Bootstrap's border */
   position: relative; /* Added to manage child element positions */
