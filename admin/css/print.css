@@ -1,0 +1,25 @@
+@media print {
+    body {
+        font-size: 12px; /* Adjust font size for better readability on print */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        page-break-inside: avoid; /* Avoid breaking inside containers during printing */
+    }
+}

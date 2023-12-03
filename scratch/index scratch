@@ -1,0 +1,231 @@
+!-- <section style="background: url('./img/sample-1.jpg') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+    <div class="container py-3">
+        <div class="d-flex justify-content-center align-items-center text-white">
+            <h3>Our Services</h3>
+        </div>
+        <div class="wrapper mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/sample-1.jpg" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Moving Service</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/clean.webp" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Cleaning Service</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/throw.webp" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Throw</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div> -->
+
+
+
+<section class="estimate">
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-primary">Estimate Form</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="floatingName" placeholder="Name" required>
+                                    <label for="floatingName">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="floatingNumber" placeholder="Phone Number" required>
+                                    <label for="floatingNumber">Phone Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="" id="floatingMail" placeholder="Email Address" required>
+                            <label for="floatingMail">Email Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="" id="floatingMovingDate" placeholder="Moving Date" style="text-transform:uppercase;" required>
+                            <label for="floatingMovingDate">Moving Date</label>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mt-md-0">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="movingFrom" placeholder="Moving From - ( POST CODES or Address )" required>
+                                    <label for="movingFrom">Moving From</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="movingTo" placeholder="Moving To - ( POST CODES or Address )" required>
+                                    <label for="movingTo">Moving To</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 col-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="fromFloor" placeholder="Current Apartment Floor" required>
+                                    <label for="fromFloor">Current Apartment Floor</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="" id="toFloor" placeholder="Next Apartment Floor" required>
+                                    <label for="toFloor">Next Apartment Floor</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapepr mb-3">
+                            <p class="fw-bolder">Elevator Information</p>
+                            <div class="row">
+                                <div class="col-md-3 col-12 mb-3 mb-md-0">
+                                    <div class="card p-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox1" name="elevatorGroup">
+                                            <label class="form-check-label" for="checkbox1">
+                                                Current Apartment have Elevator
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12 mb-3 mb-md-0">
+                                    <div class="card p-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox2" name="elevatorGroup">
+                                            <label class="form-check-label" for="checkbox2">
+                                                New Apartment have Elevator
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="card p-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox3" name="elevatorGroup">
+                                            <label class="form-check-label" for="checkbox3">
+                                                Both Apartments do have Elevators.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="card p-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox4" name="elevatorGroup">
+                                            <label class="form-check-label" for="checkbox4">
+                                                Both Apartment doesn't have Elevator
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="estimateButton" class="btn btn-primary fw-bolder justify-content-end d-flex">Free Estimate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+<div class="overlay"></div>
+    <div class="container">
+        <h1 class="d-flex align-items-center justify-content-center  py-5 mt-5">Our Services</h1>
+        <div class="wrapper mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/services-moving.webp" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Moving Service</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/clean.webp" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Cleaning Service</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card card-custom">
+                        <div class="card-body p-0">
+                            <div class="image-container">
+                                <img src="./img/throw.webp" class="img-fluid" alt="">
+                                <div class="overlay">
+                                    <h4 class="fw-bolder">Disposal Services</h4>
+                                    <div class="additional-info">
+                                        <p>Additional text goes here</p>
+                                        <a href="#" class="btn btn-primary">Inquire</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
