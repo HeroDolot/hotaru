@@ -5,7 +5,7 @@ include '../includes/header.php';
 include '../components/navbar.php';
 ?>
 
-<div class="container-fluid py-5 p-5 d-flex justify-content-end">
+<div class="container-fluid d-flex justify-content-end" style="padding-top: 150px;">  
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb fw-bolder fs-5">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -26,23 +26,6 @@ include '../components/navbar.php';
         </div>
     </div>
     <hr>
-    <div class="text-center fw-bolder fs-3 mt-4 mb-3">
-        Our services
-    </div>
-        <div class="container py-3">
-            <div class="card col-md-6">
-                <img src="../img/sample-1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">この量の家電製品の価格は約です</p>
-                    <p class="card-text">ken yappari hentai</p>
-                    <p class="card-text">ken oshiri daisuki</p>
-                    <p class="card-text">¥50,000</p>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" onclick="window.location.href='./inquiry.php'">Inquire</button>
-                </div>
-            </div>
-        </div>
 </section>
 
 

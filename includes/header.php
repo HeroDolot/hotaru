@@ -11,6 +11,10 @@
     <script src="../../hotaru/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <!-- Bootstrap -->
 
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+    <!-- Parallax -->
+
     <!-- FontaAwesome -->
     <script src="https://kit.fontawesome.com/355b676a18.js" crossorigin="anonymous"></script>
     <!-- FontaAwesome -->
@@ -44,4 +48,4 @@
     <!-- Custom CSS -->
 </head>
 
-<body>
+<body style="padding-top: 60px;">

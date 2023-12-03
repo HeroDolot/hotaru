@@ -6,7 +6,7 @@ include '../components/navbar.php';
 include '../connection.php';
 ?>
 
-<div class="container-fluid py-5 p-5 d-flex justify-content-end">
+<div class="container-fluid d-flex justify-content-end" style="padding-top: 150px;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb fw-bolder fs-5">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -17,7 +17,8 @@ include '../connection.php';
 
 <section class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
+            <img src="../img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="inquiry">
             <div class="card" style="background-color: #f3f3f3;">
                 <div class="card-header fw-bolder fs-3">
                     Inquire
@@ -46,9 +47,9 @@ include '../connection.php';
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="clientWO" required>
                                 <option selected disabled>Select Work Order</option>
-                                <option value="Relocation">Relocation</option>
-                                <option value="House Cleaning">House Cleaning</option>
-                                <option value="Things Throw">Things Throw</option>
+                                <option value="Relocation">Moving Services</option>
+                                <option value="House Cleaning">House Cleaning Services</option>
+                                <option value="Things Throw">Disposal Services</option>
                                 <option value="Others">Others</option>
                             </select>
                             <label for="floatingSelect">Select Work Order</label>
@@ -73,6 +74,9 @@ include '../connection.php';
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="col-md-5 d-none d-md-block">
+            <img src="../img/inquiry-img.jpg" class="img-fluid" alt="inquiry">
         </div>
     </div>
 </section>

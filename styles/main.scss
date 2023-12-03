@@ -35,6 +35,18 @@
     color: #fff;
 }
 
+.female-introduction {
+    background: url("../img/women.jpg") no-repeat center;
+    background-size: cover;
+    background-position: center center; /* Center the image */
+    min-height: 813.5px;
+    margin-top: 81px;
+}
+
+.female-introduction h1 {
+    font-size: 145px;
+}
+
 .section-first {
     position: relative;
     background: url('../img/hero-img.jpg') no-repeat center center;
@@ -92,7 +104,7 @@
 
 .section-second {
     position: relative;
-    background: url('../img/sample-1.jpg') no-repeat center fixed;
+    background: url('../img/section-2.webp') no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -109,7 +121,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: url('../img/sample-1.jpg') no-repeat center fixed;
+    background: url('../img/section-2.webp') no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -138,3 +150,64 @@
     text-align: center;
     padding: 20px;
 }
+
+
+ .card-call-to-action {
+        min-width: 500px;
+    }
+
+    .p-contact {
+        font-size: 38px;
+    }
+
+    .circles {
+        border: 5px dotted orange;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .circles p {
+        margin: 0;
+        font-weight: bolder;
+    }
+
+
+    @media (max-width: 768px) {
+        .card-call-to-action {
+            min-width: 100%;
+        }
+    
+        .p-contact {
+            font-size: 24px;
+        }
+    
+        .female-introduction h1 {
+            font-size: 45px;
+        }
+    
+        .female-introduction .margin {
+            margin-bottom: 75px;
+        }
+    
+        .female-introduction .catch {
+            font-weight: bolder;
+            margin-top: 210px;
+        }
+    }
+    
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 576px) {
+        .female-introduction h1 {
+            font-size: 36px;
+        }
+    
+        .female-introduction .catch {
+            font-size: 18px;
+            margin-top: 200px;
+        }
+    }

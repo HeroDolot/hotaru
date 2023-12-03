@@ -22,8 +22,10 @@ include './components/navbar.php';
                     <form action="">
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option selected>Proof</option>
-                                <option value="1">Blog</option>
+                                <option selected>Main Blog</option>
+                                <option value="1">Sub Main Blog</option>
+                                <option value="2">Secondary Blog</option>
+                                <option value="3">Promotion</option>
                             </select>
                             <label for="floatingSelect">Select Location</label>
                         </div>
@@ -31,7 +33,11 @@ include './components/navbar.php';
                             <input type="text" class="form-control" id="fileUploadTitle" placeholder="fileUploadTitle" required>
                             <label for="fileUploadTitle">Title</label>
                         </div>
-                        <div class="form-floating mb-3" id="workOrderContainer">
+                        <div class="mb-3 form-floating">
+                            <textarea class="form-control" placeholder="Context" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Context</label>
+                        </div>
+                        <!-- <div class="form-floating mb-3" id="workOrderContainer">
                             <select class="form-select" id="workOrderSelect" aria-label="Floating label select example" required>
                                 <option selected disabled>Work Order</option>
                                 <option value="1">Relocation</option>
@@ -39,8 +45,8 @@ include './components/navbar.php';
                                 <option value="3">Stuff Throwing</option>
                             </select>
                             <label for="workOrderSelect">Work Order Type</label>
-                        </div>
-                        <div id="fileUploadDescriptionContainer"></div>
+                        </div> -->
+                        <!-- <div id="fileUploadDescriptionContainer"></div> -->
                         <div class="form-floating mb-3">
                             <!-- Image input for manual uploading -->
                             <input type="file" class="form-control" name="fileUploadImage" id="fileUploadImage" required>
@@ -56,19 +62,42 @@ include './components/navbar.php';
                 <thead>
                     <th>Location</th>
                     <th>Title</th>
-                    <th>Work Order</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Blog</td>
-                        <td>Entry 1</td>
-                        <td>N/A</td>
+                        <td>Main Blog</td>
+                        <td>Main Blog 1</td>
                         <td>
                             <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                <button type="submit" class="btn btn-info text-white col-5 col-md-5">
-                                    <i class="fa-solid fa-pen"></i>
+                                <button type="button" class="btn btn-info text-white col-5 col-md-5" data-bs-toggle="modal" data-bs-target="#modal">
+                                    <i class="fas fa-pen"></i>
                                 </button>
+
+                                <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Blog ( SHOW TITLE )</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3 form-floating">
+                                                    <input type="text" class="form-control" id="fileUploadTitle" placeholder="fileUploadTitle" required>
+                                                    <label for="fileUploadTitle">Title</label>
+                                                </div>
+                                                <div class="mb-3 form-floating">
+                                                    <textarea class="form-control" placeholder="Context" id="floatingTextarea2" style="height: 100px"></textarea>
+                                                    <label for="floatingTextarea2">Context</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-danger col-5 col-md-5">
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
@@ -76,9 +105,8 @@ include './components/navbar.php';
                         </td>
                     </tr>
                     <tr>
-                        <td>Proof</td>
-                        <td>Proof 1</td>
-                        <td>N/A</td>
+                        <td>Secondary</td>
+                        <td>Secondary 1</td>
                         <td>
                             <div class="wrapper d-md-flex justify-content-around d-sm-none">
                                 <button type="submit" class="btn btn-info text-white col-5 col-md-5">
@@ -109,7 +137,7 @@ include './components/navbar.php';
 include './includes/footer.php';
 ?>
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var select = document.getElementById('floatingSelect');
         var titleInput = document.getElementById('fileUploadTitle');
@@ -139,4 +167,4 @@ include './includes/footer.php';
             }
         });
     });
-</script>
+</script> -->

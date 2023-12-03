@@ -235,8 +235,6 @@ include './components/navbar.php';
                                       <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
                                       <label for="contractAmount">Contract Amount</label>
                                     </div>
-
-
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
