@@ -71,7 +71,7 @@ include './components/navbar.php';
                                     </td>
                                     <td>
                                         <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                            <a href="./completedReport.php" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
+                                            <a href="./completedReport.php?id=<?php echo $row["inquiry_id"]?>" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
                                                 <i class="fa-solid fa-eye text-white"></i>
                                             </a>
                                         </div>

@@ -1,4 +1,32 @@
 <?php
+session_start();
+
+include("../connection.php");
+
+if (isset($_POST["add_item"])) {
+    var_dump($_POST);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $dateAcquired = strtotime(mysqli_real_escape_string($conn, $_POST['dateAcquired']));
+    $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+
+    mysqli_query($conn, "INSERT INTO assets(asset_name,asset_date_acquired,asset_quantity) VALUES('$name',$dateAcquired,$quantity)");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./assets.php?success=Asset has been added!");
+    } else {
+        header("location:./assets.php?error=Asset failed to add!");
+    }
+}
+
+if (isset($_POST["delete_asset"])) {
+    $asset_id = mysqli_real_escape_string($conn, $_POST["delete_asset"]);
+    mysqli_query($conn, "DELETE FROM assets WHERE asset_id = $asset_id");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./assets.php?success=Asset has been deleted!");
+    } else {
+        header("location:./assets.php?error=Asset failed to delete!");
+    }
+}
+
 include './includes/header.php';
 include './components/navbar.php';
 ?>
@@ -14,6 +42,16 @@ include './components/navbar.php';
 
 <div class="container">
     <div class="wrapper mb-3 mt-md-0">
+        <?php
+        if (isset($_GET["success"])) {
+            echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
+        }
+
+        if (isset($_GET["error"])) {
+            echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
+        }
+
+        ?>
         <div class="d-flex justify-content-between">
             <h4 class="fw-bolder text-primary">Hotaru Services Assets</h4>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
@@ -28,26 +66,28 @@ include './components/navbar.php';
                             <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form>
+                        <form method="POST">
+                            <div class="modal-body">
+
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Item Name">
+                                    <input type="text" class="form-control" required name="name" placeholder="Item Name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="dateAcquired" class="form-label">Date Acquired</label>
-                                    <input type="date" class="form-control" id="dateAcquired">
+                                    <input type="date" class="form-control" required name="dateAcquired">
                                 </div>
                                 <div class="mb-3">
                                     <label for="quantity" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="quantity" placeholder="Quantity">
+                                    <input type="number" class="form-control" required name="quantity" placeholder="Quantity">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save</button>
-                        </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" name="add_item" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>F
                     </div>
                 </div>
             </div>
@@ -61,21 +101,28 @@ include './components/navbar.php';
             <th>Action</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Belt Carrier</td>
-                <td>Oct 5, 2023</td>
-                <td>3</td>
-                <td>
-                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                        <button type="submit" class="btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button type="submit" class="btn btn-danger col-12 col-md-5">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+            <?php
+            $result = mysqli_query($conn, "SELECT * FROM assets");
+            while ($row = $result->fetch_assoc()) :
+            ?>
+                <tr>
+                    <td><?php echo $row["asset_name"] ?></td>
+                    <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
+                    <td><?php echo $row["asset_quantity"] ?></td>
+                    <td>
+                        <div class="wrapper d-md-flex justify-content-around d-sm-none">
+                            <button type="submit" class="col btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <form method="POST" class="col">
+                                <button type="submit" name="delete_asset" value="<?php echo $row["asset_id"] ?>" class="btn btn-danger col-12 col-md-5">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            <?php endwhile ?>
         </tbody>
     </table>
     <nav aria-label="Page navigation example">

@@ -1,4 +1,9 @@
 <?php
+session_start();
+include('../connection.php');
+
+
+
 include './includes/header.php';
 include './components/navbar.php';
 ?>
@@ -28,17 +33,24 @@ include './components/navbar.php';
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Ken Suzuki</td>
-                        <td>Oct 1, 2023</td>
-                        <td>Relocation</td>
-                        <td>¥700,000</td>
-                        <th>
-                            <a class="btn btn-info text-white">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                        </th>
-                    </tr>
+                    <?php
+                    $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
+                    while ($row = $result->fetch_assoc()) :
+                        $inquiry_id = $row["inquiry_id"];
+                        $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
+                    ?>
+                        <tr>
+                            <td><?php echo $acceptedInfo["accepted_client_name"]; ?></td>
+                            <td><?php echo date("M d, Y", $acceptedInfo["accepted_start_date"]) ?></td>
+                            <td><?php echo $row["client_wo"] ?></td>
+                            <td>¥<?php echo number_format($acceptedInfo["accepted_contract"]) ?></td>
+                            <th>
+                                <a class="btn btn-info text-white" href="./completedReport.php?id=<?php echo $row["inquiry_id"] ?>">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    <?php endwhile ?>
                 </tbody>
             </table>
             <nav aria-label="Page navigation example">
@@ -58,8 +70,39 @@ include './components/navbar.php';
     const ctx = document.getElementById('salesChart').getContext('2d');
 
     // Sales Data
-    const months = ['January', 'February', 'March', 'April', 'May'];
-    const salesData = [1000, 1200, 1500, 1100, 1400];
+    const months = ["Jan-1970",
+        <?php
+        $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
+        $monthYear = array();
+        $salesData = array();
+        while ($row = $result->fetch_assoc()) {
+            $inquiry_id = $row["inquiry_id"];
+            $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
+            if (!in_array(date("M-Y", $acceptedInfo["accepted_start_date"]), $monthYear)) {
+                $monthYear[] = date("M-Y", $acceptedInfo["accepted_start_date"]);
+                echo '"' . date("M-Y", $acceptedInfo["accepted_start_date"]) . '",';
+            }
+
+            $index = array_search(date("M-Y", $acceptedInfo["accepted_start_date"]),$monthYear);
+            if ($index !== false){
+                if (isset($salesData[$index])){
+                    $salesData[$index] = $salesData[$index] + $acceptedInfo["accepted_contract"];
+                } else {
+                    $salesData[$index] = $acceptedInfo["accepted_contract"];
+                }
+            }
+        }
+        ?>
+    ];
+
+
+    const salesData = [ 0,
+        <?php 
+        foreach ($salesData as $value){
+            echo $value . ',';
+        }
+        ?>
+    ];
 
     // Line Chart Data
     const data = {
