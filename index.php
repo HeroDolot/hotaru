@@ -641,15 +641,15 @@ include './components/navbar.php';
                             <small>ご希望は、お電話か、メールどちらが、ご希望ですか？</small>
                             <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#00C300;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
                                 <label class="form-check-label" for="inlineRadio1">お電話か</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#00C300;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required>
                                 <label class="form-check-label" for="inlineRadio2">メールどちらが</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#00C300;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" required>
                                 <label class="form-check-label" for="inlineRadio3">どちらも</label>
                             </div>
                         </div>
