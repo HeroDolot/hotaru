@@ -35,22 +35,27 @@
 }
 
 .female-introduction {
-  background: url("../img/women.jpg") no-repeat center;
+  background: url("../img/moving-out.svg") no-repeat center;
   background-size: cover;
   background-position: center center; /* Center the image */
   min-height: 813.5px;
   margin-top: 81px;
 }
 
-.female-introduction h1 {
-  font-size: 145px;
+.female-introduction-mobile {
+  background: url("../img/women.jpg") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  background-position: center center; /* Center the image */
+  min-height: 813.5px;
+  margin-top: 81px;
 }
 
 .section-first {
   position: relative;
   background: url("../img/hero-img.jpg") no-repeat center center;
   background-size: cover;
-  min-height: 700px;
+  min-height: 809px;
   overflow: hidden;
   /* Ensure the overlay doesn't overflow */
 }
@@ -172,24 +177,18 @@
   .p-contact {
     font-size: 24px;
   }
-  .female-introduction h1 {
-    font-size: 45px;
+  .female-introduction {
+    min-height: 400px; /* Adjust the height for smaller screens */
   }
-  .female-introduction .margin {
+  .female-introduction-mobile h1 {
+    font-size: 40px;
+  }
+  .female-introduction-mobile .margin {
     margin-bottom: 75px;
   }
-  .female-introduction .catch {
+  .female-introduction-mobile .catch {
     font-weight: bolder;
     margin-top: 210px;
   }
 }
-/* Responsive adjustments for smaller screens */
-@media (max-width: 576px) {
-  .female-introduction h1 {
-    font-size: 36px;
-  }
-  .female-introduction .catch {
-    font-size: 18px;
-    margin-top: 200px;
-  }
-}/*# sourceMappingURL=main.css.map */
+/* Responsive adjustments for smaller screens *//*# sourceMappingURL=main.css.map */

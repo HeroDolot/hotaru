@@ -23,6 +23,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery CDN -->
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+
     <!-- Custom CSS -->
     <!-- <link rel="stylesheet" href="../../hotaru/styles/scratch.css"> -->
     <!-- <link rel="stylesheet" href="../../hotaru/styles/main.css"> -->

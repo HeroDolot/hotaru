@@ -235,6 +235,10 @@ include './components/navbar.php';
                                       <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
                                       <label for="contractAmount">Contract Amount</label>
                                     </div>
+                                    <div class="mb-3 form-floating">
+                                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly></textarea>
+                                      <label for="floatingTextarea2">Context</label>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -318,16 +322,20 @@ include './components/navbar.php';
       },
       events: [
         <?php
-          $result = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_status = 1 or inquiry_status = 2");
-          while ($row = $result->fetch_assoc()):
-            $inq_id = $row["inquiry_id"];
-            $info = mysqli_query($conn,"SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+        $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 or inquiry_status = 2");
+        while ($row = $result->fetch_assoc()):
+          $inq_id = $row["inquiry_id"];
+          $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
         ?> {
-          title: '<?php echo $row["client_wo"];?>',
-          start: '<?php echo date("Y-m-d", $info["accepted_start_date"]);?>', // Event start date
-          color: '<?php if ($row["inquiry_status"] == 1){echo 'red';} else {echo 'green';}?>',
-        },
-        <?php endwhile;?>
+            title: '<?php echo $row["client_wo"]; ?>',
+            start: '<?php echo date("Y-m-d", $info["accepted_start_date"]); ?>', // Event start date
+            color: '<?php if ($row["inquiry_status"] == 1) {
+                      echo 'red';
+                    } else {
+                      echo 'green';
+                    } ?>'
+          },
+        <?php endwhile; ?>
       ],
 
     });

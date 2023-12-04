@@ -5,8 +5,14 @@ include '../connection.php';
 if (isset($_POST["complete"])) {
     $inq_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
     mysqli_query($conn, "UPDATE inquiry SET inquiry_status = 2 WHERE inquiry_id = $inq_id");
+    $currentDate = time();
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./pending.php?success=Pending work order complete!");
+        mysqli_query($conn, "UPDATE accepted SET accepted_completed_date = $currentDate WHERE accepted_inquiry_id = $inq_id");
+        if (mysqli_affected_rows($conn) == 1) {
+            header("location:./pending.php?success=Work order complete");
+        } else {
+            header("location:./pending.php?error=Work order failed to complete!");
+        }
     } else {
         header("location:./pending.php?error=Pending work order failed to complete!");
     }
@@ -95,7 +101,7 @@ include './components/navbar.php';
                     </tr>
 
                 <?php endwhile; ?>
-                
+
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
