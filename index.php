@@ -371,7 +371,7 @@ include './components/navbar.php';
 
 
 <section class="container py-5">
-    <p class="text-primary fw-bolder fs-1 mb-2">Blog</p>
+    <p class="text-primary fw-bolder fs-1 mb-2">ブログ</p>
     <div class="row">
         <!-- MAIN BLOG -->
         <div class="col-md-7">
@@ -549,6 +549,106 @@ include './components/navbar.php';
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="call-to-action-section overflow-hidden" style="min-height: 150px; background-color:#DAAD86;">
+    <div class="py-5">
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card card-call-to-action" style="min-height: 158px;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-3">
+                                <img src="./icons/contact-us.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-md-7 col-9 mt-2">
+                                <div class="card-title">
+                                    <p class="fw-bolder fs-5">Contact Us Now!</p>
+                                </div>
+                                <p class="card-text fw-bolder text-primary p-contact" style="letter-spacing:3px;">070-4797-8099</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card card-call-to-action" style="min-height: 148px;">
+                    <button type="button" class="btn btn-outline-none btn-bg-none text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-3">
+                                    <img src="./icons/line.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-md-7 col-9 mt-2">
+                                    <div class="card-title">
+                                        <p class="fw-bolder fs-3">Connect us through <span class="fw-bolder" style="letter-spacing: 3px; color:#00C300!important;">LINE</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fw-bold" id="exampleModalLabel"><img src="./icons/line.png" alt="Line App">Connect with us through <span style="letter-spacing: 3px; color:#00C300">LINE</span> App!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container py-3">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6 fw-bolder">
+                                                <div class="card mb-3 mb-md-0">
+                                                    <div class="card-body p-0">
+                                                        <img src="./img/ken_qr.jpg" class="img-fluid" alt="Ken Line QR CODE">
+                                                        <div class="card-footer">
+                                                            Ken Suzuki
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-6 fw-bolder">
+                                                <div class="card">
+                                                    <div class="card-body p-0">
+                                                        <img src="./img/hotaru_qr.jpg" class="img-fluid" alt="Hotaru Line QR CODE">
+                                                        <div class="card-footer">
+                                                            Hotaru
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-call-to-action" style="min-height: 158px;">
+                    <a href="./pages/inquiry.php" class="text-decoration-none text-black">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-3">
+                                    <img src="./icons/email.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-md-7 col-9 mt-2">
+                                    <div class="card-title">
+                                        <p class="fw-bolder fs-5">Send us an Email!</p>
+                                    </div>
+                                    <p class="card-text fw-bolder text-primary p-contact" style="letter-spacing:3px;">Free Estimate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

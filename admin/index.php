@@ -162,117 +162,130 @@ include './components/navbar.php';
         <div class="flex-fill">
           <canvas id="myLineChart"></canvas>
         </div>
+        <div class="card">
+          <div class="card-header fw-bolder fs-4 text-center text-white bg-success">
+            Work Order
+          </div>
+          <canvas id="myDoughnutChart"></canvas>
+        </div>
       </div>
     </div>
-    <div class="wrapper">
-      <div class="row">
-        <div class="col-md-6 mt-5">
-          <div class="card">
-            <div class="card-header fw-bolder fs-4 text-center text-white bg-success">
-              共同作業した都市
-            </div>
-            <canvas id="myDoughnutChart"></canvas>
-          </div>
-        </div>
-        <div class="col-md-6 mt-5">
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover text-center">
-              <thead class="table-info">
-                <tr>
-                  <th colspan="5" class="fw-bolder">INQUIRIES</th>
-                </tr>
-              </thead>
-              <thead class="table-info">
-                <tr>
-                  <th>Name</th>
-                  <th>Phone Number</th>
-                  <th>Region</th>
-                  <th>Work Order</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody class="align-middle">
-                <?php foreach ($inquiries as $inquiry) {
-                  $inq_id = $inquiry['inquiry_id'];
-                  $modalId = 'myModal_' . $inquiry['inquiry_id']; // Unique modal ID for each record
-                  if ($inquiry["inquiry_status"] == 0) :
-                ?>
-                    <tr>
-                      <td><?php echo $inquiry['client_name']; ?></td>
-                      <td><?php echo $inquiry['client_number']; ?></td>
-                      <td><?php echo $inquiry['client_region']; ?></td>
-                      <td><?php echo $inquiry['client_wo']; ?></td>
-                      <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
-                            <i class="fa fa-check fa-solid"></i>
-                          </button>
-                          <!-- Check Modal -->
-                          <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <!-- Form inside the modal -->
-                                  <form method="POST">
-                                    <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                                    <div class="mb-3 form-floating">
-                                      <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
-                                      <label for="clientName">Client Name</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                      <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
-                                      <label for="clientLocation">Location</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                      <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
-                                      <label for="dateStart">Date Start</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                      <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
-                                      <label for="contractAmount">Contract Amount</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly></textarea>
-                                      <label for="floatingTextarea2">Context</label>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
-                                  </form>
-                                </div>
+  </div>
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-12 mt-5">
+        <?php
+        $inquiriesPerPage = 10;
+        $totalInquiries = count($inquiries);
+        $totalPages = ceil($totalInquiries / $inquiriesPerPage);
+
+        // Determine the current page
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start = ($current_page - 1) * $inquiriesPerPage;
+        ?>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover text-center">
+            <thead class="table-info">
+              <tr>
+                <th colspan="6" class="fw-bolder">INQUIRIES</th>
+              </tr>
+            </thead>
+            <thead class="table-info">
+              <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Region</th>
+                <th>Work Order</th>
+                <th>Call/Mail</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <?php
+              for ($i = $start; $i < min($start + $inquiriesPerPage, $totalInquiries); $i++) {
+                $inquiry = $inquiries[$i];
+                $inq_id = $inquiry['inquiry_id'];
+                $modalId = 'myModal_' . $inquiry['inquiry_id'];
+                if ($inquiry["inquiry_status"] == 0) :
+              ?>
+                  <tr>
+                    <td><?php echo $inquiry['client_name']; ?></td>
+                    <td><?php echo $inquiry['client_number']; ?></td>
+                    <td><?php echo $inquiry['client_region']; ?></td>
+                    <td><?php echo $inquiry['client_wo']; ?></td>
+                    <td>Call</td>
+                    <td>
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+                          <i class="fa fa-check fa-solid"></i>
+                        </button>
+                        <!-- Check Modal -->
+                        <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <!-- Form inside the modal -->
+                                <form method="POST">
+                                  <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                                  <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
+                                    <label for="clientName">Client Name</label>
+                                  </div>
+                                  <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
+                                    <label for="clientLocation">Location</label>
+                                  </div>
+                                  <div class="mb-3 form-floating">
+                                    <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
+                                    <label for="dateStart">Date Start</label>
+                                  </div>
+                                  <div class="mb-3 form-floating">
+                                    <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
+                                    <label for="contractAmount">Contract Amount</label>
+                                  </div>
+                                  <div class="mb-3 form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly></textarea>
+                                    <label for="floatingTextarea2">Context</label>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
+                                </form>
                               </div>
                             </div>
                           </div>
-                          <!-- Check Modal -->
-                          <form method="POST">
-                            <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                            <button class="btn btn-danger" type="submit" name="inquiry_decline">
-                              <li class="fa fa-trash fa-solid"></li>
-                            </button>
-                          </form>
                         </div>
-                      </td>
-                    <?php endif; ?>
-                    </tr>
-                  <?php } ?>
-              </tbody>
-            </table>
-          </div>
-          <nav aria-label="Page navigation example" class="mt-3 mt-md-0">
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
+                        <!-- Check Modal -->
+                        <form method="POST">
+                          <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                          <button class="btn btn-danger" type="submit" name="inquiry_decline">
+                            <li class="fa fa-trash fa-solid"></li>
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                <?php endif; ?>
+              <?php } ?>
+            </tbody>
+          </table>
         </div>
+
+        <nav aria-label="Page navigation example" class="mt-3 mt-md-0">
+          <ul class="pagination">
+            <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+              <li class="page-item <?php echo ($page == $current_page) ? 'active' : ''; ?>">
+                <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+              </li>
+            <?php endfor; ?>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -280,6 +293,29 @@ include './components/navbar.php';
 
 
 <script>
+    $(document).ready(function () {
+        function loadInquiries(page) {
+            $.ajax({
+                url: './ajax/inquiry_pagination.php',
+                type: 'POST',
+                data: { page: page },
+                success: function (response) {
+                    $('tbody').html(response);
+                }
+            });
+        }
+
+        // Initial load
+        loadInquiries(1);
+
+        // Pagination click event
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var page = $(this).attr('href').split('=')[1];
+            loadInquiries(page);
+        });
+    });
+    
   function updateClock() {
     // Create a Date object
     var japanTime = new Date();
@@ -323,7 +359,7 @@ include './components/navbar.php';
       events: [
         <?php
         $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 or inquiry_status = 2");
-        while ($row = $result->fetch_assoc()):
+        while ($row = $result->fetch_assoc()) :
           $inq_id = $row["inquiry_id"];
           $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
         ?> {
@@ -352,11 +388,11 @@ include './components/navbar.php';
 
   // Doughnut Chart Data and Configuration
   const doughnutData = {
-    labels: ['Red', 'Blue', 'Yellow'],
+    labels: ['Moving Services', 'Disposal Services', 'Cleaning Services', 'Others'],
     datasets: [{
       label: 'Doughnut Dataset',
-      data: [300, 50, 100],
-      backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+      data: [300, 50, 100, 40],
+      backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(128,128,128)'],
       hoverOffset: 4
     }]
   };

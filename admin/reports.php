@@ -1,3 +1,4 @@
+<title>Reports | Hotaru Services</title>
 <?php
 session_start();
 include '../connection.php';
@@ -79,31 +80,6 @@ include './components/navbar.php';
                                 </tr>
 
                             <?php endwhile; ?>
-
-
-                            <!-- <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-danger">
-                                        Pending
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger col-12 col-md-5">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -172,30 +148,6 @@ include './components/navbar.php';
                                 </tr>
 
                             <?php endwhile; ?>
-
-                            <!-- <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-danger">
-                                        Pending
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-check"></i>
-                                        </button>
-                                        <button type="submit" class="btn btn-danger col-12 col-md-5">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -263,26 +215,6 @@ include './components/navbar.php';
 
                             <?php endwhile; ?>
 
-                            <!-- <tr>
-                                <td>1</td>
-                                <td>Oct 27, 2023</td>
-                                <td>Ken Suzuki</td>
-                                <td>09123456789</td>
-                                <td>Saitama, Satte</td>
-                                <td>Relocation</td>
-                                <td>
-                                    <div class="badge text-bg-success">
-                                        Completed
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                        <button type="submit" class="btn btn-info col-12 col-md-5 mb-3 mb-md-0">
-                                            <i class="fa-solid fa-eye text-white"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">

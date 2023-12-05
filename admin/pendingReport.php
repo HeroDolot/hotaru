@@ -1,3 +1,4 @@
+<title>Pending Report - Hotaru Services</title>
 <?php
 include './includes/header.php';
 ?>
@@ -22,7 +23,7 @@ include './includes/header.php';
         }
 
         .table-customer-information {
-            width: 200% !important;
+            width: 100% !important;
             /* Adjusted width of the table */
         }
 
@@ -69,33 +70,23 @@ include './includes/header.php';
     <hr style="border: 1px solid black;">
     <div class="row py-4 d-flex justify-content-between">
         <div class="col-md-4">
-            <table class="table table-customer-information">
+            <table class="table text-center table-responsive align-middle">
                 <thead class="table-info">
-                    <th style="font-size: 17px;" colspan="2">Customer Information</th>
+                    <th>#</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="fw-bolder">Name:</th>
-                        <td>Hero Dolot</td>
-                    </tr>
-                    <tr>
-                        <th class="fw-bolder">Contact Number:</th>
-                        <td>1234-567-89101</td>
-                    </tr>
-                    <tr>
-                        <th class="fw-bolder">Address:</th>
-                        <td>Kuki, Japan</td>
-                    </tr>
-                    <tr>
-                        <th class="fw-bolder">Contract Amount:</th>
-                        <td>170,000</td>
-                    </tr>
-                    <tr>
-                        <th class="fw-bolder">Work Order:</th>
-                        <td>Relocation</td>
+                        <td>
+                            1
+                        </td>
+                        <td>March 24, 2023</td>
+                        <td class="text-danger">Data Unavailable</td>
                     </tr>
                 </tbody>
             </table>
+
         </div>
         <div class="col-md-4">
             <table class="table">
@@ -112,20 +103,42 @@ include './includes/header.php';
             </table>
         </div>
     </div>
-    <table class="table text-center table-responsive align-middle">
-        <thead class="table-info">
-            <th>#</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    1
-                </td>
-                <td>March 24, 2023</td>
-                <td class="text-danger">Data Unavailable</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-customer-information">
+                <thead class="table-info">
+                    <th style="font-size: 17px;" colspan="2">Customer Information</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="fw-bolder">Name:</th>
+                        <td>Hero Dolot</td>
+                    </tr>
+                    <tr>
+                        <th class="fw-bolder">Contact Number:</th>
+                        <td>1234-567-89101</td>
+                    </tr>
+                    <tr>
+                        <th class="fw-bolder">Call/Email</th>
+                        <td>Call</td>
+                    </tr>
+                    <tr>
+                        <th class="fw-bolder">Address:</th>
+                        <td>Kuki, Japan</td>
+                    </tr>
+                    <tr>
+                        <th class="fw-bolder">Contract Amount:</th>
+                        <td>170,000</td>
+                    </tr>
+                    <tr>
+                        <th class="fw-bolder">Work Order:</th>
+                        <td>Relocation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-7 mt-4 mt-md-0"> <!-- Added margin top for smaller screens -->
+            <label for="context" class="fw-bolder">Work order Context</label>
+            <textarea class="form-control" style="border: 2px solid black; width: 100%;" name="" id="context" cols="40" rows="7" readonly></textarea>
+        </div>
+    </div>
