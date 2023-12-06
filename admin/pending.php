@@ -140,9 +140,19 @@ include './components/navbar.php';
                                                     </select>
                                                     <label for="floatingSelect">Expense</label>
                                                 </div>
-                                                <div class="form-floating" id="floatingPrice">
-                                                    <input type="text" class="form-control" name="expense_price" id="" placeholder="Price">
-                                                    <label for="floatingPrice">Price</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-floating" id="floatingPrice">
+                                                            <input type="text" class="form-control" name="expense_price" id="" placeholder="Price">
+                                                            <label for="floatingPrice">Price</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-floating" id="floatingQuantity">
+                                                            <input type="text" class="form-control" name="expense_quantity" id="" placeholder="Quantity">
+                                                            <label for="floatingQuantity">Quantity</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
