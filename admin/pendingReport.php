@@ -5,6 +5,7 @@ include("../connection.php");
 if (isset($_GET["id"])) :
     $inquiry_id = mysqli_real_escape_string($conn, $_GET["id"]);
     $info = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_id = $inquiry_id")->fetch_assoc();
+    
     $accepted = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
 
 
@@ -176,13 +177,22 @@ if (isset($_GET["id"])) :
                         <td> - </td>
                         <td> - </td>
                     </tr>
+                    <?php 
+                    $total = 3000;
+                    $count = 0;
+                    $result = mysqli_query($conn,"SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+                    while ($row = $result->fetch_assoc()):
+                        $count++;
+                        $expense_history_id = $row["exp_history_expense_id"];
+                    ?>
                     <tr>
-                        <td>2</td>
-                        <td>Highway Ticket</td>
-                        <td>17,000¥</td>
+                        <td><?php echo $count?></td>
+                        <td><?php echo mysqli_query($conn,"SELECT * FROM expense_type WHERE expense_id = $expense_history_id")->fetch_assoc()["expense_name"]?></td>
+                        <td></td>
                         <td>1</td>
                         <td>17,000¥</td>
                     </tr>
+                    <?php endwhile ?>
                 </tbody>
                 <tfoot>
                     <tr>

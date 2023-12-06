@@ -47,7 +47,7 @@ if (isset($_POST["submit_wo"])) {
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=Work order added");
     } else {
-        header("location:./fileupload.php?error=Failed to add!");
+        header("location:./fileupload.php?error=Failed to add order!");
     }
 }
 
@@ -57,7 +57,27 @@ if (isset($_POST["delete_wo"])) {
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=Work order deleted");
     } else {
-        header("location:./fileupload.php?error=Failed to delete!");
+        header("location:./fileupload.php?error=Failed to delete order!");
+    }
+}
+
+if (isset($_POST["submit_expense"])) {
+    $expense_name = mysqli_real_escape_string($conn, $_POST["expense_name"]);
+    mysqli_query($conn, "INSERT INTO expense_type (expense_name) VALUES('$expense_name')");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./fileupload.php?success=Expense type added");
+    } else {
+        header("location:./fileupload.php?error=Failed to add Expense!");
+    }
+}
+
+if (isset($_POST["delete_expense"])) {
+    $expense_id = mysqli_real_escape_string($conn, $_POST["expense_id"]);
+    mysqli_query($conn, "DELETE FROM expense_type WHERE expense_id = $expense_id");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./fileupload.php?success=Expense deleted");
+    } else {
+        header("location:./fileupload.php?error=Failed to delete expense!");
     }
 }
 
@@ -134,16 +154,16 @@ include './components/navbar.php';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <form method="POST" class="card">
                 <div class="card-header fw-bolder fs-4">Add Expense</div>
                 <div class="card-body">
                     <div class="mb-3 form-floating">
-                        <input type="text" class="form-control" required name="" placeholder="workOrderTitle" required>
-                        <label for="workOrderTitle">Expesne Title</label>
+                        <input type="text" class="form-control" required name="expense_name" placeholder="workOrderTitle" required>
+                        <label for="workOrderTitle">Expense Title</label>
                     </div>
-                    <button type="submit" name="submit_update" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                    <button type="submit" name="submit_expense" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-md-6">
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
@@ -152,14 +172,22 @@ include './components/navbar.php';
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Highway</td>
-                        <td>
-                            <button class="btn btn-danger">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <?php
+                    $result = mysqli_query($conn, "SELECT * FROM expense_type");
+                    while ($row = $result->fetch_assoc()) :
+                    ?>
+                        <tr>
+                            <td><?php echo $row["expense_name"] ?></td>
+                            <td>
+                                <form method="POST">
+                                    <input type="hidden" name="expense_id" value="<?php echo $row["expense_id"] ?>">
+                                    <button type="submit" name="delete_expense" class="btn btn-danger">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>

@@ -29,6 +29,20 @@ if (isset($_POST["decline"])) {
     }
 }
 
+if (isset($_POST["submit_expense"])) {
+    var_dump($_POST);
+    $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
+    $expense_type_id = mysqli_real_escape_string($conn, $_POST["expense_type"]);
+    $expense_price = mysqli_real_escape_string($conn, $_POST["expense_price"]);
+
+    mysqli_query($conn, "INSERT INTO expense_history (exp_history_inquiry_id,exp_history_expense_id,exp_history_price) VALUES($inquiry_id,$expense_type_id,$expense_price)");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./pending.php?success=Expense added to client");
+    } else {
+        header("location:./pending.php?error=Failed to add expense to client");
+    }
+}
+
 
 include './includes/header.php';
 include './components/navbar.php';
@@ -90,10 +104,9 @@ include './components/navbar.php';
                             <form method="POST">
                                 <input type="hidden" name="inquiry_id" value="<?php echo $inq_id; ?>">
                                 <div class="btn-group d-md-flex justify-content-around d-sm-none" role="group" aria-label="Button group">
-                                    <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#myModal">
+                                    <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#myModal<?php echo $inq_id ?>">
                                         <i class="fas fa-edit"></i>
                                     </button>
-
 
                                     <button type="submit" name="complete" class="btn btn-primary">
                                         <i class="fas fa-check"></i>
@@ -103,33 +116,40 @@ include './components/navbar.php';
                                     </button>
                                 </div>
                             </form>
+
                             <!-- Modal -->
-                            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="myModal<?php echo $inq_id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add Expense</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Expense | <?php echo $info["accepted_client_name"] ?></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="form-floating mb-3">
-                                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                    <option selected disabled>Choose Expense</option>
-                                                    <option value="1">Truck Rental</option>
-                                                    <option value="2">Highway</option>
-                                                    <option value="3">Salary</option>
-                                                </select>
-                                                <label for="floatingSelect">Expense</label>
+                                        <form method="POST">
+                                            <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                                            <div class="modal-body">
+                                                <div class="form-floating mb-3">
+                                                    <select class="form-select" name="expense_type" id="floatingSelect" aria-label="Floating label select example">
+                                                        <option selected disabled value="">Choose Expense</option>
+                                                        <?php
+                                                        $result = mysqli_query($conn, "SELECT * FROM expense_type");
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo '<option value="' . $row["expense_id"] . '">' . $row["expense_name"] . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <label for="floatingSelect">Expense</label>
+                                                </div>
+                                                <div class="form-floating" id="floatingPrice">
+                                                    <input type="text" class="form-control" name="expense_price" id="" placeholder="Price">
+                                                    <label for="floatingPrice">Price</label>
+                                                </div>
                                             </div>
-                                            <div class="form-floating" id="floatingPrice">
-                                                <input type="text" class="form-control" name="" id="" placeholder="Price">
-                                                <label for="floatingPrice">Price</label>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" name="submit_expense" class="btn btn-primary">Add Expense</button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Add Expense</button>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
