@@ -1,3 +1,4 @@
+<title>Admin Dashboard | Pending</title>
 <?php
 session_start();
 include '../connection.php';
@@ -88,12 +89,46 @@ include './components/navbar.php';
                         <td>
                             <form method="POST">
                                 <input type="hidden" name="inquiry_id" value="<?php echo $inq_id; ?>">
-                                <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                    <button type="submit" name="complete" class="btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                                        <i class="fa-solid fa-check"></i>
+                                <div class="btn-group d-md-flex justify-content-around d-sm-none" role="group" aria-label="Button group">
+                                    <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#myModal">
+                                        <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="submit" name="decline" class="btn btn-danger col-12 col-md-5">
-                                        <i class="fa-solid fa-xmark"></i>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Expense</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-floating mb-3">
+                                                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                            <option selected disabled>Choose Expense</option>
+                                                            <option value="1">Truck Rental</option>
+                                                            <option value="2">Highway</option>
+                                                            <option value="3">Salary</option>
+                                                        </select>
+                                                        <label for="floatingSelect">Expense</label>
+                                                    </div>
+                                                    <div class="form-floating" id="floatingPrice">
+                                                        <input type="text" class="form-control" name="" id="" placeholder="Price">
+                                                        <label for="floatingPrice">Price</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Add Expense</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" name="complete" class="btn btn-primary">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button type="submit" name="decline" class="btn btn-danger">
+                                        <i class="fas fa-xmark"></i>
                                     </button>
                                 </div>
                             </form>

@@ -1,3 +1,4 @@
+<title>Admin Dashboard | Assets</title>
 <?php
 session_start();
 
@@ -81,7 +82,10 @@ include './components/navbar.php';
                                     <label for="quantity" class="form-label">Quantity</label>
                                     <input type="number" class="form-control" required name="quantity" placeholder="Quantity">
                                 </div>
-
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="text" class="form-control" required name="price" placeholder="Price">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -98,6 +102,7 @@ include './components/navbar.php';
             <th>Name</th>
             <th>Date Acquire</th>
             <th>Quantity</th>
+            <th>Price</th>
             <th>Action</th>
         </thead>
         <tbody>
@@ -109,12 +114,10 @@ include './components/navbar.php';
                     <td><?php echo $row["asset_name"] ?></td>
                     <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
                     <td><?php echo $row["asset_quantity"] ?></td>
+                    <td>17,000¥</td>
                     <td>
-                        <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                            <button type="submit" class="col btn btn-primary col-12 col-md-5 mb-3 mb-md-0">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <form method="POST" class="col">
+                        <div class="wrapper d-flex justify-content-center align-items-center">
+                            <form method="POST" class="col-md-12">
                                 <button type="submit" name="delete_asset" value="<?php echo $row["asset_id"] ?>" class="btn btn-danger col-12 col-md-5">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

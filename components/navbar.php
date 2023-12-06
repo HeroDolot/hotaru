@@ -47,8 +47,8 @@
     <section class="bg-primary text-white p-3">
         <div class="container-fluid">
             <div class="wrapper d-flex justify-content-between">
-                <p class="fw-bolder fs-5">Hotaru Services</p>
-                <p class="text-end fw-bolder fs-5">09055270361</p>
+                <p class="fw-bolder fs-5">Moving Services</p>
+                <p class="text-end fw-bolder fs-5">Company Phone Number</p>
             </div>
         </div>
     </section>

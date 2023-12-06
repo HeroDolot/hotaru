@@ -1,3 +1,4 @@
+<title>Admin Dashboard | History</title>
 <?php
 include './includes/header.php';
 include './components/navbar.php';

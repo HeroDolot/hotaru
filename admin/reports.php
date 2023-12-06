@@ -1,4 +1,4 @@
-<title>Reports | Hotaru Services</title>
+<title>Admin Dashboard | Reports</title>
 <?php
 session_start();
 include '../connection.php';

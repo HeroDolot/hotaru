@@ -1,3 +1,4 @@
+<title>Admin Dashboard | Overview</title>
 <?php
 session_start();
 
@@ -78,9 +79,9 @@ include './components/navbar.php';
 <div class="container">
   <div id="clock" class="fw-bolder fs-6"></div>
   <div class="wrapper overflow-hidden">
-    <div class="row mb-5">
-      <div class="col-md-3 col-6 mt-5">
-        <div class="card bg-primary rounded-2" style="max-width: 20rem;">
+    <div class="row mb-5 d-flex justify-content-center align-items-center">
+      <div class="col-md-2 col-6 mt-5">
+        <div class="card bg-primary rounded-2" style="max-width: 17rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-regular fa-file fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -96,8 +97,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-6 mt-5">
-        <div class="card bg-danger rounded-2" style="max-width: 20rem;">
+      <div class="col-md-2 col-6 mt-5">
+        <div class="card bg-danger rounded-2" style="max-width: 17rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-clock fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -116,8 +117,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-6 mt-5">
-        <div class="card bg-success rounded-2" style="max-width: 20rem;">
+      <div class="col-md-2 col-6 mt-5">
+        <div class="card bg-success rounded-2" style="max-width: 17rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-yen-sign fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -133,8 +134,25 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-6 mt-5">
-        <div class="card bg-warning rounded-2" style="max-width: 20rem;">
+      <div class="col-md-2 col-6 mt-5">
+        <div class="card bg-info rounded-2" style="max-width: 17rem;">
+          <div class="card-body text-white p-0">
+            <div class="row p-3">
+              <i class="fa-solid fa-money-bills fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
+              <div class="col-md-9 col">
+                <h4>Expenses</h4>
+              </div>
+            </div>
+            <div class="card-footer p-0">
+              <div class="m-1">
+                <a href="./expenses.php" class="btn btn-transparent text-white">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-6 mt-5">
+        <div class="card bg-warning rounded-2" style="max-width: 17rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-warehouse fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -155,25 +173,10 @@ include './components/navbar.php';
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 col-12">
-        <div class="fw-bolder text-danger" id='calendar'></div>
+      <div class="col-md-6 col-12">
+        <canvas id="monthlyChart" width="600" height="400"></canvas>
       </div>
-      <div class="col-md-4 col-12 mt-4 mt-md-0">
-        <div class="flex-fill">
-          <canvas id="myLineChart"></canvas>
-        </div>
-        <div class="card">
-          <div class="card-header fw-bolder fs-4 text-center text-white bg-success">
-            Work Order
-          </div>
-          <canvas id="myDoughnutChart"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="wrapper">
-    <div class="row">
-      <div class="col-md-12 mt-5">
+      <div class="col-md-6 col-12">
         <?php
         $inquiriesPerPage = 10;
         $totalInquiries = count($inquiries);
@@ -289,33 +292,106 @@ include './components/navbar.php';
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-8 col-12">
+      <div class="fw-bolder text-danger" id='calendar'></div>
+    </div>
+    <div class="col-md-4 col-12 mt-4 mt-md-0">
+      <div class="flex-fill">
+        <canvas id="myLineChart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-header fw-bolder fs-4 text-center text-white bg-success">
+          Work Order
+        </div>
+        <canvas id="myDoughnutChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="row">
+    <div class="col-md-12 mt-5">
+    </div>
+  </div>
 </div>
 
 
 <script>
-    $(document).ready(function () {
-        function loadInquiries(page) {
-            $.ajax({
-                url: './ajax/inquiry_pagination.php',
-                type: 'POST',
-                data: { page: page },
-                success: function (response) {
-                    $('tbody').html(response);
-                }
-            });
+  var months = ["January 2024", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var incomeData = [2000, 2500, 3000, 2800, 3500, 4000, 4200, 3800, 3000, 3200, 3500, 4000];
+  var expensesData = [1500, 1800, 2000, 2100, 2500, 2800, 3000, 2700, 2200, 2400, 2600, 3000];
+
+  // Calculate Profit
+  var profitData = incomeData.map((income, index) => income - expensesData[index]);
+
+  // Create a bar chart
+  var ctx = document.getElementById('monthlyChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+          label: 'Income',
+          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          data: incomeData
+        },
+        {
+          label: 'Expenses',
+          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          data: expensesData
+        },
+        {
+          label: 'Profit',
+          backgroundColor: 'rgba(99, 255, 132, 0.7)',
+          borderColor: 'rgba(99, 255, 132, 1)',
+          borderWidth: 1,
+          data: profitData
         }
+      ]
+    },
+    options: {
+      scales: {
+        x: {
+          stacked: false
+        },
+        y: {
+          stacked: false
+        }
+      }
+    }
+  });
 
-        // Initial load
-        loadInquiries(1);
 
-        // Pagination click event
-        $(document).on('click', '.pagination a', function (e) {
-            e.preventDefault();
-            var page = $(this).attr('href').split('=')[1];
-            loadInquiries(page);
-        });
+  $(document).ready(function() {
+    function loadInquiries(page) {
+      $.ajax({
+        url: './ajax/inquiry_pagination.php',
+        type: 'POST',
+        data: {
+          page: page
+        },
+        success: function(response) {
+          $('tbody').html(response);
+        }
+      });
+    }
+
+    // Initial load
+    loadInquiries(1);
+
+    // Pagination click event
+    $(document).on('click', '.pagination a', function(e) {
+      e.preventDefault();
+      var page = $(this).attr('href').split('=')[1];
+      loadInquiries(page);
     });
-    
+  });
+
   function updateClock() {
     // Create a Date object
     var japanTime = new Date();

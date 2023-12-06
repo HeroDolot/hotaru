@@ -177,7 +177,48 @@ if (isset($_GET["id"])) :
                     <textarea class="form-control" style="border: 2px solid black; width: 100%;" name="" id="context" cols="40" rows="7" readonly></textarea>
                 </div>
             </div>
-        </div>
+            <table class="table table-bordered table-responsive text-center">
+                <thead class="table-danger">
+                    <tr>
+                        <th colspan="5">EXPENSES</th>
+                    </tr>
+                </thead>
+                <thead style="text-transform: uppercase;">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Hero Dolot</td>
+                        <td>3,000¥</td>
+                        <td> - </td>
+                        <td> - </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Highway Ticket</td>
+                        <td>17,000¥</td>
+                        <td>1</td>
+                        <td>17,000¥</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th>Total: 17,000¥</th>
+                    </tr>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th>Total Profit: 20,000¥</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </body>
 

@@ -1,3 +1,4 @@
+<title>Admin Dashboard | File Upload</title>
 <?php
 session_start();
 include("../connection.php");
@@ -81,6 +82,7 @@ include './components/navbar.php';
                                 <option value="Sub Main Blog">Sub Main Blog</option>
                                 <option value="Secondary Blog">Secondary Blog</option>
                                 <option value="Promotion">Promotion</option>
+                                <option value="Promotion">Testimony</option>
                             </select>
                             <label for="floatingSelect">Select Location</label>
                         </div>
