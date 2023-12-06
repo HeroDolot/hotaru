@@ -80,8 +80,25 @@ include './components/navbar.php';
   <div id="clock" class="fw-bolder fs-6"></div>
   <div class="wrapper overflow-hidden">
     <div class="row mb-5 d-flex justify-content-center align-items-center">
-      <div class="col-md-2 col-6 mt-5">
-        <div class="card bg-primary rounded-2" style="max-width: 17rem;">
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-info rounded-2" style="max-width: 20rem;">
+          <div class="card-body text-white p-0">
+            <div class="row p-3">
+              <i class="fa-solid fa-arrow-trend-up fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(9deg); margin-left:20px;"></i>
+              <div class="col-md-9 col">
+                <h4>Net Worth</h4>
+              </div>
+            </div>
+            <div class="card-footer p-0">
+              <div class="m-1">
+                <a href="./reports.php" class="btn btn-transparent text-white fw-bolder">1,000,000¥</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-primary rounded-2" style="max-width: 20rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-regular fa-file fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -97,8 +114,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-6 mt-5">
-        <div class="card bg-danger rounded-2" style="max-width: 17rem;">
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-danger rounded-2" style="max-width: 20rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-clock fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -117,8 +134,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-6 mt-5">
-        <div class="card bg-success rounded-2" style="max-width: 17rem;">
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-success rounded-2" style="max-width: 20rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-yen-sign fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -134,8 +151,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-6 mt-5">
-        <div class="card bg-info rounded-2" style="max-width: 17rem;">
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-warning rounded-2" style="max-width: 20rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-money-bills fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -151,8 +168,8 @@ include './components/navbar.php';
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-6 mt-5">
-        <div class="card bg-warning rounded-2" style="max-width: 17rem;">
+      <div class="col-md-4 col-6 mt-5">
+        <div class="card bg-secondary rounded-2" style="max-width: 20rem;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-warehouse fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
@@ -318,7 +335,7 @@ include './components/navbar.php';
 
 
 <script>
-  var months = ["January 2024", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var months = ["January 2024 ", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var incomeData = [2000, 2500, 3000, 2800, 3500, 4000, 4200, 3800, 3000, 3200, 3500, 4000];
   var expensesData = [1500, 1800, 2000, 2100, 2500, 2800, 3000, 2700, 2200, 2400, 2600, 3000];
 
