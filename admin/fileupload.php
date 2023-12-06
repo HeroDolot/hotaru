@@ -29,11 +29,11 @@ if (isset($_POST["delete_update"])) {
     }
 }
 
-if (isset($_POST["edit_update"])){
-    $update_id = mysqli_real_escape_string($conn,$_POST["edit_update"]);
-    $update_title = mysqli_real_escape_string($conn,$_POST["update_title"]);
-    $update_description = mysqli_real_escape_string($conn,$_POST["update_description"]);
-    mysqli_query($conn,"UPDATE updates SET update_title = '$update_title', update_description = '$update_description' WHERE update_id = $update_id");
+if (isset($_POST["edit_update"])) {
+    $update_id = mysqli_real_escape_string($conn, $_POST["edit_update"]);
+    $update_title = mysqli_real_escape_string($conn, $_POST["update_title"]);
+    $update_description = mysqli_real_escape_string($conn, $_POST["update_description"]);
+    mysqli_query($conn, "UPDATE updates SET update_title = '$update_title', update_description = '$update_description' WHERE update_id = $update_id");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=Updates has been updated!");
     } else {
@@ -60,6 +60,42 @@ include './components/navbar.php';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            <div class="card">
+                <div class="card-header fw-bolder fs-4">Add Work Order</div>
+                <div class="card-body">
+                    <div class="mb-3 form-floating">
+                        <input type="text" class="form-control" required name="" placeholder="workOrderTitle" required>
+                        <label for="workOrderTitle">Work Order Title</label>
+                    </div>
+                    <button type="submit" name="submit_update" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-alternate table-responsive table-bordered table-info text-center">
+                <thead>
+                    <th>Title</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Moving Service</td>
+                        <td>
+                            <button class="btn btn-danger">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
             <?php
             if (isset($_GET["success"])) {
                 echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
@@ -68,10 +104,7 @@ include './components/navbar.php';
             if (isset($_GET["error"])) {
                 echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
             }
-
-
             ?>
-
             <div class="card">
                 <div class="card-header fw-bolder fs-4">File Upload</div>
                 <div class="card-body">
@@ -171,7 +204,7 @@ include './components/navbar.php';
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" name="edit_update" value="<?php echo $row["update_id"]?>" class="btn btn-primary">Save changes</button>
+                                                        <button type="submit" name="edit_update" value="<?php echo $row["update_id"] ?>" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </form>
                                             </div>
