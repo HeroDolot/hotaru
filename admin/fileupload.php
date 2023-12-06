@@ -96,6 +96,42 @@ include './components/navbar.php';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            <div class="card">
+                <div class="card-header fw-bolder fs-4">Add Expense</div>
+                <div class="card-body">
+                    <div class="mb-3 form-floating">
+                        <input type="text" class="form-control" required name="" placeholder="workOrderTitle" required>
+                        <label for="workOrderTitle">Expesne Title</label>
+                    </div>
+                    <button type="submit" name="submit_update" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-alternate table-responsive table-bordered table-info text-center">
+                <thead>
+                    <th>Title</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Highway</td>
+                        <td>
+                            <button class="btn btn-danger">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
             <?php
             if (isset($_GET["success"])) {
                 echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
