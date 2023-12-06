@@ -41,6 +41,27 @@ if (isset($_POST["edit_update"])) {
     }
 }
 
+if (isset($_POST["submit_wo"])) {
+    $work_title = mysqli_real_escape_string($conn, $_POST["work_title"]);
+    mysqli_query($conn, "INSERT INTO work_order (work_name) VALUES('$work_title')");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./fileupload.php?success=Work order added");
+    } else {
+        header("location:./fileupload.php?error=Failed to add!");
+    }
+}
+
+if (isset($_POST["delete_wo"])) {
+    $work_id = mysqli_real_escape_string($conn, $_POST["wo_id"]);
+    mysqli_query($conn, "DELETE FROM work_order WHERE work_id = $work_id");
+    if (mysqli_affected_rows($conn) == 1) {
+        header("location:./fileupload.php?success=Work order deleted");
+    } else {
+        header("location:./fileupload.php?error=Failed to delete!");
+    }
+}
+
+
 
 
 include './includes/header.php';
@@ -58,18 +79,27 @@ include './components/navbar.php';
 </div>
 
 <div class="container">
+    <?php
+    if (isset($_GET["success"])) {
+        echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
+    }
+
+    if (isset($_GET["error"])) {
+        echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
+    }
+    ?>
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <form method="POST" class="card">
                 <div class="card-header fw-bolder fs-4">Add Work Order</div>
                 <div class="card-body">
                     <div class="mb-3 form-floating">
-                        <input type="text" class="form-control" required name="" placeholder="workOrderTitle" required>
+                        <input type="text" class="form-control" required name="work_title" placeholder="workOrderTitle" required>
                         <label for="workOrderTitle">Work Order Title</label>
                     </div>
-                    <button type="submit" name="submit_update" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                    <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-md-6">
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
@@ -78,14 +108,22 @@ include './components/navbar.php';
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Moving Service</td>
-                        <td>
-                            <button class="btn btn-danger">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <?php
+                    $result = mysqli_query($conn, "SELECT * FROM work_order");
+                    while ($row = $result->fetch_assoc()) :
+                    ?>
+                        <tr>
+                            <td><?php echo $row["work_name"] ?></td>
+                            <td>
+                                <form method="POST">
+                                    <input type="hidden" name="wo_id" value="<?php echo $row["work_id"] ?>">
+                                    <button type="submit" name="delete_wo" class="btn btn-danger">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -132,15 +170,7 @@ include './components/navbar.php';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <?php
-            if (isset($_GET["success"])) {
-                echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
-            }
 
-            if (isset($_GET["error"])) {
-                echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
-            }
-            ?>
             <div class="card">
                 <div class="card-header fw-bolder fs-4">File Upload</div>
                 <div class="card-body">

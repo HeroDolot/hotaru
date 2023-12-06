@@ -1,5 +1,13 @@
 <?php
 include './connection.php';
+$currentDate = strtotime(date("Y-m-d") . "00:00:00");
+$res = mysqli_query($conn,"SELECT * FROM page_count WHERE count_date = $currentDate");
+if ($res->num_rows == 0){
+    mysqli_query($conn,"INSERT INTO page_count (count_date,count) VALUES($currentDate,1)");
+} else {
+    mysqli_query($conn,"UPDATE page_count SET count = count + 1 WHERE count_date = $currentDate");
+}
+
 include './includes/header.php';
 
 // Components
@@ -724,7 +732,7 @@ include './components/navbar.php';
                     問い合わせる
                 </div>
                 <div class="card-body">
-                    <form action="../controller/inquiry_conn.php" method="POST">
+                    <form action="./controller/inquiry_conn.php" method="POST">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" name="clientEmail" placeholder="name@example.com" required>
                             <label for="floatingInput">メールアドレス</label>
@@ -741,15 +749,15 @@ include './components/navbar.php';
                             <small>ご希望は、お電話か、メールどちらが、ご希望ですか？</small>
                             <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Call" required>
                                 <label class="form-check-label" for="inlineRadio1">お電話か</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Mail" required>
                                 <label class="form-check-label" for="inlineRadio2">メールどちらが</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Call/Mail" required>
                                 <label class="form-check-label" for="inlineRadio3">どちらも</label>
                             </div>
                         </div>
@@ -763,11 +771,13 @@ include './components/navbar.php';
 
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="clientWO" required>
-                                <option selected disabled>作業オーダーを選択してください</option>
-                                <option value="Relocation">引越しサービス</option>
-                                <option value="House Cleaning">家庭清掃サービス</option>
-                                <option value="Things Throw">廃棄物処理サービス</option>
-                                <option value="Others">その他</option>
+                                <option selected disabled value="">作業オーダーを選択してください</option>
+                                <?php 
+                                $result = mysqli_query($conn,"SELECT * FROM work_order");
+                                while ($row = $result->fetch_assoc()){
+                                    echo '<option value="'.$row["work_name"].'">'.$row["work_name"].'</option>';
+                                }
+                                ?>
                             </select>
                             <label for="floatingSelect">作業オーダーを選択</label>
                         </div>

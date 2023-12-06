@@ -72,9 +72,17 @@ include './components/navbar.php';
                                     </td>
                                     <td>
                                         <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                            <a href="./completedReport.php?id=<?php echo $row["inquiry_id"]?>" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
-                                                <i class="fa-solid fa-eye text-white"></i>
-                                            </a>
+                                            <?php if ($row["inquiry_status"] == 2) : ?>
+                                                <a href="./completedReport.php?id=<?php echo $row["inquiry_id"] ?>" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
+                                                    <i class="fa-solid fa-eye text-white"></i>
+                                                </a>
+
+                                            <?php elseif ($row["inquiry_status"] == 1) : ?>
+                                                <a href="./pendingReport.php?id=<?php echo $row["inquiry_id"] ?>" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
+                                                    <i class="fa-solid fa-eye text-white"></i>
+                                                </a>
+                                            <?php endif; ?>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -140,7 +148,7 @@ include './components/navbar.php';
                                     </td>
                                     <td>
                                         <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                            <a href="./pendingReport.php" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
+                                            <a href="./pendingReport.php?id=<?php echo $row["inquiry_id"] ?>" target="_blank" class="btn btn-info col-12 col-md-12 mb-3 mb-md-0">
                                                 <i class="fa-solid fa-eye text-white"></i>
                                             </a>
                                         </div>

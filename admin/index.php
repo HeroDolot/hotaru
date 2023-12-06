@@ -4,28 +4,10 @@ session_start();
 
 include '../connection.php';
 
-
-// Check if the user is logged in
 if (!isset($_SESSION['user_email'])) {
-  // Redirect to the login page or show an error message
-  header('Location: login.php'); // Change to your login page URL
+  header('Location: login.php');
   exit();
 }
-
-function fetchInquiries($conn)
-{
-  $sql = "SELECT inquiry_id, client_name, client_number, client_region, client_wo, inquiry_status FROM inquiry";
-  $result = mysqli_query($conn, $sql);
-
-  $inquiries = array();
-  while ($row = mysqli_fetch_assoc($result)) {
-    $inquiries[] = $row;
-  }
-
-  return $inquiries;
-}
-
-$inquiries = fetchInquiries($conn);
 
 if (isset($_POST["submit_contract"])) {
   var_dump($_POST);
@@ -194,15 +176,6 @@ include './components/navbar.php';
         <canvas id="monthlyChart" width="600" height="400"></canvas>
       </div>
       <div class="col-md-6 col-12">
-        <?php
-        $inquiriesPerPage = 10;
-        $totalInquiries = count($inquiries);
-        $totalPages = ceil($totalInquiries / $inquiriesPerPage);
-
-        // Determine the current page
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $start = ($current_page - 1) * $inquiriesPerPage;
-        ?>
 
         <div class="table-responsive">
           <table class="table table-bordered table-hover text-center">
@@ -223,8 +196,9 @@ include './components/navbar.php';
             </thead>
             <tbody class="align-middle">
               <?php
-              for ($i = $start; $i < min($start + $inquiriesPerPage, $totalInquiries); $i++) {
-                $inquiry = $inquiries[$i];
+              $res = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_status = 0");
+              while ($row = $res->fetch_assoc()) :
+                $inquiry = $row;
                 $inq_id = $inquiry['inquiry_id'];
                 $modalId = 'myModal_' . $inquiry['inquiry_id'];
                 if ($inquiry["inquiry_status"] == 0) :
@@ -236,76 +210,66 @@ include './components/navbar.php';
                     <td><?php echo $inquiry['client_wo']; ?></td>
                     <td>Call</td>
                     <td>
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+                      <form method="POST" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
                           <i class="fa fa-check fa-solid"></i>
                         </button>
-                        <!-- Check Modal -->
-                        <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <!-- Form inside the modal -->
-                                <form method="POST">
-                                  <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                                  <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
-                                    <label for="clientName">Client Name</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
-                                    <label for="clientLocation">Location</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
-                                    <label for="dateStart">Date Start</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
-                                    <label for="contractAmount">Contract Amount</label>
-                                  </div>
-                                  <div class="mb-3 form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly></textarea>
-                                    <label for="floatingTextarea2">Context</label>
-                                  </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
-                                </form>
-                              </div>
+                        <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                        <button class="btn btn-danger" type="submit" name="inquiry_decline">
+                          <li class="fa fa-trash fa-solid"></li>
+                        </button>
+                      </form>
+
+                      <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <!-- Form inside the modal -->
+                              <form method="POST">
+                                <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
+                                <div class="mb-3 form-floating">
+                                  <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
+                                  <label for="clientName">Client Name</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
+                                  <label for="clientLocation">Location</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
+                                  <label for="dateStart">Date Start</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
+                                  <label for="contractAmount">Contract Amount</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly><?php echo $inquiry["client_comment"] ?></textarea>
+                                  <label for="floatingTextarea2">Context</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
+                              </form>
                             </div>
                           </div>
                         </div>
-                        <!-- Check Modal -->
-                        <form method="POST">
-                          <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                          <button class="btn btn-danger" type="submit" name="inquiry_decline">
-                            <li class="fa fa-trash fa-solid"></li>
-                          </button>
-                        </form>
                       </div>
+
                     </td>
                   </tr>
                 <?php endif; ?>
-              <?php } ?>
+              <?php endwhile; ?>
+
             </tbody>
           </table>
         </div>
 
-        <nav aria-label="Page navigation example" class="mt-3 mt-md-0">
-          <ul class="pagination">
-            <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
-              <li class="page-item <?php echo ($page == $current_page) ? 'active' : ''; ?>">
-                <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
-              </li>
-            <?php endfor; ?>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
@@ -393,7 +357,7 @@ include './components/navbar.php';
           page: page
         },
         success: function(response) {
-          $('tbody').html(response);
+          // $('tbody').html(response);
         }
       });
     }
@@ -456,8 +420,8 @@ include './components/navbar.php';
           $inq_id = $row["inquiry_id"];
           $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
         ?> {
-            title: '<?php echo $row["client_wo"]; ?>',
-            start: '<?php echo date("Y-m-d", $info["accepted_start_date"]); ?>', // Event start date
+            title: '<?php echo $row["client_wo"] . ":" . $info["accepted_client_name"]; ?>',
+            start: '<?php echo date("Y-m-d", $info["accepted_start_date"]); ?>',
             color: '<?php if ($row["inquiry_status"] == 1) {
                       echo 'red';
                     } else {
@@ -497,10 +461,39 @@ include './components/navbar.php';
 
   // Line Chart Data and Configuration
   const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May'],
+    labels: [
+      'Start',
+      <?php
+      $result = mysqli_query($conn, "SELECT * FROM page_count");
+      $monthYear = array();
+      $salesData = array();
+      while ($row = $result->fetch_assoc()) {
+        if (!in_array(date("M-Y", $row["count_date"]), $monthYear)) {
+          $monthYear[] = date("M-Y", $row["count_date"]);
+          echo '"' . date("M-Y", $row["count_date"]) . '",';
+        }
+
+        $index = array_search(date("M-Y", $row["count_date"]), $monthYear);
+        if ($index !== false) {
+          if (isset($salesData[$index])) {
+            $salesData[$index] = $salesData[$index] + $row["count"];
+          } else {
+            $salesData[$index] = $row["count"];
+          }
+        }
+      }
+      ?>
+    ],
     datasets: [{
       label: 'Page Visitor Volume',
-      data: [10, 25, 17, 30, 22],
+      data: [
+        0,
+        <?php 
+          foreach($salesData as $value){
+            echo $value . ',';
+          }
+          ?>
+      ],
       borderColor: 'rgb(75, 192, 192)',
       tension: 0.1
     }]
