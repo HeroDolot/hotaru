@@ -34,8 +34,9 @@ if (isset($_POST["submit_expense"])) {
     $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
     $expense_type_id = mysqli_real_escape_string($conn, $_POST["expense_type"]);
     $expense_price = mysqli_real_escape_string($conn, $_POST["expense_price"]);
+    $expense_quantity = mysqli_real_escape_string($conn, $_POST["expense_quantity"]);
 
-    mysqli_query($conn, "INSERT INTO expense_history (exp_history_inquiry_id,exp_history_expense_id,exp_history_price) VALUES($inquiry_id,$expense_type_id,$expense_price)");
+    mysqli_query($conn, "INSERT INTO expense_history (exp_history_inquiry_id,exp_history_expense_id,exp_history_price,expense_quantity) VALUES($inquiry_id,$expense_type_id,$expense_price,$expense_quantity)");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./pending.php?success=Expense added to client");
     } else {
@@ -87,6 +88,7 @@ include './components/navbar.php';
                 while ($row = $result->fetch_assoc()) :
                     $inq_id = $row["inquiry_id"];
                     $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                    $wo_id = $row["client_wo"]
                 ?>
                     <tr>
                         <td><?php echo $inq_id; ?></td>
@@ -94,7 +96,7 @@ include './components/navbar.php';
                         <td><?php echo $info["accepted_client_name"]; ?></td>
                         <td><?php echo $row["client_number"]; ?></td>
                         <td><?php echo $info["accepted_location"]; ?></td>
-                        <td><?php echo $row["client_wo"]; ?></td>
+                        <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                         <td>
                             <div class="badge text-bg-danger">
                                 Pending

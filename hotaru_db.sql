@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 10:39 AM
+-- Generation Time: Dec 06, 2023 at 05:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,17 +33,17 @@ CREATE TABLE `accepted` (
   `accepted_client_name` text NOT NULL,
   `accepted_contract` int(11) NOT NULL,
   `accepted_start_date` int(11) NOT NULL,
-  `accepted_location` text NOT NULL
+  `accepted_location` text NOT NULL,
+  `accepted_completed_date` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accepted`
 --
 
-INSERT INTO `accepted` (`accepted_id`, `accepted_inquiry_id`, `accepted_client_name`, `accepted_contract`, `accepted_start_date`, `accepted_location`) VALUES
-(5, 12, 'm4k1b0y Desu ka', 35000, 1700866800, '185 Angeles II Pasolo Valenzuela City, Philippines'),
-(6, 12, 'm4k1b0y Desu ka', 55000, 1700953200, '185 Angeles II Pasolo Valenzuela City, Philippines'),
-(7, 10, 'May anne dolot', 49000, 1701039600, '275 Dreamland St. Pasolo Valenzuela City');
+INSERT INTO `accepted` (`accepted_id`, `accepted_inquiry_id`, `accepted_client_name`, `accepted_contract`, `accepted_start_date`, `accepted_location`, `accepted_completed_date`) VALUES
+(8, 16, 'm4k1', 23000, 1702508400, '185 Angeles II Pasolo valenzuela city, philippines', 1701875491),
+(9, 17, 'MakMak Atendido', 29994, 1703718000, '185 Angeles II Pasolo valenzuela city, philippines', 1701878528);
 
 -- --------------------------------------------------------
 
@@ -68,6 +68,48 @@ INSERT INTO `assets` (`asset_id`, `asset_name`, `asset_date_acquired`, `asset_qu
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expense_history`
+--
+
+CREATE TABLE `expense_history` (
+  `exp_history_id` int(11) NOT NULL,
+  `exp_history_inquiry_id` int(11) NOT NULL,
+  `exp_history_expense_id` int(11) NOT NULL,
+  `exp_history_price` int(11) NOT NULL,
+  `expense_quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expense_history`
+--
+
+INSERT INTO `expense_history` (`exp_history_id`, `exp_history_inquiry_id`, `exp_history_expense_id`, `exp_history_price`, `expense_quantity`) VALUES
+(1, 16, 3, 500, 1),
+(2, 17, 3, 2, 500),
+(3, 17, 2, 500, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expense_type`
+--
+
+CREATE TABLE `expense_type` (
+  `expense_id` int(11) NOT NULL,
+  `expense_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expense_type`
+--
+
+INSERT INTO `expense_type` (`expense_id`, `expense_name`) VALUES
+(2, 'Miryenda'),
+(3, 'Sinelas');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inquiry`
 --
 
@@ -76,6 +118,7 @@ CREATE TABLE `inquiry` (
   `client_email` varchar(255) NOT NULL,
   `client_name` varchar(255) NOT NULL,
   `client_number` varchar(255) NOT NULL,
+  `preferred_contact` text NOT NULL,
   `client_region` varchar(255) NOT NULL,
   `client_wo` varchar(255) NOT NULL,
   `client_comment` varchar(255) NOT NULL,
@@ -86,12 +129,29 @@ CREATE TABLE `inquiry` (
 -- Dumping data for table `inquiry`
 --
 
-INSERT INTO `inquiry` (`inquiry_id`, `client_email`, `client_name`, `client_number`, `client_region`, `client_wo`, `client_comment`, `inquiry_status`) VALUES
-(8, 'test@mail.com', '123', '123', 'Kanto', 'Relocation', '123', 0),
-(9, 'dolot.hero@gmail.com', 'ヒーロードロット', '09055270361', 'Kanto', 'Things Throw', 'やれやれだぜ', 0),
-(10, 'mayannedolot@gmail.com', 'May anne dolot', '012312987', 'Kanto', 'Relocation', 'blabal', 1),
-(11, 'macmac0804@gmail.com', 'MakMak Atendido', '1234456932', 'Kanto', 'House Cleaning', 'aaaa', -1),
-(12, 'testing@test.com', 'm4k1b0y Desu ka', '09458513800', 'Kanto', 'Things Throw', 'please throw my corps in the ocean, thanks :)', 2);
+INSERT INTO `inquiry` (`inquiry_id`, `client_email`, `client_name`, `client_number`, `preferred_contact`, `client_region`, `client_wo`, `client_comment`, `inquiry_status`) VALUES
+(16, 'm4k1@gmail.com', 'm4k1', '09458513800', 'Mail', 'Kanto', '1', 'okeh', 2),
+(17, 'test@mail.com', 'MakMak Atendido', 'punturin', 'Mail', 'Kanto', '4', 'meow', 2),
+(18, 'test@mail.com', 'test', '123', 'Call/Mail', 'Kanto', '3', 'test', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_count`
+--
+
+CREATE TABLE `page_count` (
+  `count_id` int(11) NOT NULL,
+  `count_date` int(11) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `page_count`
+--
+
+INSERT INTO `page_count` (`count_id`, `count_date`, `count`) VALUES
+(2, 1701817200, 15);
 
 -- --------------------------------------------------------
 
@@ -136,6 +196,26 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `user_email`, `user_password`) VALUES
 (1, 'test@mail.com', '123');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work_order`
+--
+
+CREATE TABLE `work_order` (
+  `work_id` int(11) NOT NULL,
+  `work_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `work_order`
+--
+
+INSERT INTO `work_order` (`work_id`, `work_name`) VALUES
+(1, 'House Transfer'),
+(3, 'Moving Services'),
+(4, 'Graphic Design by Andres');
+
 --
 -- Indexes for dumped tables
 --
@@ -153,10 +233,28 @@ ALTER TABLE `assets`
   ADD PRIMARY KEY (`asset_id`);
 
 --
+-- Indexes for table `expense_history`
+--
+ALTER TABLE `expense_history`
+  ADD PRIMARY KEY (`exp_history_id`);
+
+--
+-- Indexes for table `expense_type`
+--
+ALTER TABLE `expense_type`
+  ADD PRIMARY KEY (`expense_id`);
+
+--
 -- Indexes for table `inquiry`
 --
 ALTER TABLE `inquiry`
   ADD PRIMARY KEY (`inquiry_id`);
+
+--
+-- Indexes for table `page_count`
+--
+ALTER TABLE `page_count`
+  ADD PRIMARY KEY (`count_id`);
 
 --
 -- Indexes for table `updates`
@@ -171,6 +269,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `work_order`
+--
+ALTER TABLE `work_order`
+  ADD PRIMARY KEY (`work_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -178,7 +282,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `accepted`
 --
 ALTER TABLE `accepted`
-  MODIFY `accepted_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `accepted_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `assets`
@@ -187,10 +291,28 @@ ALTER TABLE `assets`
   MODIFY `asset_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `expense_history`
+--
+ALTER TABLE `expense_history`
+  MODIFY `exp_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `expense_type`
+--
+ALTER TABLE `expense_type`
+  MODIFY `expense_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `inquiry`
 --
 ALTER TABLE `inquiry`
-  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `page_count`
+--
+ALTER TABLE `page_count`
+  MODIFY `count_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `updates`
@@ -203,6 +325,12 @@ ALTER TABLE `updates`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `work_order`
+--
+ALTER TABLE `work_order`
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

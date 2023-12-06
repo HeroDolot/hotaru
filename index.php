@@ -775,7 +775,7 @@ include './components/navbar.php';
                                 <?php 
                                 $result = mysqli_query($conn,"SELECT * FROM work_order");
                                 while ($row = $result->fetch_assoc()){
-                                    echo '<option value="'.$row["work_name"].'">'.$row["work_name"].'</option>';
+                                    echo '<option value="'.$row["work_id"].'">'.$row["work_name"].'</option>';
                                 }
                                 ?>
                             </select>

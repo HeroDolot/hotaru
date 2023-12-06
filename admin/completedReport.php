@@ -88,6 +88,10 @@ if (isset($_GET["id"])) :
                         <p class="fw-bolder" style="font-size: 55px;"><span class="text-primary">Hotaru</span> Services</p>
                     </div>
                     <p class="text-secondary">Company Address</p>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" onchange="switchMode(this)" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Client Copy</label>
+                    </div>
                 </div>
                 <div class="col-md-6 text-md-end mt-0 mt-md-5">
                     <p class="text-info fw-bolder" style="font-size:25px;">INVOICE</p>
@@ -174,10 +178,10 @@ if (isset($_GET["id"])) :
                 </div>
                 <div class="col-md-7 mt-4 mt-md-0"> <!-- Added margin top for smaller screens -->
                     <label for="context" class="fw-bolder">Work order Context</label>
-                    <textarea class="form-control" style="border: 2px solid black; width: 100%;" name="" id="context" cols="40" rows="7" readonly></textarea>
+                    <textarea class="form-control" style="border: 2px solid black; width: 100%;" name="" id="context" cols="40" rows="7" readonly><?php echo $inquiryInfo["client_comment"] ?></textarea>
                 </div>
             </div>
-            <table class="table table-bordered table-responsive text-center">
+            <table id="expense_table" class="table table-bordered table-responsive text-center">
                 <thead class="table-danger">
                     <tr>
                         <th colspan="5">EXPENSES</th>
@@ -193,29 +197,33 @@ if (isset($_GET["id"])) :
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Hero Dolot</td>
-                        <td>3,000¥</td>
-                        <td> - </td>
-                        <td> - </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Highway Ticket</td>
-                        <td>17,000¥</td>
-                        <td>1</td>
-                        <td>17,000¥</td>
-                    </tr>
+                    <?php
+                    $total = 0;
+                    $count = 0;
+                    $result = mysqli_query($conn, "SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+                    while ($row = $result->fetch_assoc()) :
+                        $count++;
+                        $expense_history_id = $row["exp_history_expense_id"];
+                        $subtotal = $row["exp_history_price"] * $row["expense_quantity"];
+                        $total = $total + $subtotal;
+                    ?>
+                        <tr>
+                            <td><?php echo $count ?></td>
+                            <td><?php echo mysqli_query($conn, "SELECT * FROM expense_type WHERE expense_id = $expense_history_id")->fetch_assoc()["expense_name"] ?></td>
+                            <td><?php echo $row["exp_history_price"] ?>¥</td>
+                            <td><?php echo $row["expense_quantity"]; ?></td>
+                            <td><?php echo number_format($subtotal) ?>¥</td>
+                        </tr>
+                    <?php endwhile ?>
                 </tbody>
                 <tfoot>
                     <tr>
                         <th colspan="4"></th>
-                        <th>Total: 17,000¥</th>
+                        <th>Total: <?php echo number_format($total); ?>¥</th>
                     </tr>
                     <tr>
                         <th colspan="4"></th>
-                        <th>Total Profit: 20,000¥</th>
+                        <th>Total Profit: <?php echo number_format($acceptedInfo["accepted_contract"] - $total); ?>¥</th>
                     </tr>
                 </tfoot>
             </table>
@@ -225,3 +233,14 @@ if (isset($_GET["id"])) :
     </html>
 
 <?php endif ?>
+
+<script>
+    function switchMode(element) {
+        table = document.getElementById("expense_table");
+        if (element.checked) {
+            table.style.opacity = '0';
+        } else {
+            table.style.opacity = '1';
+        }
+    }
+</script>

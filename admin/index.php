@@ -73,7 +73,19 @@ include './components/navbar.php';
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./reports.php" class="btn btn-transparent text-white fw-bolder">1,000,000¥</a>
+                <a href="./reports.php" class="btn btn-transparent text-white fw-bolder">
+                  <?php
+                  $total = 0;
+                  $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
+                  while ($acceptedRow = $acceptedInfo->fetch_assoc()) {
+                    $accepted_inquiry_id = $acceptedRow["accepted_inquiry_id"];
+                    $expense = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as subtotal FROM expense_history WHERE exp_history_inquiry_id = $accepted_inquiry_id")->fetch_assoc()["subtotal"];
+                    $subtotal = $acceptedRow["accepted_contract"] - $expense;
+                    $total = $total + $subtotal;
+                  }
+                  echo number_format($total);
+                  ?>
+                  ¥</a>
               </div>
             </div>
           </div>
@@ -196,18 +208,19 @@ include './components/navbar.php';
             </thead>
             <tbody class="align-middle">
               <?php
-              $res = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_status = 0");
+              $res = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 0 limit 3");
               while ($row = $res->fetch_assoc()) :
                 $inquiry = $row;
                 $inq_id = $inquiry['inquiry_id'];
                 $modalId = 'myModal_' . $inquiry['inquiry_id'];
+                $wo_id = $inquiry['client_wo'];
                 if ($inquiry["inquiry_status"] == 0) :
               ?>
                   <tr>
                     <td><?php echo $inquiry['client_name']; ?></td>
                     <td><?php echo $inquiry['client_number']; ?></td>
                     <td><?php echo $inquiry['client_region']; ?></td>
-                    <td><?php echo $inquiry['client_wo']; ?></td>
+                    <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                     <td>Call</td>
                     <td>
                       <form method="POST" class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -299,9 +312,48 @@ include './components/navbar.php';
 
 
 <script>
-  var months = ["January 2024 ", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  var incomeData = [2000, 2500, 3000, 2800, 3500, 4000, 4200, 3800, 3000, 3200, 3500, 4000];
-  var expensesData = [1500, 1800, 2000, 2100, 2500, 2800, 3000, 2700, 2200, 2400, 2600, 3000];
+  function getJapaneseMonths(year) {
+    const months = [];
+    const japaneseFormatter = new Intl.DateTimeFormat('ja-JP', {
+      month: 'long'
+    });
+    let startMonth = 0; // January by default
+
+    // Adjust startMonth based on the era change from Heisei to Reiwa
+    if (year > 2019 || (year === 2019 && new Date(year, 3, 30) < new Date(year, 3, 1))) {
+      startMonth = 0; // Reiwa starts from May (index 4)
+    }
+
+    for (let i = startMonth; i < startMonth + 12; i++) {
+      const date = new Date(year, i, 1);
+      const monthName = japaneseFormatter.format(date);
+      months.push("<?php echo date("Y"); ?>年" + monthName);
+    }
+
+    return months;
+  }
+
+  var months = getJapaneseMonths(<?php echo date('Y'); ?>);
+  var incomeData = [
+    <?php
+    for ($i = 1; $i <= 12; $i++) {
+      $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 1");
+      $total = 0;
+      while ($row = $result->fetch_assoc()) {
+        $inquiry_id = $row["inquiry_id"];
+        $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
+        $startdate = date("m", $acceptedInfo["accepted_start_date"]);
+        if ($startdate == $i){
+          $total = $total + $acceptedInfo["accepted_contract"];
+        }
+      }
+      echo $total . ",";
+    }
+    ?>
+  ];
+  var expensesData = [
+    1500, 1800, 2000, 2100, 2500, 2800, 3000, 2700, 2200, 2400, 2600, 3000
+  ];
 
   // Calculate Profit
   var profitData = incomeData.map((income, index) => income - expensesData[index]);
@@ -419,8 +471,9 @@ include './components/navbar.php';
         while ($row = $result->fetch_assoc()) :
           $inq_id = $row["inquiry_id"];
           $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+          $work_id = $row["client_wo"]
         ?> {
-            title: '<?php echo $row["client_wo"] . ":" . $info["accepted_client_name"]; ?>',
+            title: '<?php echo  mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $work_id")->fetch_assoc()["work_name"] . ":" . $info["accepted_client_name"]; ?>',
             start: '<?php echo date("Y-m-d", $info["accepted_start_date"]); ?>',
             color: '<?php if ($row["inquiry_status"] == 1) {
                       echo 'red';
@@ -445,10 +498,30 @@ include './components/navbar.php';
 
   // Doughnut Chart Data and Configuration
   const doughnutData = {
-    labels: ['Moving Services', 'Disposal Services', 'Cleaning Services', 'Others'],
+    labels: [
+      <?php
+      $result = mysqli_query($conn, "SELECT * FROM work_order");
+      while ($row = $result->fetch_assoc()) {
+        echo "'" . $row["work_name"] . "',";
+      }
+      ?>
+    ],
     datasets: [{
-      label: 'Doughnut Dataset',
-      data: [300, 50, 100, 40],
+      label: 'Accumulated',
+      data: [
+        <?php
+        $res = mysqli_query($conn, "SELECT * FROM work_order");
+        while ($resRow = $res->fetch_assoc()) {
+          $count = 0;
+          $work_id = $resRow["work_id"];
+          $res1 = mysqli_query($conn, "SELECT * FROM inquiry WHERE client_wo = $work_id AND inquiry_status >= 1");
+          while ($res1Row = $res1->fetch_assoc()) {
+            $count++;
+          }
+          echo $count . ",";
+        }
+        ?>
+      ],
       backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(128,128,128)'],
       hoverOffset: 4
     }]
@@ -488,11 +561,11 @@ include './components/navbar.php';
       label: 'Page Visitor Volume',
       data: [
         0,
-        <?php 
-          foreach($salesData as $value){
-            echo $value . ',';
-          }
-          ?>
+        <?php
+        foreach ($salesData as $value) {
+          echo $value . ',';
+        }
+        ?>
       ],
       borderColor: 'rgb(75, 192, 192)',
       tension: 0.1

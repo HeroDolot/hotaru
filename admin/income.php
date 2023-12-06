@@ -39,11 +39,12 @@ include './components/navbar.php';
                     while ($row = $result->fetch_assoc()) :
                         $inquiry_id = $row["inquiry_id"];
                         $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
-                    ?>
+                        $wo_id = $row["client_wo"];
+                   ?>
                         <tr>
                             <td><?php echo $acceptedInfo["accepted_client_name"]; ?></td>
                             <td><?php echo date("M d, Y", $acceptedInfo["accepted_start_date"]) ?></td>
-                            <td><?php echo $row["client_wo"] ?></td>
+                            <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];?></td>
                             <td>¥<?php echo number_format($acceptedInfo["accepted_contract"]) ?></td>
                             <th>
                                 <a class="btn btn-info text-white" href="./completedReport.php?id=<?php echo $row["inquiry_id"] ?>">

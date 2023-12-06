@@ -50,6 +50,7 @@ include './components/navbar.php';
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                                $wo_id = $row["client_wo"];
                             ?>
 
                                 <tr>
@@ -58,7 +59,7 @@ include './components/navbar.php';
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"] ?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {
