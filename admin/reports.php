@@ -30,7 +30,7 @@ include './components/navbar.php';
     </ul>
     <div class="tab-content" id="myTabsContent">
         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-            <p>Reports Overview Content Goes Here</p>
+            <!-- <p>Reports Overview Content Goes Here</p> -->
             <div class="container mt-5">
                 <div class="table-responsive">
                     <table class="table table-bordered table-info align-middle">
@@ -105,7 +105,7 @@ include './components/navbar.php';
         </div>
         <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
             <!-- Content for Pending tab -->
-            <p>Pending Content Goes Here</p>
+            <!-- <p>Pending Content Goes Here</p> -->
 
             <div class="container mt-5">
                 <div class="table-responsive">
@@ -127,6 +127,7 @@ include './components/navbar.php';
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                                $wo_id = $row["client_wo"];
                             ?>
 
                                 <tr>
@@ -135,7 +136,7 @@ include './components/navbar.php';
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {
@@ -173,7 +174,7 @@ include './components/navbar.php';
         </div>
         <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
             <!-- Content for Completed tab -->
-            <p>Completed Content Goes Here</p>
+            <!-- <p>Completed Content Goes Here</p> -->
             <div class="container mt-5">
                 <div class="table-responsive">
                     <table class="table table-bordered table-success align-middle">
@@ -193,6 +194,7 @@ include './components/navbar.php';
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
+                                $wo_id = $row["client_wo"]
                             ?>
 
                                 <tr>
@@ -201,7 +203,7 @@ include './components/navbar.php';
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo $row["client_wo"] ?></td>
+                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {

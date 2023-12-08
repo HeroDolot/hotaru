@@ -223,12 +223,12 @@ include './components/navbar.php';
                     <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                     <td>Call</td>
                     <td>
-                      <form method="POST" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <form method="POST" id="" onsumbit="confirmDeletion(event)" class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
                           <i class="fa fa-check fa-solid"></i>
                         </button>
                         <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                        <button class="btn btn-danger" type="submit" name="inquiry_decline">
+                        <button class="btn btn-danger" type="submit" onclick="return confirmDelete()" name="inquiry_decline">
                           <li class="fa fa-trash fa-solid"></li>
                         </button>
                       </form>
@@ -253,7 +253,7 @@ include './components/navbar.php';
                                   <label for="clientLocation">Location</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                  <input type="date" class="form-control fw-bolder" required id="dateStart" name="start_date">
+                                  <input type="date" class="form-control fw-bolder" min="<?php echo date('Y-m-d'); ?>" required id="dateStart" name="start_date">
                                   <label for="dateStart">Date Start</label>
                                 </div>
                                 <div class="mb-3 form-floating">
@@ -312,6 +312,14 @@ include './components/navbar.php';
 
 
 <script>
+  function confirmDelete() {
+    if (confirm("Are you sure you want to delete this?")) {
+      return true; // Proceed with form submission
+    } else {
+      return false; // Cancel form submission
+    }
+  }
+
   function getJapaneseMonths(year) {
     const months = [];
     const japaneseFormatter = new Intl.DateTimeFormat('ja-JP', {
@@ -337,13 +345,13 @@ include './components/navbar.php';
   var incomeData = [
     <?php
     for ($i = 1; $i <= 12; $i++) {
-      $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 1");
+      $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
       $total = 0;
       while ($row = $result->fetch_assoc()) {
         $inquiry_id = $row["inquiry_id"];
         $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
         $startdate = date("m", $acceptedInfo["accepted_start_date"]);
-        if ($startdate == $i){
+        if ($startdate == $i) {
           $total = $total + $acceptedInfo["accepted_contract"];
         }
       }
