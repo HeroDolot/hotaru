@@ -382,13 +382,45 @@ include './components/navbar.php';
     <p class="text-primary fw-bolder fs-1 mb-2">ブログ</p>
     <div class="row">
         <!-- MAIN BLOG -->
+        <?php
+        $row = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'")->fetch_assoc();
+
+        ?>
         <div class="col-md-7">
             <div class="card mb-3">
-                <img src="./img/throw.webp" class="card-img-top img-fluid" alt="...">
+                <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
+                    <p class="card-text"><?php echo $row["update_description"] ?></p>
+                    <p class="card-text"><small class="text-body-secondary"><?php
+                                                                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+
+                                                                            // Current timestamp
+                                                                            $currentTimestamp = time();
+
+                                                                            // Calculate the difference in seconds
+                                                                            $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+
+                                                                            // Convert seconds to minutes and hours
+                                                                            $minutes = floor($timeDifferenceSeconds / 60);
+                                                                            $hours = floor($timeDifferenceSeconds / 3600);
+                                                                            $days = floor($hours / 24);
+
+                                                                            if ($days > 0) {
+                                                                                if ($days == 1) {
+                                                                                    echo "Last update " . $days . " day ago.";
+                                                                                } else {
+                                                                                    echo "Last update " . $days . " days ago.";
+                                                                                }
+                                                                            } else {
+                                                                                if ($hours > 0) {
+                                                                                    echo "Last update " . $hours . " hours ago.";
+                                                                                } else {
+                                                                                    echo "Last update " . $minutes . " minutes ago.";
+                                                                                }
+                                                                            }
+
+                                                                            ?></small></p>
                 </div>
             </div>
         </div>
@@ -397,7 +429,7 @@ include './components/navbar.php';
         <!-- SUB MAIN BLOG -->
         <div class="col-md-5">
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit ");
+            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit 3");
             while ($row = $result->fetch_assoc()) :
             ?>
 
@@ -460,42 +492,21 @@ include './components/navbar.php';
     <!-- SECONDARY BLOG -->
     <div class="text-primary fw-bolder mt-4 mb-3">
         <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="./img/sample-3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <?php
+            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
+            while ($row = $result->fetch_assoc()) :
+            ?>
+                <div class="col">
+                    <div class="card">
+                        <img src="<?php echo $row["update_image"]?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row["update_title"]?></h5>
+                            <p class="card-text"><?php echo $row["update_description"]?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="./img/sample-3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="./img/sample-3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="./img/sample-3.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
+            <?php endwhile ?>
+
         </div>
     </div>
 </section>

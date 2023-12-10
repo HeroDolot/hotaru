@@ -362,7 +362,27 @@ include './components/navbar.php';
     ?>
   ];
   var expensesData = [
-    1500, 1800, 2000, 2100, 2500, 2800, 3000, 2700, 2200, 2400, 2600, 3000
+    <?php
+    for ($i = 1; $i <= 12; $i++) {
+      $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
+      $total = 0;
+      while ($row = $result->fetch_assoc()) {
+        $inquiry_id = $row["inquiry_id"];
+        $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
+        $startdate = date("m", $acceptedInfo["accepted_start_date"]);
+        if ($startdate == $i) {
+          $expenseInfo = mysqli_query($conn,"SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+          $subtotal = 0;
+          while ($expense = $expenseInfo->fetch_assoc()){
+            $supersubtotal = $expense["exp_history_price"] * $expense["expense_quantity"];
+            $subtotal = $subtotal + $supersubtotal;
+          }
+          $total = $total + $subtotal;
+        }
+      }
+      echo $total . ",";
+    }
+    ?>
   ];
 
   // Calculate Profit
@@ -481,7 +501,7 @@ include './components/navbar.php';
         while ($row = $result->fetch_assoc()) :
           $inq_id = $row["inquiry_id"];
           $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
-          $work_id = $row["client_wo"]
+          $work_id = $row["client_wo"];
         ?> {
             title: '<?php echo  mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $work_id")->fetch_assoc()["work_name"] . ":" . $info["accepted_client_name"]; ?>',
             start: '<?php echo date("Y-m-d", $info["accepted_start_date"]); ?>',
@@ -491,7 +511,7 @@ include './components/navbar.php';
                       echo 'green';
                     } ?>'
           },
-        <?php endwhile; ?>
+        <?php endwhile ?>
       ],
 
     });

@@ -205,7 +205,7 @@ include './components/navbar.php';
                     <form method="POST">
                         <div class="form-floating mb-3">
                             <select class="form-select" name="update_location" required id="floatingSelect" aria-label="Floating label select example">
-                                <option selected disabled value="Main Blog">Main Blog</option>
+                                <option selected value="Main Blog">Main Blog</option>
                                 <option value="Sub Main Blog">Sub Main Blog</option>
                                 <option value="Secondary Blog">Secondary Blog</option>
                                 <option value="Promotion">Promotion</option>
