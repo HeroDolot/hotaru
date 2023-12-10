@@ -223,12 +223,12 @@ include './components/navbar.php';
                     <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                     <td>Call</td>
                     <td>
-                      <form method="POST" id="" onsumbit="confirmDeletion(event)" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <form method="POST" id="deleteForm" class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
                           <i class="fa fa-check fa-solid"></i>
                         </button>
                         <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
-                        <button class="btn btn-danger" type="submit" onclick="return confirmDelete()" name="inquiry_decline">
+                        <button class="btn btn-danger" type="submit" onclick="confirmDelete(event)" name="inquiry_decline">
                           <li class="fa fa-trash fa-solid"></li>
                         </button>
                       </form>
@@ -312,11 +312,13 @@ include './components/navbar.php';
 
 
 <script>
-  function confirmDelete() {
-    if (confirm("Are you sure you want to delete this?")) {
-      return true; // Proceed with form submission
+  function confirmDelete(event) {
+    event.preventDefault();
+    var confirmation = prompt("Are you sure you want to delete? Type 'confirm' to proceed.");
+    if (confirmation && confirmation.toLowerCase() === 'confirm') {
+      document.getElementById('deleteForm').submit(); // Submit the form
     } else {
-      return false; // Cancel form submission
+      alert("Deletion canceled.");
     }
   }
 

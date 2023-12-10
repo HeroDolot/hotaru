@@ -1,11 +1,11 @@
 <?php
 include './connection.php';
 $currentDate = strtotime(date("Y-m-d") . "00:00:00");
-$res = mysqli_query($conn,"SELECT * FROM page_count WHERE count_date = $currentDate");
-if ($res->num_rows == 0){
-    mysqli_query($conn,"INSERT INTO page_count (count_date,count) VALUES($currentDate,1)");
+$res = mysqli_query($conn, "SELECT * FROM page_count WHERE count_date = $currentDate");
+if ($res->num_rows == 0) {
+    mysqli_query($conn, "INSERT INTO page_count (count_date,count) VALUES($currentDate,1)");
 } else {
-    mysqli_query($conn,"UPDATE page_count SET count = count + 1 WHERE count_date = $currentDate");
+    mysqli_query($conn, "UPDATE page_count SET count = count + 1 WHERE count_date = $currentDate");
 }
 
 include './includes/header.php';
@@ -396,60 +396,62 @@ include './components/navbar.php';
 
         <!-- SUB MAIN BLOG -->
         <div class="col-md-5">
-            <div class="card mb-3">
-                <div class="card-body p-0">
-                    <div class="row g-1">
-                        <div class="col-md-7">
-                            <img src="./img/sample-2.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="wrapper">
-                                <p class="card-header">Card title</p>
-                                <p class="p-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, nesciunt impedit rerum vitae</p>
+            <?php
+            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit ");
+            while ($row = $result->fetch_assoc()) :
+            ?>
+
+                <div class="card mb-3">
+                    <div class="card-body p-0">
+                        <div class="row g-1">
+                            <div class="col-md-7">
+                                <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="">
                             </div>
-                        </div>
-                        <div class="card-footer m-0">
-                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                            <div class="col-md-5">
+                                <div class="wrapper">
+                                    <p class="card-header"><?php echo $row["update_title"] ?></p>
+                                    <p class="p-2"><?php echo $row["update_description"] ?></p>
+                                </div>
+                            </div>
+                            <div class="card-footer m-0">
+                                <p class="card-text"><small class="text-body-secondary">
+                                        <?php
+                                        $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+
+                                        // Current timestamp
+                                        $currentTimestamp = time();
+
+                                        // Calculate the difference in seconds
+                                        $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+
+                                        // Convert seconds to minutes and hours
+                                        $minutes = floor($timeDifferenceSeconds / 60);
+                                        $hours = floor($timeDifferenceSeconds / 3600);
+                                        $days = floor($hours / 24);
+
+                                        if ($days > 0) {
+                                            if ($days == 1) {
+                                                echo "Last update " . $days . " day ago.";
+                                            } else {
+                                                echo "Last update " . $days . " days ago.";
+                                            }
+                                        } else {
+                                            if ($hours > 0) {
+                                                echo "Last update " . $hours . " hours ago.";
+                                            } else {
+                                                echo "Last update " . $minutes . " minutes ago.";
+                                            }
+                                        }
+
+                                        ?>
+                                    </small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body p-0">
-                    <div class="row g-1">
-                        <div class="col-md-7">
-                            <img src="./img/sample-2.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="wrapper">
-                                <p class="card-header">Card title</p>
-                                <p class="p-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, nesciunt impedit rerum vitae</p>
-                            </div>
-                        </div>
-                        <div class="card-footer m-0">
-                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body p-0">
-                    <div class="row g-1">
-                        <div class="col-md-7">
-                            <img src="./img/sample-2.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="wrapper">
-                                <p class="card-header">Card title</p>
-                                <p class="p-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, nesciunt impedit rerum vitae</p>
-                            </div>
-                        </div>
-                        <div class="card-footer m-0">
-                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <?php endwhile ?>
+
         </div>
     </div>
     <!-- SUB MAIN BLOG -->
@@ -772,10 +774,10 @@ include './components/navbar.php';
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="clientWO" required>
                                 <option selected disabled value="">作業オーダーを選択してください</option>
-                                <?php 
-                                $result = mysqli_query($conn,"SELECT * FROM work_order");
-                                while ($row = $result->fetch_assoc()){
-                                    echo '<option value="'.$row["work_id"].'">'.$row["work_name"].'</option>';
+                                <?php
+                                $result = mysqli_query($conn, "SELECT * FROM work_order");
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<option value="' . $row["work_id"] . '">' . $row["work_name"] . '</option>';
                                 }
                                 ?>
                             </select>
