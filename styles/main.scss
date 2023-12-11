@@ -36,7 +36,7 @@
 }
 
 .female-introduction {
-    background: url("../img/moving-out.svg") no-repeat center;
+    background: url("../img/female-intro.svg") no-repeat center;
     background-size: cover;
     background-position: center center; /* Center the image */
     min-height: 813.5px;
@@ -44,7 +44,7 @@
 }
 
 .female-introduction-mobile {
-    background: url("../img/women.jpg") no-repeat center;
+    background: url("../img/female-mobile.jpg") no-repeat center;
     background-size: cover;
     width: 100%;
     background-position: center center; /* Center the image */
@@ -198,6 +198,7 @@
     
         .female-introduction-mobile h1 {
             font-size: 40px;
+            margin-top:40px;
         }
     
         .female-introduction-mobile .margin {

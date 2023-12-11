@@ -392,35 +392,37 @@ include './components/navbar.php';
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
                     <p class="card-text"><?php echo $row["update_description"] ?></p>
-                    <p class="card-text"><small class="text-body-secondary"><?php
-                                                                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+                    <p class="card-text"><small class="text-body-secondary">
+                            <?php
+                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
 
-                                                                            // Current timestamp
-                                                                            $currentTimestamp = time();
+                            // Current timestamp
+                            $currentTimestamp = time();
 
-                                                                            // Calculate the difference in seconds
-                                                                            $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+                            // Calculate the difference in seconds
+                            $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
 
-                                                                            // Convert seconds to minutes and hours
-                                                                            $minutes = floor($timeDifferenceSeconds / 60);
-                                                                            $hours = floor($timeDifferenceSeconds / 3600);
-                                                                            $days = floor($hours / 24);
+                            // Convert seconds to minutes and hours
+                            $minutes = floor($timeDifferenceSeconds / 60);
+                            $hours = floor($timeDifferenceSeconds / 3600);
+                            $days = floor($hours / 24);
 
-                                                                            if ($days > 0) {
-                                                                                if ($days == 1) {
-                                                                                    echo "Last update " . $days . " day ago.";
-                                                                                } else {
-                                                                                    echo "Last update " . $days . " days ago.";
-                                                                                }
-                                                                            } else {
-                                                                                if ($hours > 0) {
-                                                                                    echo "Last update " . $hours . " hours ago.";
-                                                                                } else {
-                                                                                    echo "Last update " . $minutes . " minutes ago.";
-                                                                                }
-                                                                            }
+                            if ($days > 0) {
+                                if ($days == 1) {
+                                    echo "Last update " . $days . " day ago.";
+                                } else {
+                                    echo "Last update " . $days . " days ago.";
+                                }
+                            } else {
+                                if ($hours > 0) {
+                                    echo "Last update " . $hours . " hours ago.";
+                                } else {
+                                    echo "Last update " . $minutes . " minutes ago.";
+                                }
+                            }
 
-                                                                            ?></small></p>
+                            ?>
+                        </small></p>
                 </div>
             </div>
         </div>
@@ -490,23 +492,42 @@ include './components/navbar.php';
 
     <hr>
     <!-- SECONDARY BLOG -->
+    <!-- CONVERT TO CAROUSEL -->
     <div class="text-primary fw-bolder mt-4 mb-3">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
-            while ($row = $result->fetch_assoc()) :
-            ?>
-                <div class="col">
-                    <div class="card">
-                        <img src="<?php echo $row["update_image"]?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row["update_title"]?></h5>
-                            <p class="card-text"><?php echo $row["update_description"]?></p>
+        <?php
+        $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
+        ?>
+
+        <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <?php
+                $first = true;
+                while ($row = $result->fetch_assoc()) :
+                ?>
+
+                    <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100" style="min-height: 600px; max-height: 600px; object-fit: cover;" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5><?php echo $row["update_title"] ?></h5>
+                            <p><?php echo $row["update_description"] ?></p>
                         </div>
                     </div>
-                </div>
-            <?php endwhile ?>
 
+                <?php
+                    $first = false;
+                endwhile;
+                ?>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#updateCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#updateCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
@@ -820,8 +841,6 @@ include './components/navbar.php';
         </div>
     </div>
 </section>
-
-
 
 <script src="./js/index.js"></script>
 <?php

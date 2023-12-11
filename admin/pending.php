@@ -84,19 +84,31 @@ include './components/navbar.php';
             </thead>
             <tbody>
                 <?php
-                $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1");
-                while ($row = $result->fetch_assoc()) :
-                    $inq_id = $row["inquiry_id"];
+              $records_per_page = 5;
+
+              // Get the current page or set it to 1 if not set
+              $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+              
+              // Calculate the starting record for the current page
+              $start_from = ($current_page - 1) * $records_per_page;
+              
+              // Fetch data with pagination
+              $result_inquiries = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 LIMIT $start_from, $records_per_page");
+              
+              
+                while ($row_inquiry = $result_inquiries->fetch_assoc()) :
+                    $inq_id = $row_inquiry["inquiry_id"];
                     $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
-                    $wo_id = $row["client_wo"]
+                    $wo_id = $row_inquiry["client_wo"];
                 ?>
+
                     <tr>
                         <td><?php echo $inq_id; ?></td>
                         <td><?php echo date('M d, Y', $info["accepted_start_date"]); ?></td>
                         <td><?php echo $info["accepted_client_name"]; ?></td>
-                        <td><?php echo $row["client_number"]; ?></td>
+                        <td><?php echo $row_inquiry["client_number"]; ?></td>
                         <td><?php echo $info["accepted_location"]; ?></td>
-                        <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
+                        <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                         <td>
                             <div class="badge text-bg-danger">
                                 Pending
@@ -109,7 +121,6 @@ include './components/navbar.php';
                                     <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#myModal<?php echo $inq_id ?>">
                                         <i class="fas fa-edit"></i>
                                     </button>
-
                                     <button type="submit" name="complete" class="btn btn-primary">
                                         <i class="fas fa-check"></i>
                                     </button>
@@ -134,9 +145,9 @@ include './components/navbar.php';
                                                     <select class="form-select" name="expense_type" id="floatingSelect" aria-label="Floating label select example">
                                                         <option selected disabled value="">Choose Expense</option>
                                                         <?php
-                                                        $result = mysqli_query($conn, "SELECT * FROM expense_type");
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo '<option value="' . $row["expense_id"] . '">' . $row["expense_name"] . '</option>';
+                                                        $result_expenses = mysqli_query($conn, "SELECT * FROM expense_type");
+                                                        while ($row_expense = $result_expenses->fetch_assoc()) {
+                                                            echo '<option value="' . $row_expense["expense_id"] . '">' . $row_expense["expense_name"] . '</option>';
                                                         }
                                                         ?>
                                                     </select>
@@ -170,17 +181,33 @@ include './components/navbar.php';
 
                 <?php endwhile; ?>
 
+
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+      <!-- Pagination links -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <?php
+        // Calculate total number of pages
+        $total_pages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1")) / $records_per_page);
+
+        // Previous page link
+        if ($current_page > 1) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page - 1) . '">Previous</a></li>';
+        }
+
+        // Page links
+        for ($i = 1; $i <= $total_pages; $i++) {
+            echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+
+        // Next page link
+        if ($current_page < $total_pages) {
+            echo '<li class="page-item"><a class="page-link" href="?page=' . ($current_page + 1) . '">Next</a></li>';
+        }
+        ?>
+    </ul>
+</nav>
     </div>
 </div>
 

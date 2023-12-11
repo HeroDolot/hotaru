@@ -63,7 +63,7 @@ include './components/navbar.php';
   <div class="wrapper overflow-hidden">
     <div class="row mb-5 d-flex justify-content-center align-items-center">
       <div class="col-md-4 col-6 mt-5">
-        <div class="card bg-info rounded-2" style="max-width: 20rem;">
+        <div class="card bg-info rounded-2" style="max-width: 20rem; min-height:122px;">
           <div class="card-body text-white p-0">
             <div class="row p-3">
               <i class="fa-solid fa-arrow-trend-up fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(9deg); margin-left:20px;"></i>
@@ -73,19 +73,42 @@ include './components/navbar.php';
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./reports.php" class="btn btn-transparent text-white fw-bolder">
-                  <?php
-                  $total = 0;
-                  $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
+                <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
+                <?php
+                $total = 0;
+                $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
+
+                // Check if the query executed successfully
+                if ($acceptedInfo) {
                   while ($acceptedRow = $acceptedInfo->fetch_assoc()) {
                     $accepted_inquiry_id = $acceptedRow["accepted_inquiry_id"];
-                    $expense = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as subtotal FROM expense_history WHERE exp_history_inquiry_id = $accepted_inquiry_id")->fetch_assoc()["subtotal"];
-                    $subtotal = $acceptedRow["accepted_contract"] - $expense;
-                    $total = $total + $subtotal;
+
+                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as subtotal FROM expense_history WHERE exp_history_inquiry_id = $accepted_inquiry_id");
+
+                    // Check if the expense query executed successfully
+                    if ($expenseResult) {
+                      $expenseRow = $expenseResult->fetch_assoc();
+                      $expense = ($expenseRow !== null) ? $expenseRow["subtotal"] : 0;
+
+                      // Calculate subtotal for the current accepted row
+                      $subtotal = $acceptedRow["accepted_contract"] - $expense;
+
+                      // Add the subtotal to the total
+                      $total = $total + $subtotal;
+                    } else {
+                      // Handle the error, e.g., log it or display a user-friendly message
+                      echo "Error executing expense query: " . mysqli_error($conn);
+                    }
                   }
-                  echo number_format($total);
-                  ?>
-                  ¥</a>
+
+                  // Echo the formatted total
+                  echo "<div class='fw-bolder' style='margin-top: 10px;'>" . number_format($total) . " ¥</div>";
+                } else {
+                  // Handle the error, e.g., log it or display a user-friendly message
+                  echo "Error executing acceptedInfo query: " . mysqli_error($conn);
+                }
+                ?>
+
               </div>
             </div>
           </div>
@@ -371,9 +394,9 @@ include './components/navbar.php';
         $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
         $startdate = date("m", $acceptedInfo["accepted_start_date"]);
         if ($startdate == $i) {
-          $expenseInfo = mysqli_query($conn,"SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+          $expenseInfo = mysqli_query($conn, "SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
           $subtotal = 0;
-          while ($expense = $expenseInfo->fetch_assoc()){
+          while ($expense = $expenseInfo->fetch_assoc()) {
             $supersubtotal = $expense["exp_history_price"] * $expense["expense_quantity"];
             $subtotal = $subtotal + $supersubtotal;
           }

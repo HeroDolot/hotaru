@@ -44,11 +44,12 @@
 </style>
 
 <div class="fixed-top">
-    <section class="bg-primary text-white p-3">
+    <section class="bg-dark text-white p-3">
         <div class="container-fluid">
             <div class="wrapper d-flex justify-content-between">
-                <p class="fw-bolder fs-5">Moving Services</p>
-                <p class="text-end fw-bolder fs-5">Company Phone Number</p>
+                <!-- <p class="fw-bolder fs-5">TRUE LINK</p> -->
+                <h4 style="color:#C5F656; letter-spacing:5px;">TRUE LINK COMPANY</h4>
+                <p class="text-end fw-bolder fs-5" style="letter-spacing: 7px;">070-4797-8099</p>
             </div>
         </div>
     </section>
