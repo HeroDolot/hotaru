@@ -16,7 +16,7 @@ include './includes/header.php';
 
 
 <div class="fixed-top">
-    <nav class="navbar navbar-expand bg-body-tertiary p-3" id="scrollNavbar">
+    <nav class="navbar navbar-expand bg-body-tertiary p-3" id="scrollNavbar" style="display: none;">
         <div class="container-fluid">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
@@ -213,7 +213,7 @@ include './includes/header.php';
 </section>
 
 
-<section class="call-to-action-section overflow-hidden" style="min-height: 150px; background-color:#DAAD86;">
+<section class="call-to-action-section overflow-hidden bg-dark" style="min-height: 150px;;">
     <div class="py-5">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
@@ -292,7 +292,7 @@ include './includes/header.php';
             </div>
             <div class="col-md-4">
                 <div class="card card-call-to-action" style="min-height: 158px;">
-                    <a href="./pages/inquiry.php" class="text-decoration-none text-black">
+                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3 col-3">
@@ -306,7 +306,7 @@ include './includes/header.php';
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -629,7 +629,7 @@ include './includes/header.php';
     </div>
 </section>
 
-<section class="call-to-action-section overflow-hidden" style="min-height: 150px; background-color:#DAAD86;">
+<section class="call-to-action-section overflow-hidden bg-dark" style="min-height: 150px;">
     <div class="py-5">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
@@ -708,7 +708,7 @@ include './includes/header.php';
             </div>
             <div class="col-md-4">
                 <div class="card card-call-to-action" style="min-height: 158px;">
-                    <a href="./pages/inquiry.php" class="text-decoration-none text-black">
+                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3 col-3">
@@ -722,7 +722,7 @@ include './includes/header.php';
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

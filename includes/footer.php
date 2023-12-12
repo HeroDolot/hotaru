@@ -22,6 +22,9 @@
       <div class="col-lg-6">
       <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy; <span id="currentYear"></span> TRUE LINK COMPANY. All rights reserved.</a></p>
       </div>
+      <div class="col-lg-3 d-md-none d-block">
+        <p class="fw-bolder">古物商許可証: 第306612320825号</p>
+      </div>
       <div class="col-lg-3">
         <ul class="list-inline text-lg-right mb-0">
           <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -30,7 +33,7 @@
           <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
         </ul>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 d-none d-md-block">
         <p class="fw-bolder">古物商許可証: 第306612320825号</p>
       </div>
     </div>

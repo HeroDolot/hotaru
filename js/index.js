@@ -27,7 +27,7 @@ var scrollNavbar = document.getElementById('scrollNavbar');
 var scrolled = false;
 
 function toggleScrollNavbar() {
-    if (window.pageYOffset > 100) { // Adjust this value based on when you want the navbar to appear
+    if (window.pageYOffset > 140) { // Adjust this value based on when you want the navbar to appear
         if (!scrolled) {
             scrollNavbar.style.display = 'block';
             scrolled = true;
@@ -45,8 +45,8 @@ function toggleScrollCard() {
     var scrollPosition = window.scrollY;
 
     // Customize the threshold values as needed
-    var showThreshold = 100; // Show the card when scrolled down by 100 pixels
-    var hideThreshold = document.body.offsetHeight - window.innerHeight - 300; // Hide the card when close to the bottom
+    var showThreshold = 800; // Show the card when scrolled down by 100 pixels
+    var hideThreshold = document.body.offsetHeight - window.innerHeight - 1300; // Hide the card when close to the bottom
 
     if (scrollPosition >= showThreshold && scrollPosition <= hideThreshold) {
         // Show the card when scrolling down and not close to the bottom

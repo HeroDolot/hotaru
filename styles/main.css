@@ -38,7 +38,7 @@
   background: url("../img/female-intro.svg") no-repeat center;
   background-size: cover;
   background-position: center center; /* Center the image */
-  min-height: 813.5px;
+  min-height: 876.5px;
 }
 
 .female-introduction-mobile {
@@ -193,7 +193,6 @@
 /* Responsive adjustments for smaller screens */
 .navbar-nav .nav-link:hover {
   color: #007bff;
-  font-size: 17px;
   /* Change color on hover */
 }
 

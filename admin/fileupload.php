@@ -88,6 +88,23 @@ include './includes/header.php';
 include './components/navbar.php';
 ?>
 
+<style>
+    .rating {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .star {
+        color: #ccc;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .star:hover,
+    .star.active {
+        color: #ffcc00;
+    }
+</style>
 
 <div class="container-fluid py-5 p-5">
     <nav aria-label="breadcrumb">
@@ -209,7 +226,6 @@ include './components/navbar.php';
                                 <option value="Sub Main Blog">Sub Main Blog</option>
                                 <option value="Secondary Blog">Secondary Blog</option>
                                 <option value="Promotion">Promotion</option>
-                                <option value="Promotion">Testimony</option>
                             </select>
                             <label for="floatingSelect">Select Location</label>
                         </div>
@@ -273,43 +289,49 @@ include './components/navbar.php';
                             <td><?php echo $row["update_location"] ?></td>
                             <td><?php echo $row["update_title"] ?></td>
                             <td>
-                                <div class="wrapper d-md-flex justify-content-around d-sm-none">
-                                    <button type="button" class="btn btn-info text-white col-5 col-md-5" data-bs-toggle="modal" data-bs-target="#modal<?php echo $row["update_id"] ?>">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
+                                <div class="d-md-flex justify-content-around d-sm-none">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12 mb-3 mb-md-0">
+                                            <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal<?php echo $row["update_id"] ?>">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
 
-                                    <div class="modal fade" id="modal<?php echo $row["update_id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Blog ( <?php echo $row["update_title"] ?> )</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal fade" id="modal<?php echo $row["update_id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Blog ( <?php echo $row["update_title"] ?> )</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="POST">
+                                                            <div class="modal-body">
+                                                                <div class="mb-3 form-floating">
+                                                                    <input type="text" class="form-control" required name="update_title" value="<?php echo $row["update_title"] ?>" placeholder="fileUploadTitle" required>
+                                                                    <label for="fileUploadTitle">Title</label>
+                                                                </div>
+                                                                <div class="mb-3 form-floating">
+                                                                    <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"><?php echo $row["update_description"] ?></textarea>
+                                                                    <label for="floatingTextarea2">Context</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" name="edit_update" value="<?php echo $row["update_id"] ?>" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <form method="POST">
-                                                    <div class="modal-body">
-                                                        <div class="mb-3 form-floating">
-                                                            <input type="text" class="form-control" required name="update_title" value="<?php echo $row["update_title"] ?>" placeholder="fileUploadTitle" required>
-                                                            <label for="fileUploadTitle">Title</label>
-                                                        </div>
-                                                        <div class="mb-3 form-floating">
-                                                            <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"><?php echo $row["update_description"] ?></textarea>
-                                                            <label for="floatingTextarea2">Context</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" name="edit_update" value="<?php echo $row["update_id"] ?>" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12">
+                                            <form method="POST">
+                                                <input type="hidden" name="update_id" value="<?php echo $row["update_id"] ?>">
+                                                <button type="submit" name="delete_update" class="btn btn-danger">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <form method="POST" class="col">
-                                        <input type="hidden" name="update_id" value="<?php echo $row["update_id"] ?>">
-                                        <button type="submit" name="delete_update" class="btn btn-danger">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -328,12 +350,168 @@ include './components/navbar.php';
             </nav>
         </div>
     </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="card">
+                    <div class="card-header fw-bolder fs-4">Testimony</div>
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="form-floating mb-3" style="display: none;">
+                                <select class="form-select" name="update_location" required id="floatingSelect" aria-label="Floating label select example">
+                                    <option selected value="Testimony">Testimony</option>
+                                </select>
+                                <label for="floatingSelect">File Location</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" required placeholder="Location" required>
+                                <label for="testimonyTitle">Title</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" required placeholder="Location" required>
+                                <label for="testimonyLocation">Location</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" required placeholder="Age" required>
+                                <label for="testimonyAge">Age</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <select class="form-select" required id="floatingSelect" aria-label="Floating label select example">
+                                    <option selected value="Testimony">Moving Services</option>
+                                </select>
+                                <label for="floatingSelect">Select Work Order</label>
+                            </div>
+                            <div class="rating">
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Context</label>
+                            </div>
+                            <!-- <div class="form-floating mb-3" id="workOrderContainer">
+                            <select class="form-select" id="workOrderSelect" aria-label="Floating label select example" required>
+                                <option selected disabled>Work Order</option>
+                                <option value="1">Relocation</option>
+                                <option value="2">Cleaning</option>
+                                <option value="3">Stuff Throwing</option>
+                            </select>
+                            <label for="workOrderSelect">Work Order Type</label>
+                        </div> -->
+                            <!-- <div id="fileUploadDescriptionContainer"></div> -->
+                            <div class="form-floating mb-3">
+                                <!-- Image input for manual uploading -->
+                                <input type="file" onchange="previewFile()" required class="form-control" id="fileUploadImage" required>
+                                <input type="hidden" name="update_image" id="update_image">
+                                <label for="fileUploadImage">Image Upload</label>
+
+                                <script>
+                                    function previewFile() {
+                                        const fileInput = document.getElementById('fileUploadImage');
+                                        const file = fileInput.files[0];
+                                        const reader = new FileReader();
+
+                                        reader.onloadend = function() {
+                                            document.getElementById("update_image").value = reader.result;;
+                                        }
+
+                                        reader.readAsDataURL(file);
+                                    }
+                                </script>
+                            </div>
+                            <button type="submit" name="submit_update" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-bordered table-hover table-info text-center">
+                    <thead>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Testimony 1</td>
+                            <td><button class="btn btn-danger">
+                                    <li class="fas fa-trash"></li>
+                            </td></button>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <?php
 include './includes/footer.php';
 ?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star');
+        const selectedRatingElement = document.getElementById('selectedRating');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseFloat(star.getAttribute('data-rating'));
+
+                // Check if the clicked star is already selected as a half-star
+                if (rating === selectedRating - 0.5) {
+                    selectedRating = Math.floor(selectedRating);
+                } else {
+                    selectedRating = rating;
+                }
+
+                updateRating(selectedRating);
+            });
+
+            star.addEventListener('mouseover', () => {
+                const rating = parseFloat(star.getAttribute('data-rating'));
+                highlightStars(rating);
+            });
+
+            star.addEventListener('mouseout', () => {
+                resetStars();
+                highlightStars(selectedRating);
+            });
+        });
+
+        function highlightStars(rating) {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function resetStars() {
+            stars.forEach(star => {
+                star.classList.remove('active');
+            });
+        }
+
+    });
+</script>
 <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var select = document.getElementById('floatingSelect');
