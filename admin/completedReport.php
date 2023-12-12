@@ -171,7 +171,12 @@ if (isset($_GET["id"])) :
                             </tr>
                             <tr>
                                 <th class="fw-bolder">Work Order:</th>
-                                <td><?php echo $inquiryInfo["client_wo"] ?></td>
+                                <td>
+                                    <?php
+                                    $wo_id = $inquiryInfo["client_wo"];
+                                    echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];
+                                    ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

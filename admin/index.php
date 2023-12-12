@@ -336,12 +336,12 @@ include './components/navbar.php';
 
 <script>
   function confirmDelete(event) {
-    event.preventDefault();
+   
     var confirmation = prompt("Are you sure you want to delete? Type 'confirm' to proceed.");
     if (confirmation && confirmation.toLowerCase() === 'confirm') {
-      document.getElementById('deleteForm').submit(); // Submit the form
     } else {
       alert("Deletion canceled.");
+      event.preventDefault();
     }
   }
 
