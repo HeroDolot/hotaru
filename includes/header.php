@@ -54,4 +54,4 @@
     <!-- Custom CSS -->
 </head>
 
-<body style="padding-top: 60px;">
+<body>

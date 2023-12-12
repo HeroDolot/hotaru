@@ -20,7 +20,7 @@
     <hr class="mt-4">
     <div class="row">
       <div class="col-lg-6">
-        <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">©</a> 2023 Company Name. All rights reserved.</p>
+      <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy; <span id="currentYear"></span> TRUE LINK COMPANY. All rights reserved.</a></p>
       </div>
       <div class="col-lg-3">
         <ul class="list-inline text-lg-right mb-0">
@@ -36,6 +36,14 @@
     </div>
   </div>
 </footer>
+<script>
+  // Get the current year
+  var currentYear = new Date().getFullYear();
+
+  // Set the current year in the HTML
+  document.getElementById("currentYear").textContent = currentYear;
+</script>
 </body>
 
 </html>
+

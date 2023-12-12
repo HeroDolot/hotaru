@@ -11,12 +11,44 @@ if ($res->num_rows == 0) {
 include './includes/header.php';
 
 // Components
-include './components/navbar.php';
+// include './components/navbar.php';
 ?>
 
-<style>
 
-</style>
+<div class="fixed-top">
+    <nav class="navbar navbar-expand bg-body-tertiary p-3" id="scrollNavbar">
+        <div class="container-fluid">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <button class="nav-link active" aria-current="page" href="#">Home</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" href="#" onclick="scrollToSection('section-second')">Services</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" href="#" onclick="scrollToSection('blog')">Blog</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" href="#" onclick="scrollToSection('testimony')">Testimonies</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" href="#" onclick="scrollToSection('flow')">Flow</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" href="#" onclick="scrollToSection('inquiry')">Inquire</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<section class="bg-dark text-white p-3">
+    <div class="container-fluid">
+        <div class="wrapper d-flex justify-content-between">
+            <h4 style="color:#C5F656; letter-spacing:5px;">TRUE LINK COMPANY</h4>
+            <p class="text-end fw-bolder fs-5" style="letter-spacing: 7px;">070-4797-8099</p>
+        </div>
+    </div>
+</section>
 
 <section class="female-introduction d-none d-md-block">
 
@@ -98,7 +130,7 @@ include './components/navbar.php';
         </div>
 </section> -->
 
-<section class="why-Hotaru" style="min-height: 810px; background-color:#f9f9f9;">
+<section class="why-Hotaru" id="why-Hotaru" style="min-height: 810px; background-color:#f9f9f9;">
     <div class="container py-5">
         <p class="text-primary fw-bolder" style="font-size: 17px; text-transform:uppercase;">なぜ私たちを選ぶのですか？</p>
         <div class="container">
@@ -314,7 +346,7 @@ include './components/navbar.php';
     ?>
 
 </section>
-<section class="section-second">
+<section class="section-second" id="section-second">
     <div class="container-fluid pb-5" style="background-color: #f2f2f2; min-height: 1080px;">
         <div class="container">
             <div class="text-primary text-start fw-bolder mt-4 mb-3 py-5" style="font-size:44px; letter-spacing:5px;">
@@ -378,8 +410,8 @@ include './components/navbar.php';
 </section>
 
 
-<section class="container py-5">
-    <p class="text-primary fw-bolder fs-1 mb-2">ブログ</p>
+<section class="container py-5" id="blog">
+    <p class="text-primary fw-bolder mb-2" style="font-size:44px; letter-spacing:5px;">ブログ</p>
     <div class="row">
         <!-- MAIN BLOG -->
         <?php
@@ -507,7 +539,7 @@ include './components/navbar.php';
                 ?>
 
                     <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100" style="min-height: 600px; max-height: 600px; object-fit: cover;" alt="...">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100 img-fluid" style="min-height: 600px; max-height: 600px; object-fit: cover;" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5><?php echo $row["update_title"] ?></h5>
                             <p><?php echo $row["update_description"] ?></p>
@@ -554,9 +586,9 @@ include './components/navbar.php';
         transition: color 0.2s;
     }
 </style>
-<section class="testimony bg-half-blue" style="min-height: 1080px;">
+<section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-        <p class="fw-bolder fs-2">お客様の声</p>
+        <p class="fw-bolder" style="font-size:44px; letter-spacing:5px;">お客様の声</p>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
                 <div class="card text-white fw-bolder" style="background-color: #EF6F6C;">
@@ -697,9 +729,9 @@ include './components/navbar.php';
     </div>
 </section>
 
-<section class="flow" style="background-color: #f2f2f2;">
+<section class="flow" id="flow" style="background-color: #f2f2f2;">
     <div class="container py-5">
-        <p class="fw-bolder text-primary" style="font-size:44px; letter-spacing:5px;">フロー</p>
+        <p class="fw-bolder text-primary mt-5" style="font-size:44px; letter-spacing:5px;">フロー</p>
         <div class="container d-flex align-items-center justify-content-center py-3">
             <div class="col-md-7">
                 <div class="row mb-5">
@@ -757,7 +789,8 @@ include './components/navbar.php';
 </section>
 
 
-<section class="container py-5">
+<section class="container py-5" id="inquiry">
+    <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</p>
     <div class="row">
         <div class="col-md-7">
             <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="inquiry">
@@ -842,6 +875,23 @@ include './components/navbar.php';
     </div>
 </section>
 
+<div id="scrollCard" class="card border-primary col-md-6 col-7">
+    <div class="container">
+        <div class="card-body text-center">
+            <h5 class="card-title text-primary">Contact Us Now!</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        070-4797-8099
+                    </div>
+                    <div class="col-md-6">
+                        a
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="./js/index.js"></script>
 <?php
 include './includes/footer.php'
