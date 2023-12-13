@@ -211,7 +211,13 @@ include './components/navbar.php';
         <canvas id="monthlyChart" width="600" height="400"></canvas>
       </div>
       <div class="col-md-6 col-12">
+        <?php
+        $recordsPerPage = 4;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $recordsPerPage;
 
+        $res = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 0 LIMIT $offset, $recordsPerPage");
+        ?>
         <div class="table-responsive">
           <table class="table table-bordered table-hover text-center">
             <thead class="table-info">
@@ -231,7 +237,6 @@ include './components/navbar.php';
             </thead>
             <tbody class="align-middle">
               <?php
-              $res = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 0 limit 3");
               while ($row = $res->fetch_assoc()) :
                 $inquiry = $row;
                 $inq_id = $inquiry['inquiry_id'];
@@ -301,11 +306,32 @@ include './components/navbar.php';
                   </tr>
                 <?php endif; ?>
               <?php endwhile; ?>
-
             </tbody>
           </table>
-        </div>
 
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <?php
+              $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 0")) / $recordsPerPage);
+
+              // Previous Page Link
+              if ($page > 1) {
+                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page - 1) . "'><</a></li>";
+              }
+
+              // Page Links
+              for ($i = 1; $i <= $totalPages; $i++) {
+                echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+              }
+
+              // Next Page Link
+              if ($page < $totalPages) {
+                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page + 1) . "'>></a></li>";
+              }
+              ?>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
@@ -336,10 +362,9 @@ include './components/navbar.php';
 
 <script>
   function confirmDelete(event) {
-   
+
     var confirmation = prompt("Are you sure you want to delete? Type 'confirm' to proceed.");
-    if (confirmation && confirmation.toLowerCase() === 'confirm') {
-    } else {
+    if (confirmation && confirmation.toLowerCase() === 'confirm') {} else {
       alert("Deletion canceled.");
       event.preventDefault();
     }
@@ -452,31 +477,6 @@ include './components/navbar.php';
     }
   });
 
-
-  $(document).ready(function() {
-    function loadInquiries(page) {
-      $.ajax({
-        url: './ajax/inquiry_pagination.php',
-        type: 'POST',
-        data: {
-          page: page
-        },
-        success: function(response) {
-          // $('tbody').html(response);
-        }
-      });
-    }
-
-    // Initial load
-    loadInquiries(1);
-
-    // Pagination click event
-    $(document).on('click', '.pagination a', function(e) {
-      e.preventDefault();
-      var page = $(this).attr('href').split('=')[1];
-      loadInquiries(page);
-    });
-  });
 
   function updateClock() {
     // Create a Date object

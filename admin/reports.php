@@ -46,7 +46,21 @@ include './components/navbar.php';
                         </thead>
                         <tbody>
                             <?php
-                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 OR inquiry_status = 2");
+                            $results_per_page = 10;
+
+                            $total_results = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 OR inquiry_status = 2"));
+                            $total_pages = ceil($total_results / $results_per_page);
+
+                            if (!isset($_GET['overview'])) {
+                                $page = 1;
+                            } else {
+                                $page = $_GET['overview'];
+                            }
+
+                            $starting_index = ($page - 1) * $results_per_page;
+
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 OR inquiry_status = 2 LIMIT $starting_index, $results_per_page");
+
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
@@ -59,7 +73,7 @@ include './components/navbar.php';
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"] ?></td>
+                                    <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"] ?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {
@@ -93,11 +107,11 @@ include './components/navbar.php';
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                                    <a class="page-link" href="?overview=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
                         </ul>
                     </nav>
                 </div>
@@ -123,7 +137,21 @@ include './components/navbar.php';
                         <tbody>
 
                             <?php
-                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1");
+                            $results_per_page = 10;
+
+                            $total_results = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1"));
+                            $total_pages = ceil($total_results / $results_per_page);
+
+                            if (!isset($_GET['pending'])) {
+                                $page = 1;
+                            } else {
+                                $page = $_GET['pending'];
+                            }
+
+                            $starting_index = ($page - 1) * $results_per_page;
+
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 1 LIMIT $starting_index, $results_per_page");
+
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
@@ -136,7 +164,7 @@ include './components/navbar.php';
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];?></td>
+                                    <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {
@@ -162,11 +190,11 @@ include './components/navbar.php';
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                                    <a class="page-link" href="?pending=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
                         </ul>
                     </nav>
                 </div>
@@ -190,20 +218,23 @@ include './components/navbar.php';
                         </thead>
                         <tbody>
                             <?php
-                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 2");
+                            $recordsPerPage = 10;
+                            $currentPage = isset($_GET['completed']) ? $_GET['completed'] : 1;
+                            $offset = ($currentPage - 1) * $recordsPerPage;
+                            $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 2 LIMIT $offset, $recordsPerPage");
+
                             while ($row = $result->fetch_assoc()) :
                                 $inq_id = $row["inquiry_id"];
                                 $info = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inq_id")->fetch_assoc();
-                                $wo_id = $row["client_wo"]
+                                $wo_id = $row["client_wo"];
                             ?>
-
                                 <tr>
                                     <td><?php echo $inq_id ?></td>
                                     <td><?php echo date('M d, Y', $info["accepted_start_date"]) ?></td>
                                     <td><?php echo $info["accepted_client_name"] ?></td>
                                     <td><?php echo $row["client_number"] ?></td>
                                     <td><?php echo $info["accepted_location"] ?></td>
-                                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];?></td>
+                                    <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
                                     <td>
                                         <?php
                                         if ($row["inquiry_status"] == 2) {
@@ -230,11 +261,13 @@ include './components/navbar.php';
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            <?php
+                            $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status = 2")) / $recordsPerPage);
+
+                            for ($i = 1; $i <= $totalPages; $i++) {
+                                echo '<li class="page-item ' . ($i == $currentPage ? 'active' : '') . '"><a class="page-link" href="?completed=' . $i . '">' . $i . '</a></li>';
+                            }
+                            ?>
                         </ul>
                     </nav>
                 </div>

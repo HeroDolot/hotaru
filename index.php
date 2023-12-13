@@ -391,7 +391,7 @@ include './includes/header.php';
                     <p class="text-secondary">環境にやさしい廃棄物処理サービス。不要なものをスムーズに手配し、エコフレンドリーな方法でリサイクルいたします。地球環境への貢献を共にしましょう。</p>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-6">
                     <div class="card shadow mb-5">
                         <div class="card-body">
@@ -403,10 +403,12 @@ include './includes/header.php';
                     <p class="fw-bolder fs-4 text-primary">クリーニングサービス</p>
                     <p class="text-secondary">プロの手によるクリーニングサービス。清潔で快適な空間を提供し、お客様の日常生活をより良くするお手伝いを致します。</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
-    <button id="scrollTopBtn" onclick="scrollToTop()">トップ</button>
+    <button class="btn" id="scrollTopBtn" onclick="scrollToTop()">
+        <img src="./icons/arrow-up-1.png" class="img-fluid" alt="" >
+    </button>
 </section>
 
 

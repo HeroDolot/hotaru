@@ -3,6 +3,9 @@
 session_start();
 
 include("../connection.php");
+$recordsPerPage = 5; // Adjust the number of records per page as needed
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $recordsPerPage;
 
 if (isset($_POST["add_item"])) {
     var_dump($_POST);
@@ -107,7 +110,7 @@ include './components/navbar.php';
         </thead>
         <tbody>
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM assets");
+            $result = mysqli_query($conn, "SELECT * FROM assets LIMIT $offset, $recordsPerPage");
             while ($row = $result->fetch_assoc()) :
             ?>
                 <tr>
@@ -130,11 +133,24 @@ include './components/navbar.php';
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <?php
+            $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM assets")) / $recordsPerPage);
+
+            // Previous Page Link
+            if ($page > 1) {
+                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page - 1) . "'>Previous</a></li>";
+            }
+
+            // Page Links
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+            }
+
+            // Next Page Link
+            if ($page < $totalPages) {
+                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page + 1) . "'>Next</a></li>";
+            }
+            ?>
         </ul>
     </nav>
 </div>

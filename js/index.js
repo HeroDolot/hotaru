@@ -14,20 +14,13 @@ window.onscroll = function () {
     toggleScrollCard();
 };
 
-function toggleScrollTopButton() {
-    var button = document.getElementById("scrollTopBtn");
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        button.style.display = "block";
-    } else {
-        button.style.display = "none";
-    }
-}
+
 
 var scrollNavbar = document.getElementById('scrollNavbar');
 var scrolled = false;
 
 function toggleScrollNavbar() {
-    if (window.pageYOffset > 140) { // Adjust this value based on when you want the navbar to appear
+    if (window.pageYOffset > 400) { // Adjust this value based on when you want the navbar to appear
         if (!scrolled) {
             scrollNavbar.style.display = 'block';
             scrolled = true;
@@ -54,6 +47,15 @@ function toggleScrollCard() {
     } else {
         // Hide the card in other cases
         scrollCard.style.display = "none";
+    }
+}
+
+function toggleScrollTopButton() {
+    var button = document.getElementById("scrollTopBtn");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
     }
 }
 
