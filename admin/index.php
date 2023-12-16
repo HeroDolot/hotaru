@@ -77,9 +77,9 @@ include './components/navbar.php';
                   <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
                   <?php
                   $total = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0")->fetch_assoc()["total"];
-
+                  $expense = 0;
+                  
                   $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
-
                   while ($row = $acceptedInfo->fetch_assoc()) {
                     $inq_id = $row["accepted_inquiry_id"];
                     $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as totalExpense FROM expense_history WHERE exp_history_inquiry_id = $inq_id");
@@ -90,10 +90,22 @@ include './components/navbar.php';
 
                       // Check if the result is not null before accessing its values
                       if ($expenseRow !== null && array_key_exists("totalExpense", $expenseRow)) {
-                        $total -= $expenseRow["totalExpense"];
+                        $expense = $expense + $expenseRow["totalExpense"];
                       }
                     }
                   }
+
+                  $currentYear = date("Y");
+                  $assetInfo = mysqli_query($conn, "SELECT * FROM assets");
+                  while ($asset = $assetInfo->fetch_assoc()) {
+                    $purchaseMonth = date("m", $asset["asset_date_acquired"]);
+                    $purchaseYear = date("Y", $asset["asset_date_acquired"]);
+                    $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
+                    $expense = $expense + $supersubtotal;;
+                    
+                  }
+
+                  $total = $total - $expense;
 
                   echo number_format($total) . " YEN";
                   ?>
@@ -402,23 +414,39 @@ include './components/navbar.php';
   ];
   var expensesData = [
     <?php
+    $currentYear = date("Y");
+    $subtotal = 0;
     for ($i = 1; $i <= 12; $i++) {
       $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
       $total = 0;
       while ($row = $result->fetch_assoc()) {
         $inquiry_id = $row["inquiry_id"];
         $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
-        $startdate = date("m", $acceptedInfo["accepted_start_date"]);
-        if ($startdate == $i) {
+        $startMonth = date("m", $acceptedInfo["accepted_start_date"]);
+        $startYear = date("Y", $acceptedInfo["accepted_start_date"]);
+        if ($startMonth == $i && $startYear == $currentYear) {
           $expenseInfo = mysqli_query($conn, "SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
-          $subtotal = 0;
           while ($expense = $expenseInfo->fetch_assoc()) {
             $supersubtotal = $expense["exp_history_price"] * $expense["expense_quantity"];
             $subtotal = $subtotal + $supersubtotal;
           }
-          $total = $total + $subtotal;
+        }
+      
+      }
+
+
+      $assetInfo = mysqli_query($conn, "SELECT * FROM assets");
+      while ($asset = $assetInfo->fetch_assoc()) {
+        $purchaseMonth = date("m", $asset["asset_date_acquired"]);
+        $purchaseYear = date("Y", $asset["asset_date_acquired"]);
+        if ($purchaseMonth == $i && $purchaseYear == $currentYear) {
+          $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
+          $subtotal = $subtotal + $supersubtotal;;
         }
       }
+
+      $total = $total + $subtotal;
+
       echo $total . ",";
     }
     ?>

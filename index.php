@@ -601,7 +601,7 @@ include './includes/header.php';
                                         <div class="col-md-8 col-12">
                                             <div class="star-rating">
                                                 <?php
-                                                if ($row["review_star"] >= 1) {
+                                                // if ($row["review_star"] >= 1) {
                                                     echo '<label for="star1">&#9733;</label>';
                                                 }
                                                 if ($row["review_star"] >= 2) {
