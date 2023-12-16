@@ -394,16 +394,7 @@ include './components/navbar.php';
                                 <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"></textarea>
                                 <label for="floatingTextarea2">Context</label>
                             </div>
-                            <!-- <div class="form-floating mb-3" id="workOrderContainer">
-                            <select class="form-select" id="workOrderSelect" aria-label="Floating label select example" required>
-                                <option selected disabled>Work Order</option>
-                                <option value="1">Relocation</option>
-                                <option value="2">Cleaning</option>
-                                <option value="3">Stuff Throwing</option>
-                            </select>
-                            <label for="workOrderSelect">Work Order Type</label>
-                        </div> -->
-                            <!-- <div id="fileUploadDescriptionContainer"></div> -->
+
                             <div class="form-floating mb-3">
                                 <!-- Image input for manual uploading -->
                                 <input type="file" onchange="previewFile()" required class="form-control" id="fileUploadImage" required>

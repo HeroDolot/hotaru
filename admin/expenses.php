@@ -32,13 +32,23 @@ include './components/navbar.php';
                     <th>TOTAL</th>
                 </thead>
                 <tbody>
+                    <?php 
+                    
+                    $result = mysqli_query($conn,"SELECT * FROM expense_history");
+                    while ($row = $result->fetch_assoc()):
+                        $exp_id = $row["exp_history_expense_id"];
+
+                    ?>
                     <tr>
-                        <td>1</td>
-                        <td>Hero Dolot</td>
-                        <td>3,000¥</td>
-                        <td> - </td>
-                        <td>3,000¥</td>
+                        <td><?php echo $row["exp_history_id"]?></td>
+                        <td><?php echo mysqli_query($conn,"SELECT * FROM expense_type WHERE expense_id = $exp_id")->fetch_assoc()["expense_name"];?></td>
+                        <td><?php echo number_format($row["exp_history_price"])?>¥</td>
+                        <td><?php echo number_format($row["expense_quantity"])?></td>
+                        <td><?php echo number_format($row["exp_history_price"] * $row["expense_quantity"])?>¥</td>
                     </tr>
+                    <?php endwhile?>
+
+
                 </tbody>
             </table>
             <nav aria-label="Page navigation example">

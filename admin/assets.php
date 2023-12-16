@@ -12,8 +12,9 @@ if (isset($_POST["add_item"])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $dateAcquired = strtotime(mysqli_real_escape_string($conn, $_POST['dateAcquired']));
     $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
+    $price = mysqli_real_escape_string($conn, $_POST['price']);
 
-    mysqli_query($conn, "INSERT INTO assets(asset_name,asset_date_acquired,asset_quantity) VALUES('$name',$dateAcquired,$quantity)");
+    mysqli_query($conn, "INSERT INTO assets(asset_name,asset_date_acquired,asset_quantity,asset_price) VALUES('$name',$dateAcquired,$quantity,$price)");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./assets.php?success=Asset has been added!");
     } else {
@@ -117,7 +118,7 @@ include './components/navbar.php';
                     <td><?php echo $row["asset_name"] ?></td>
                     <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
                     <td><?php echo $row["asset_quantity"] ?></td>
-                    <td>17,000¥</td>
+                    <td><?php echo number_format($row["asset_price"]) ?> YEN</td>
                     <td>
                         <div class="wrapper d-flex justify-content-center align-items-center">
                             <form method="POST" class="col-md-12">

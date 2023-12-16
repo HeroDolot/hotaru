@@ -73,41 +73,20 @@ include './components/navbar.php';
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
-                <?php
-                $total = 0;
-                $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
-
-                // Check if the query executed successfully
-                if ($acceptedInfo) {
-                  while ($acceptedRow = $acceptedInfo->fetch_assoc()) {
-                    $accepted_inquiry_id = $acceptedRow["accepted_inquiry_id"];
-
-                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as subtotal FROM expense_history WHERE exp_history_inquiry_id = $accepted_inquiry_id");
-
-                    // Check if the expense query executed successfully
-                    if ($expenseResult) {
-                      $expenseRow = $expenseResult->fetch_assoc();
-                      $expense = ($expenseRow !== null) ? $expenseRow["subtotal"] : 0;
-
-                      // Calculate subtotal for the current accepted row
-                      $subtotal = $acceptedRow["accepted_contract"] - $expense;
-
-                      // Add the subtotal to the total
-                      $total = $total + $subtotal;
-                    } else {
-                      // Handle the error, e.g., log it or display a user-friendly message
-                      echo "Error executing expense query: " . mysqli_error($conn);
-                    }
+                <p class="p-1">
+                  <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
+                  <?php
+                  $total = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0")->fetch_assoc()["total"];
+                  $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
+                  while ($row = $acceptedInfo->fetch_assoc()) {
+                    $inq_id = $row["accepted_inquiry_id"];
+                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as totalExpense FROM expense_history WHERE exp_history_inquiry_id = $inq_id")->fetch_assoc()["totalExpense"];
+                    $total = $total - $expenseResult;
                   }
 
-                  // Echo the formatted total
-                  echo "<div class='fw-bolder' style='margin-top: 10px;'>" . number_format($total) . " ¥</div>";
-                } else {
-                  // Handle the error, e.g., log it or display a user-friendly message
-                  echo "Error executing acceptedInfo query: " . mysqli_error($conn);
-                }
-                ?>
+                  echo number_format($total) . " YEN";
+                  ?>
+                </p>
 
               </div>
             </div>
@@ -194,7 +173,7 @@ include './components/navbar.php';
                 <h4>Assets</h4>
               </div>
               <div class="col-md-3 col-3">
-                <h4 class="fw-bolder" style="margin-left: 10px;">4</h4>
+                <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn, "SELECT COUNT(*) as total FROM assets")->fetch_assoc()["total"] ?></h4>
               </div>
             </div>
             <div class="card-footer p-0">
@@ -231,7 +210,7 @@ include './components/navbar.php';
                 <th>Phone Number</th>
                 <th>Region</th>
                 <th>Work Order</th>
-                <th>Call/Mail</th>
+                <th>Preferred Contact</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -249,7 +228,7 @@ include './components/navbar.php';
                     <td><?php echo $inquiry['client_number']; ?></td>
                     <td><?php echo $inquiry['client_region']; ?></td>
                     <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
-                    <td>Call</td>
+                    <td><?php echo $inquiry['preferred_contact']?></td>
                     <td>
                       <form method="POST" id="deleteForm" class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
