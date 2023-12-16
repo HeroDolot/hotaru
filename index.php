@@ -407,7 +407,7 @@ include './includes/header.php';
         </div>
     </div>
     <button class="btn" id="scrollTopBtn" onclick="scrollToTop()">
-        <img src="./icons/arrow-up-1.png" class="img-fluid" alt="" >
+        <img src="./icons/arrow-up-1.png" class="img-fluid" alt="">
     </button>
 </section>
 
@@ -593,39 +593,63 @@ include './includes/header.php';
         <p class="fw-bolder" style="font-size:44px; letter-spacing:5px;">お客様の声</p>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
-                <div class="card text-white fw-bolder" style="background-color: #EF6F6C;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-5 col-5">
-                                <img src="./icons/testi-male.png" class="img-fluid" alt="">
-                                <div class="row container fw-bolder fs-4">
-                                    <p class="fs-5">Moving Services</p>
-                                    <div class="col-md-4 col-9">
-                                        <p>46歳</p>
-                                    </div>
-                                    <div class="col-md-8 col-12">
-                                        <div class="star-rating">
-                                            <label for="star5">&#9733;</label>
-                                            <label for="star4">&#9733;</label>
-                                            <label for="star3">&#9733;</label>
-                                            <label for="star2">&#9733;</label>
-                                            <label for="star1">&#9733;</label>
+
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM reviews WHERE is_deleted = 0 limit 3");
+                while ($row = $result->fetch_assoc()) :
+                    $service_id = $row["review_service"];
+                ?>
+                    <div class="card text-white fw-bolder" style="background-color: #EF6F6C;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5 col-5">
+                                    <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
+                                    <img src="<?php echo $row["review_image"];?>" class="img-fluid" alt="">
+
+                                    <div class="row container fw-bolder fs-4">
+                                        <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
+                                        <div class="col-md-4 col-9">
+                                            <p><?php echo $row["review_age"] ?>歳</p>
+                                        </div>
+                                        <div class="col-md-8 col-12">
+                                            <div class="star-rating">
+                                                <?php
+                                                if ($row["review_star"] >= 1) {
+                                                    echo '<label for="star1">&#9733;</label>';
+                                                }
+                                                if ($row["review_star"] >= 2) {
+                                                    echo '<label for="star2">&#9733;</label>';
+                                                }
+                                                if ($row["review_star"] >= 3) {
+                                                    echo '<label for="star3">&#9733;</label>';
+                                                }
+                                                if ($row["review_star"] >= 4) {
+                                                    echo '<label for="star4">&#9733;</label>';
+                                                }
+                                                if ($row["review_star"] == 5) {
+                                                    echo '<label for="star5">&#9733;</label>';
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7 col-7 p-0 m-0">
-                                <div class="container mt-3">
-                                    <p class="fw-bolder fs-3">Tochigi Ken</p>
-                                    <hr style="border: 1px solid white;">
-                                    <p style="font-family: 'Passion One', sans-serif; font-size:35px;">"</p>
-                                    <p style="margin-top: -10px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam omnis ratione sapiente libero veritatis, perspiciatis velit nisi eius expedita, porro aperiam voluptas obcaecati accusantium reiciendis pariatur id? Cum, debitis voluptatibus!</p>
-                                    <p class="text-end" style="font-family: 'Passion One', sans-serif; font-size:35px; margin-top:-20px; margin-right: 25px;">"</p>
+                                <div class="col-md-7 col-7 p-0 m-0">
+                                    <div class="container mt-3">
+                                        <p class="fw-bolder fs-3"><?php echo $row["review_title"]?></p>
+                                        <hr style="border: 1px solid white;">
+                                        <p style="font-family: 'Passion One', sans-serif; font-size:35px;">"</p>
+                                        <p style="margin-top: -10px;"><?php echo $row["review_context"]?></p>
+                                        <p class="text-end" style="font-family: 'Passion One', sans-serif; font-size:35px; margin-top:-20px; margin-right: 25px;">"</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                <?php endwhile ?>
+
+
             </div>
         </div>
     </div>
