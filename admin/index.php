@@ -58,7 +58,7 @@ include './components/navbar.php';
 </div>
 
 
-<div class="container">
+<div class="container over">
   <div id="clock" class="fw-bolder fs-6"></div>
   <div class="wrapper overflow-hidden">
     <div class="row mb-5 d-flex justify-content-center align-items-center">
@@ -77,15 +77,27 @@ include './components/navbar.php';
                   <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
                   <?php
                   $total = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0")->fetch_assoc()["total"];
+
                   $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
+
                   while ($row = $acceptedInfo->fetch_assoc()) {
                     $inq_id = $row["accepted_inquiry_id"];
-                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as totalExpense FROM expense_history WHERE exp_history_inquiry_id = $inq_id")->fetch_assoc()["totalExpense"];
-                    $total = $total - $expenseResult;
+                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as totalExpense FROM expense_history WHERE exp_history_inquiry_id = $inq_id");
+
+                    // Check if the query was successful
+                    if ($expenseResult) {
+                      $expenseRow = $expenseResult->fetch_assoc();
+
+                      // Check if the result is not null before accessing its values
+                      if ($expenseRow !== null && array_key_exists("totalExpense", $expenseRow)) {
+                        $total -= $expenseRow["totalExpense"];
+                      }
+                    }
                   }
 
                   echo number_format($total) . " YEN";
                   ?>
+
                 </p>
 
               </div>
@@ -186,10 +198,10 @@ include './components/navbar.php';
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-12">
+      <div class="col-md-6 col-12 mb-5 mb-md-0">
         <canvas id="monthlyChart" width="600" height="400"></canvas>
       </div>
-      <div class="col-md-6 col-12">
+      <div class="col-md-6 col-12 mb-5 mb-md-0">
         <?php
         $recordsPerPage = 4;
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -228,7 +240,7 @@ include './components/navbar.php';
                     <td><?php echo $inquiry['client_number']; ?></td>
                     <td><?php echo $inquiry['client_region']; ?></td>
                     <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"]; ?></td>
-                    <td><?php echo $inquiry['preferred_contact']?></td>
+                    <td><?php echo $inquiry['preferred_contact'] ?></td>
                     <td>
                       <form method="POST" id="deleteForm" class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
@@ -315,11 +327,11 @@ include './components/navbar.php';
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-12">
+    <div class="col-md-8 col-12 mb-5 mb-md-0">
       <div class="fw-bolder text-danger" id='calendar'></div>
     </div>
     <div class="col-md-4 col-12 mt-4 mt-md-0">
-      <div class="flex-fill">
+      <div class="flex-fill mb-5 mb-md-4">
         <canvas id="myLineChart"></canvas>
       </div>
       <div class="card">

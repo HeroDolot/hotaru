@@ -56,7 +56,7 @@ include './includes/header.php';
 
 <section class="female-introduction-mobile d-sm-none d-md-none">
     <div class="py-4 p-4">
-        <h1 class="fw-bolder" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">引っ越しを計画していますか？<br>おまかせください！</h1>
+        <h1 class="fw-bolder" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">引っ越しを計画していますか？</h1>
     </div>
 
     <div class="container">
@@ -75,7 +75,7 @@ include './includes/header.php';
                 </div>
             </div>
             <div class="wrapper fw-bolder mt-3" style="font-size:40px; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
-                保証された！
+                おまかせください！
             </div>
         </div>
 
@@ -541,10 +541,16 @@ include './includes/header.php';
                 ?>
 
                     <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100 img-fluid" style="min-height: 600px; max-height: 600px; object-fit: cover;" alt="...">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100 img-fluid" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5><?php echo $row["update_title"] ?></h5>
-                            <p><?php echo $row["update_description"] ?></p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-footer">
+                                        <h5><?php echo $row["update_title"] ?></h5>
+                                        <p><?php echo $row["update_description"] ?></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -567,26 +573,7 @@ include './includes/header.php';
 </section>
 
 <style>
-    .bg-half-blue {
-        background: linear-gradient(to right, #EF6F6C 50%, #7FB685 50%);
-    }
 
-    .star-rating {
-        font-size: 24px;
-        display: inline-block;
-        color: #FFAC00;
-    }
-
-    .star-rating input {
-        display: none;
-    }
-
-    .star-rating label {
-        color: #FFD700;
-        /* Set the default star color */
-        cursor: pointer;
-        transition: color 0.2s;
-    }
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
@@ -604,7 +591,7 @@ include './includes/header.php';
                             <div class="row">
                                 <div class="col-md-5 col-5">
                                     <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
-                                    <img src="<?php echo $row["review_image"];?>" class="img-fluid" alt="">
+                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid" alt="">
 
                                     <div class="row container fw-bolder fs-4">
                                         <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
@@ -636,10 +623,10 @@ include './includes/header.php';
                                 </div>
                                 <div class="col-md-7 col-7 p-0 m-0">
                                     <div class="container mt-3">
-                                        <p class="fw-bolder fs-3"><?php echo $row["review_title"]?></p>
+                                        <p class="fw-bolder fs-3"><?php echo $row["review_title"] ?></p>
                                         <hr style="border: 1px solid white;">
                                         <p style="font-family: 'Passion One', sans-serif; font-size:35px;">"</p>
-                                        <p style="margin-top: -10px;"><?php echo $row["review_context"]?></p>
+                                        <p style="margin-top: -10px;"><?php echo $row["review_context"] ?></p>
                                         <p class="text-end" style="font-family: 'Passion One', sans-serif; font-size:35px; margin-top:-20px; margin-right: 25px;">"</p>
                                     </div>
                                 </div>

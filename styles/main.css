@@ -140,6 +140,27 @@
   padding: 20px;
 }
 
+.bg-half-blue {
+  background: linear-gradient(to right, #EF6F6C 50%, #7FB685 50%);
+}
+
+.star-rating {
+  font-size: 24px;
+  display: inline-block;
+  color: #FFAC00;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #FFD700;
+  /* Set the default star color */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
 .card-call-to-action {
   min-width: 500px;
 }

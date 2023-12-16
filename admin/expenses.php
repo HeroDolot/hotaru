@@ -8,6 +8,21 @@ include('../connection.php');
 
 include './includes/header.php';
 include './components/navbar.php';
+
+// Assuming you have already established a database connection ($conn)
+
+// Set the number of items per page
+$itemsPerPage = 10; // You can adjust this as needed
+
+// Get the current page number from the query string, default to 1 if not set
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calculate the offset for the SQL query
+$offset = ($page - 1) * $itemsPerPage;
+
+// Fetch data for the current page
+$result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $itemsPerPage");
+
 ?>
 
 <div class="container-fluid py-5 p-5">
@@ -32,32 +47,31 @@ include './components/navbar.php';
                     <th>TOTAL</th>
                 </thead>
                 <tbody>
-                    <?php 
-                    
-                    $result = mysqli_query($conn,"SELECT * FROM expense_history");
-                    while ($row = $result->fetch_assoc()):
-                        $exp_id = $row["exp_history_expense_id"];
-
-                    ?>
-                    <tr>
-                        <td><?php echo $row["exp_history_id"]?></td>
-                        <td><?php echo mysqli_query($conn,"SELECT * FROM expense_type WHERE expense_id = $exp_id")->fetch_assoc()["expense_name"];?></td>
-                        <td><?php echo number_format($row["exp_history_price"])?>¥</td>
-                        <td><?php echo number_format($row["expense_quantity"])?></td>
-                        <td><?php echo number_format($row["exp_history_price"] * $row["expense_quantity"])?>¥</td>
-                    </tr>
-                    <?php endwhile?>
-
-
+                    <?php while ($row = $result->fetch_assoc()) : ?>
+                        <tr>
+                            <td><?php echo $row["exp_history_id"] ?></td>
+                            <td><?php echo mysqli_query($conn, "SELECT * FROM expense_type WHERE expense_id = {$row['exp_history_expense_id']}")->fetch_assoc()["expense_name"]; ?></td>
+                            <td><?php echo number_format($row["exp_history_price"]) ?>¥</td>
+                            <td><?php echo number_format($row["expense_quantity"]) ?></td>
+                            <td><?php echo number_format($row["exp_history_price"] * $row["expense_quantity"]) ?>¥</td>
+                        </tr>
+                    <?php endwhile ?>
                 </tbody>
             </table>
+
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <?php
+                    // Calculate the total number of pages
+                    $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM expense_history")) / $itemsPerPage);
+
+                    // Generate pagination links
+                    for ($i = 1; $i <= $totalPages; $i++) :
+                    ?>
+                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor ?>
                 </ul>
             </nav>
         </div>
@@ -81,9 +95,9 @@ include './components/navbar.php';
                 echo '"' . date("M-Y", $acceptedInfo["accepted_start_date"]) . '",';
             }
 
-            $index = array_search(date("M-Y", $acceptedInfo["accepted_start_date"]),$monthYear);
-            if ($index !== false){
-                if (isset($salesData[$index])){
+            $index = array_search(date("M-Y", $acceptedInfo["accepted_start_date"]), $monthYear);
+            if ($index !== false) {
+                if (isset($salesData[$index])) {
                     $salesData[$index] = $salesData[$index] + $acceptedInfo["accepted_contract"];
                 } else {
                     $salesData[$index] = $acceptedInfo["accepted_contract"];
@@ -94,9 +108,9 @@ include './components/navbar.php';
     ];
 
 
-    const salesData = [ 0,
-        <?php 
-        foreach ($salesData as $value){
+    const salesData = [0,
+        <?php
+        foreach ($salesData as $value) {
             echo $value . ',';
         }
         ?>
