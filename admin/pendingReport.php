@@ -1,7 +1,10 @@
 <?php
 session_start();
-include("../connection.php");
+include '../connection.php';
 
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
 if (isset($_GET["id"])) :
     $inquiry_id = mysqli_real_escape_string($conn, $_GET["id"]);
     $info = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_id = $inquiry_id")->fetch_assoc();

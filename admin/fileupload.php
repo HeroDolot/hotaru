@@ -1,7 +1,11 @@
 <title>Admin Dashboard | File Upload</title>
 <?php
 session_start();
-include("../connection.php");
+include '../connection.php';
+
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
 
 if (isset($_POST["delete_review"])){
     $review_id = mysqli_real_escape_string($conn,$_POST["review_id"]);

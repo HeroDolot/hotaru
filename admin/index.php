@@ -1,12 +1,10 @@
 <title>Admin Dashboard | Overview</title>
 <?php
 session_start();
-
 include '../connection.php';
 
-if (!isset($_SESSION['user_email'])) {
-  header('Location: login.php');
-  exit();
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
 }
 
 if (isset($_POST["submit_contract"])) {
