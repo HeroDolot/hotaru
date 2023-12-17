@@ -58,7 +58,7 @@ include './components/navbar.php';
 </div>
 
 
-<div class="container over">
+<div class="container">
   <div id="clock" class="fw-bolder fs-6"></div>
   <div class="wrapper overflow-hidden">
     <div class="row mb-5 d-flex justify-content-center align-items-center">
