@@ -3,6 +3,9 @@
 session_start();
 include '../connection.php';
 
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
 include './includes/header.php';
 include './components/navbar.php';
 ?>

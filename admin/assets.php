@@ -1,8 +1,11 @@
 <title>Admin Dashboard | Assets</title>
 <?php
 session_start();
+include '../connection.php';
 
-include("../connection.php");
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
 $recordsPerPage = 5; // Adjust the number of records per page as needed
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $recordsPerPage;

@@ -3,6 +3,9 @@
 session_start();
 include '../connection.php';
 
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
 if (isset($_POST["complete"])) {
     $inq_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
     mysqli_query($conn, "UPDATE inquiry SET inquiry_status = 2 WHERE inquiry_id = $inq_id");

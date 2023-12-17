@@ -1,5 +1,12 @@
 <title>Admin Dashboard | History</title>
 <?php
+session_start();
+include '../connection.php';
+
+if (!isset($_SESSION["user_email"])){
+    header("location:../login.php");
+}
+
 include './includes/header.php';
 include './components/navbar.php';
 ?>
@@ -25,30 +32,36 @@ include './components/navbar.php';
                 <th>Status</th>
             </thead>
             <tbody>
+
+                <?php 
+                $result = mysqli_query($conn,"SELECT * FROM accepted");
+                while ($row = $result->fetch_assoc()):
+                    $inq_id = $row["accepted_inquiry_id"];
+                    $inqInfo = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_id = $inq_id")->fetch_assoc();
+                    $inqWo = $inqInfo["client_wo"];
+
+                ?>
                 <tr>
-                    <td>Ken Suzuki</td>
-                    <td>09123456789</td>
-                    <td>mail@mail.com</td>
-                    <td>Kanto</td>
-                    <td>Relocation</td>
+                    <td><?php echo $row["accepted_client_name"]?></td>
+                    <td><?php echo $inqInfo["client_name"]?></td>
+                    <td><?php echo $inqInfo["client_email"]?></td>
+                    <td><?php echo $inqInfo["client_region"]?></td>
+                    <td><?php echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $inqWo")->fetch_assoc()["work_name"]?></td>
                     <td>
+                        <?php 
+                        if ($row["accepted_completed_date"] != 0){
+                        ?>
                         <div class="badge text-bg-success">
                             Completed
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ken Suzuki</td>
-                    <td>09123456789</td>
-                    <td>mail@mail.com</td>
-                    <td>Saitama, Satte Shi</td>
-                    <td>Relocation</td>
-                    <td>
-                        <div class="badge text-bg-danger">
+                        <?php } else {?>
+                            <div class="badge text-bg-danger">
                             Pending
                         </div>
+                        <?php }?>
                     </td>
                 </tr>
+                <?php endwhile ?>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
