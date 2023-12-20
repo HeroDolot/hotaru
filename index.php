@@ -258,8 +258,8 @@ include './includes/header.php';
                                 </div>
                                 <div class="modal-body">
                                     <div class="container py-3">
-                                        <div class="row">
-                                            <div class="col-md-6 col-6 fw-bolder">
+                                        <!-- <div class="row"> -->
+                                        <!-- <div class="col-md-6 col-6 fw-bolder">
                                                 <div class="card mb-3 mb-md-0">
                                                     <div class="card-body p-0">
                                                         <img src="./img/ken_qr.jpg" class="img-fluid" alt="Ken Line QR CODE">
@@ -268,18 +268,18 @@ include './includes/header.php';
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-6 fw-bolder">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
-                                                        <img src="./img/hotaru_qr.jpg" class="img-fluid" alt="Hotaru Line QR CODE">
-                                                        <div class="card-footer">
-                                                            Hotaru
-                                                        </div>
+                                            </div> -->
+                                        <div class="fw-bolder">
+                                            <div class="card">
+                                                <div class="card-body text-center p-0">
+                                                    <img src="./img/hotaru_qr.jpg" class="img-fluid" alt="Hotaru Line QR CODE">
+                                                    <div class="card-footer">
+                                                        Hotaru
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- </div> -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -531,7 +531,6 @@ include './includes/header.php';
         <?php
         $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
         ?>
-
         <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
             <div class="carousel-inner">
 
@@ -539,10 +538,9 @@ include './includes/header.php';
                 $first = true;
                 while ($row = $result->fetch_assoc()) :
                 ?>
-
                     <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                        <img src="<?php echo $row["update_image"] ?>" class="d-block w-100 img-fluid" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="...">
+                        <div class="carousel-caption">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-footer">
@@ -553,7 +551,6 @@ include './includes/header.php';
                             </div>
                         </div>
                     </div>
-
                 <?php
                     $first = false;
                 endwhile;
@@ -577,7 +574,8 @@ include './includes/header.php';
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-        <p class="fw-bolder" style="font-size:44px; letter-spacing:5px;">お客様の声</p>
+        <p class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</p>
+        <hr>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
 
@@ -586,12 +584,12 @@ include './includes/header.php';
                 while ($row = $result->fetch_assoc()) :
                     $service_id = $row["review_service"];
                 ?>
-                    <div class="card text-white fw-bolder" style="background-color: #EF6F6C;">
+                    <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5 col-5">
                                     <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
-                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid" alt="">
+                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="">
 
                                     <div class="row container fw-bolder fs-4">
                                         <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
@@ -801,6 +799,54 @@ include './includes/header.php';
     </div>
 </section>
 
+<section class="area">
+    <div class="container">
+        <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">解体工事対応エリア
+
+        </p>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card border-success">
+                    <div class="card-header fs-3 fw-bolder">
+                        千葉県
+                    </div>
+                    <div class="card-body fs-5">
+                        ・ 千葉市・中央区・花見川区・稲毛区・若葉区・緑区・美浜区・銚子市・市川市・船橋市・館山市・木更津市・松戸市・野田市・茂原市・成田市・佐倉市・東金市・旭市・習志野市・柏市・ ・勝浦市・市原市・流山市・八千代市・我孫子市・鴨川市・鎌ヶ谷市・君津市・富津市・浦安市・四街道市・袖ヶ浦市・八街市・印西市・白井市・富里市・南房総市・匝瑳市・香取市・山武市・いすみ市 ・大網白里市・酒々井町・栄町・神崎町・多古町・東庄町・九十九里町・芝山町・横芝光町・一宮町・睦沢町・白子町・長柄町・長南町・大多喜町・御宿町・鋸南町
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-success mb-3" style="min-height: 364px;">
+                    <div class="card-header fs-3 fw-bolder">
+                        東京都
+                    </div>
+                    <div class="card-body fs-5">
+                        ・千代田区・中央区・港区・新宿区・文京区・台東区・墨田区・江東区・品川区・目黒区・大田区・世田谷区・渋谷区・中野区・杉並区・豊島区・北区・荒川区・板橋区・練馬区・足立区・葛飾区・江戸川区 ・八王子市・立川市・武蔵野市・三鷹市・青梅市・府中市・昭島市・調布市・町田市・小金井市・小平市・日野市・東村山市・国分寺市・国立市・福生市 ・狛江市・東大和市・清瀬市・東久留米市・武蔵村山市・多摩市・稲城市・羽村市・あきる野市・西東京市・瑞穂町・日の出町・ 檜原村・奥多摩町
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-success mb-3">
+                    <div class="card-header fs-3 fw-bolder">
+                        埼玉県
+                    </div>
+                    <div class="card-body fs-5">
+                        ・さいたま市・西区・北区・大宮区・見沼区・中央区・桜区・浦和区・南区・緑区・岩槻区・川越市・熊谷市・川口市・行田市・秩父市・所沢市・飯能市・加須市・本庄市・東松山市・春日部市・狭山市 ・羽生市・鴻巣市・深谷市・上尾市・草加市・越谷市・蕨市・戸田市・入間市・朝霞市・志木市・和光市・新座市・桶川市・久喜市・北本市・八潮市・富士見市・三郷市・蓮田市・坂戸市 ・幸手市・鶴ヶ島市・日高市・吉川市・ふじみ野市・白岡市・伊奈町・三芳町・毛呂山町・越生町・滑川町・嵐山町・小川町・川島町・吉見町・鳩山町・ときがわ町・横瀬町・皆野町・長瀞町 ・小鹿野町・東秩父村・美里町・神川町・上里町・寄居町・宮代町・杉戸町・松伏町 </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-success" style="min-height: 423px;">
+                    <div class="card-header fs-3 fw-bolder">
+                        茨城県
+                    </div>
+                    <div class="card-body fs-5">
+                        ・水戸市・日立市・土浦市・古河市・石岡市・結城市・龍ヶ崎市・下妻市・常総市・常陸太田市・高萩市・北茨城市・笠間市・取手市・牛久市・つくば市・ひたちなか市・鹿嶋市・潮来市 ・守谷市・常陸大宮市・那珂市・筑西市・坂東市・稲敷市・かすみがうら市・桜川市・神栖市・行方市・鉾田市・つくばみらい市・小美玉市・茨城町・大洗町・城里町・東海村・大子町 ・美浦村・阿見町・河内町・八千代町・五霞町・境町・利根町 </div>
+                </div>
+            </div>
+        </div>
+</section>
+<hr>
+
 
 <section class="container py-5" id="inquiry">
     <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</p>
@@ -818,7 +864,7 @@ include './includes/header.php';
                             <label for="floatingInput">メールアドレス</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInputGroup1" name="clientName" placeholder="Name" required>
+                            <input type="text" class="form-control" id="floatingName" name="clientName" placeholder="Name" required>
                             <label for="floatingInputGroup1">名前</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -826,7 +872,7 @@ include './includes/header.php';
                             <label for="floatingInputGroup1">連絡先番号 </label>
                         </div>
                         <div class="container mb-3">
-                            <small>ご希望は、お電話か、メールどちらが、ご希望ですか？</small>
+                            <small class="fw-bolder">ご希望は、お電話か、メールどちらが、ご希望ですか？</small>
                             <br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Call" required>

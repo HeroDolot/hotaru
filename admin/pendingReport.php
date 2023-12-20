@@ -102,7 +102,7 @@ if (isset($_GET["id"])) :
                                 <?php echo $accepted["accepted_id"] ?>
                             </td>
                             <td><?php echo date('M d, Y', $accepted["accepted_start_date"]) ?></td>
-                            <td class="text-danger">Data Unavailable</td>
+                            <td><?php echo date('M d, Y', $accepted["accepted_completed_date"]) ?></td>
                         </tr>
                     </tbody>
                 </table>

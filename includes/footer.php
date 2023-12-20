@@ -14,23 +14,25 @@
         </ul>
       </div>
     </div>
-    <a href="http://herodolot.infinityfreeapp.com/?i=2" class="fs-1" style="text-decoration: none;">
+    <!-- <a href="http://herodolot.infinityfreeapp.com/?i=2" class="fs-1" style="text-decoration: none;">
       <i class="fa-solid fa-car"></i> <span class="text-white">SKY KRUMA</span>
-    </a>
+    </a> -->
     <hr class="mt-4">
     <div class="row">
       <div class="col-lg-6">
-      <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy; <span id="currentYear"></span> TRUE LINK COMPANY. All rights reserved.</a></p>
+      <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy; 2023 TRUE LINK COMPANY. All rights reserved.</a></p>
       </div>
       <div class="col-lg-3 d-md-none d-block">
         <p class="fw-bolder">古物商許可証: 第306612320825号</p>
       </div>
       <div class="col-lg-3">
         <ul class="list-inline text-lg-right mb-0">
-          <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li> -->
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li> -->
+          <li class="list-inline-item"><a href="https://fuyouhin.support/company/detail/YTyZwfiN/" target="_blank"><i><img src="../../hotaru/icons/fuyouhin.png" width="21px" alt="Fuyouhin Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro" target="_blank"><i><img src="../../hotaru/icons/zehitomo.png" width="25px" alt="Zehitomo Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a></li>
         </ul>
       </div>
       <div class="col-lg-3 d-none d-md-block">
@@ -39,13 +41,13 @@
     </div>
   </div>
 </footer>
-<script>
+<!-- <script>
   // Get the current year
   var currentYear = new Date().getFullYear();
 
   // Set the current year in the HTML
   document.getElementById("currentYear").textContent = currentYear;
-</script>
+</script> -->
 </body>
 
 </html>
