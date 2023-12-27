@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-      <h4 style="color:#C5F656; letter-spacing:5px;">TRUE LINK COMPANY</h4>
-        <p>お客様の要求に応じてさまざまな種類のサービスも提供できる引越し会社</p>
+        <h4 style="color:#C5F656; letter-spacing:5px;">不用品回収代行サービス</h4>
+        <p>True Link Companyは、人々が本当の絆で平和な社会を築く手助けをすることを使命とし、その使命を迷わずに果たします。個々の出会いを繋ぎ合わせ、真っすぐな姿勢で様々な課題に取り組む企業を目指しています。</p>
       </div>
       <div class="col-lg-6">
         <h4>お問い合わせ情報</h4>
@@ -17,15 +17,17 @@
     <hr class="mt-4">
     <div class="row">
       <div class="col-lg-6">
-      <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy; <span id="currentYear"></span> TRUE LINK COMPANY. All rights reserved.</a></p>
+        <p class="text-white">&copy; <span id="currentYear"></span> TRUE LINK COMPANY. All rights reserved.</p>
         <small class="text-white" style="font-size: 10px;">Developed by: HERO DOLOT</small>
       </div>
       <div class="col-lg-6">
         <ul class="list-inline text-lg-right mb-0">
-          <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li> -->
+          <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li> -->
+          <li class="list-inline-item"><a href="https://fuyouhin.support/company/detail/YTyZwfiN/" target="_blank"><i><img src="../../../../hotaru/icons/fuyouhin.png" width="21px" alt="Fuyouhin Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro" target="_blank"><i><img src="../../../../hotaru/icons/zehitomo.png" width="25px" alt="Zehitomo Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr" target="_blank"><i><img src="../../../../hotaru/icons/instagram.png" width="25px" alt="Instagram Logo"></i></a></li>
         </ul>
       </div>
     </div>
@@ -41,4 +43,3 @@
 </body>
 
 </html>
-

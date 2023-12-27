@@ -16,94 +16,56 @@ include './includes/header.php';
 
 
 <div class="fixed-top">
-    <nav class="navbar navbar-expand bg-body-tertiary p-3" id="scrollNavbar" style="display: none;">
+    <nav class="navbar navbar-expand-lg p-3 overflow-x-auto" id="scrollNavbar" style="background-color: rgba(0, 0, 0, 0.5); display:none;">
         <div class="container-fluid">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <button class="nav-link active" aria-current="page" href="#">Home</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" href="#" onclick="scrollToSection('section-second')">Services</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" href="#" onclick="scrollToSection('blog')">Blog</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" href="#" onclick="scrollToSection('testimony')">Testimonies</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" href="#" onclick="scrollToSection('flow')">Flow</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" href="#" onclick="scrollToSection('inquiry')">Inquire</button>
-                </li>
-            </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars text-white"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <button class="nav-link active text-white fs-4" aria-current="page" href="#" onclick="scrollToTop()">ホーム</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-white fs-4" href="#" onclick="scrollToSection('section-second')">サービス</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-white fs-4" href="#" onclick="scrollToSection('blog')">ブログ</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-white fs-4" href="#" onclick="scrollToSection('testimony')">証言</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-white fs-4" href="#" onclick="scrollToSection('flow')">フロー</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-white fs-4" href="#" onclick="scrollToSection('inquiry')">お問い合わせ</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>
-<section class="bg-dark text-white p-3">
+
+<section class="bg-dark text-white p-0">
     <div class="container-fluid">
         <div class="wrapper d-flex justify-content-between">
-            <h4 style="color:#C5F656; letter-spacing:5px;">TRUE LINK COMPANY</h4>
-            <p class="text-end fw-bolder fs-5" style="letter-spacing: 7px;">070-4797-8099</p>
+            <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-none d-md-block img-fluid mx-5">
+            <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-md-none d-sm-block img-fluid mx-3">
+            <img src="./img/imgCrdScroll2.svg" class="img-fluid d-none d-md-block" alt="">
         </div>
+        <!-- <marquee behavior="scroll" direction="right"><img src="./img/imgCrdScroll2.svg" alt=""></marquee> -->
     </div>
 </section>
+
 
 <section class="female-introduction d-none d-md-block">
 
 </section>
 
 <section class="female-introduction-mobile d-sm-none d-md-none">
-    <div class="py-4 p-4">
-        <h1 class="fw-bolder" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">引っ越しを計画していますか？</h1>
-    </div>
 
-    <div class="container">
-        <div class="col-md-6" style="margin-top: 7em;">
-            <div class="wrapper fw-bolder fs-5" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
-                <div class="row gap-4">
-                    <div class="col-12">
-                        ・捨てたい家具や、燃えないゴミを不良品回収します。
-                    </div>
-                    <div class="col-12">
-                        ・少しでも迷ってるなら、相談して下さい。ご相談は無料です。
-                    </div>
-                    <div class="col-12">
-                        ・捨て方のアドバイスも承ります。
-                    </div>
-                </div>
-            </div>
-            <div class="wrapper fw-bolder mt-3" style="font-size:40px; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
-                おまかせください！
-            </div>
-        </div>
-
-        <div class="col-12 mt-3">
-            <div class="container d-flex justify-content-center align-items-center">
-                <div class="row fw-bolder" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
-                    <div class="col-7">
-                        <p class="text-center" style="color:#00BF63; font-size:30px;">お手ごろな価格</p>
-                    </div>
-                    <div class="col-3">
-                        <p class="text-center" style="color:#FF914D; font-size:30px">速い</p>
-                    </div>
-                    <div class="col-12">
-                        <p class="text-center" style="color:#38B6FF; font-size:30px">安全な</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="section-first">
-    <div class="overlay"></div>
-    <div class="container">
-        <h1 class="d-flex align-items-center justify-content-center  py-5 mt-5">Hotaru Services</h1>
-        <p class="fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam blanditiis voluptatibus rerum quas aliquam quasi illum minima incidunt laudantium cumque at eum iure perspiciatis expedita soluta accusamus, recusandae sapiente quidem.</p>
-    </div>
 </section>
 
 
@@ -130,79 +92,80 @@ include './includes/header.php';
         </div>
 </section> -->
 
-<section class="why-Hotaru" id="why-Hotaru" style="min-height: 810px; background-color:#f9f9f9;">
+<section class="why-Hotaru" id="why-Hotaru" style="min-height: 810px; background-color:#FFFFFF;">
     <div class="container py-5">
         <p class="text-primary fw-bolder" style="font-size: 17px; text-transform:uppercase;">なぜ私たちを選ぶのですか？</p>
         <div class="container">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px;">
+                    <div class="card shadow" style="min-height: 194px; background-color: #FFFFFF;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/handle-with-care.png" alt="Handle With Care Icon">
                             </div>
-                            <div class="card-text text-center">
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
                                 お客様の大切なものを心を込めて取り扱います。安心してお任せください。
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/cash.png" alt="Affordable Icon">
                             </div>
-                            <div class="card-text text-center">
-                                手頃な価格で高品質のサービスを提供します。予算にやさしいオプションをご用意しています。
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
+                                手頃な価格で高品質のサービスを提供します。予算にやさしいオプションをご用意しています.
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="w-100 d-md-none"></div> <!-- Add a clearfix for smaller screens -->
                 <div class="col-md-6">
-                    <div class="card shadow">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/truck-fast.png" alt="Fast Icon">
                             </div>
-                            <div class="card-text text-center">
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
                                 迅速で効率的なサービスをお約束します。大切な日程に合わせて迅速に対応いたします。
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/secure.png" alt="Secure Icon">
                             </div>
-                            <div class="card-text text-center">
-                                お客様のデータや財産を安全に保護します。セキュリティに配慮したサービスを提供しています。
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
+                                お客様のデータや財産を安全に保護します。セキュリティに配慮したサービスを提供しています.
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/language.png" alt="Bilingual Icon">
                             </div>
-                            <div class="card-text text-center">
-                                多言語対応で、日本語が分からない方ともスムーズにコミュニケーションいたします。言葉の壁を感じさせません。
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
+                                多言語対応で、日本語が分からない方ともスムーズにコミュニケーションいたします。言葉の壁を感じさせません.
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/group.png" alt="Professional Team Icon">
                             </div>
-                            <div class="card-text text-center">
-                                プロフェッショナルなチームがお客様のサポートに尽力します。信頼性と高い技術力を備えたチームがお手伝いいたします。
+                            <div class="card-text text-center fw-bold text-secondary mt-3">
+                                プロフェッショナルなチームがお客様のサポートに尽力します。信頼性と高い技術力を備えたチームがお手伝いいたします.
                             </div>
                         </div>
                     </div>
@@ -212,10 +175,36 @@ include './includes/header.php';
     </div>
 </section>
 
+<hr>
 
-<section class="call-to-action-section overflow-hidden bg-dark" style="min-height: 150px;;">
+
+
+<section class="call-to-action-section overflow-hidden img-fluid" style="min-height: 700px;;">
     <div class="py-5">
-        <div class="row">
+        <div class="container text-center">
+            <div class="wrapper">
+                <img src="./img/phoneCTA1.svg" class="col-12 mb-3 d-none d-md-block" alt="070-4797-8099">
+                <img src="./img/phoneSMCTA.svg" class="col-12 mb-3 d-block d-sm-none" alt="070-4797-8099">
+                <div class="row">
+                    <div class="col-md-6 col-12 mb-3 mb-md-0 mx-3 mx-md-0">
+                        <img src="./img/lineCTA.svg" class="img-fluid w-100" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="LINE">
+                    </div>
+                    <div class="col-md-6 col-12 mx-3 mx-md-0">
+                        <img src="./img/inquiryCTA.svg" class="img-fluid w-100" onclick="scrollToSection('inquiry')" style="cursor:pointer;" alt="無料見積もりフォームはこちら">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="text-center">
+            <div class="container d-flex justify-content-center align-items-center">
+                <img src="./img/ctaPlans.svg" class="d-none d-md-block" style="max-width:100%; height:auto;" alt="お得な定額パック">
+                <img src="./img/ctaSMPlans.svg" class="d-block d-md-none mt-3" style="max-width:100%; height:auto;" alt="お得な定額パック">
+            </div>
+        </section>
+        <!-- <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
                 <div class="card card-call-to-action" style="min-height: 158px;">
                     <div class="card-body">
@@ -258,17 +247,6 @@ include './includes/header.php';
                                 </div>
                                 <div class="modal-body">
                                     <div class="container py-3">
-                                        <!-- <div class="row"> -->
-                                        <!-- <div class="col-md-6 col-6 fw-bolder">
-                                                <div class="card mb-3 mb-md-0">
-                                                    <div class="card-body p-0">
-                                                        <img src="./img/ken_qr.jpg" class="img-fluid" alt="Ken Line QR CODE">
-                                                        <div class="card-footer">
-                                                            Ken Suzuki
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                         <div class="fw-bolder">
                                             <div class="card">
                                                 <div class="card-body text-center p-0">
@@ -279,7 +257,6 @@ include './includes/header.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- </div> -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -292,7 +269,7 @@ include './includes/header.php';
             </div>
             <div class="col-md-4">
                 <div class="card card-call-to-action" style="min-height: 158px;">
-                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0">
+                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0" style="background-color: #FFFFFF;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3 col-3">
@@ -309,11 +286,11 @@ include './includes/header.php';
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
-<section class="promotion" style="min-height:80px; background-color: red;">
+<section class="promotion">
     <?php
     $sqlPromotion = "SELECT * FROM updates WHERE update_location = 'Promotion'";
     $result = mysqli_query($conn, $sqlPromotion);
@@ -326,7 +303,7 @@ include './includes/header.php';
         // Check if there is any data
         if ($rowUpdates) {
     ?>
-            <div class="container">
+            <div class="container-fluid" style="min-height:80px; background-color: red;">
                 <div class="d-flex justify-content-center align-items-center">
                     <p class="mt-4 text-white fw-bolder fs-3"><?php echo $rowUpdates['update_description']; ?></p>
                 </div>
@@ -334,7 +311,7 @@ include './includes/header.php';
     <?php
         } else {
             // Handle case when no data is found
-            echo "<p>No promotions yet.</p>";
+            echo '';
         }
 
         // Free the result set
@@ -406,9 +383,6 @@ include './includes/header.php';
             </div> -->
         </div>
     </div>
-    <button class="btn" id="scrollTopBtn" onclick="scrollToTop()">
-        <img src="./icons/arrow-up-1.png" class="img-fluid" alt="">
-    </button>
 </section>
 
 
@@ -587,7 +561,7 @@ include './includes/header.php';
                     <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-5 col-5">
+                                <div class="col-md-5 col-7">
                                     <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
                                     <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="">
 
@@ -619,7 +593,7 @@ include './includes/header.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-7 col-7 p-0 m-0">
+                                <div class="col-md-7 col-5 p-0 m-0">
                                     <div class="container mt-3">
                                         <p class="fw-bolder fs-3"><?php echo $row["review_title"] ?></p>
                                         <hr style="border: 1px solid white;">
@@ -640,9 +614,32 @@ include './includes/header.php';
     </div>
 </section>
 
-<section class="call-to-action-section overflow-hidden bg-dark" style="min-height: 150px;">
+<section class="call-to-action-section overflow-hidden img-fluid" style="min-height: 700px;;">
     <div class="py-5">
-        <div class="row">
+        <div class="container text-center">
+            <div class="wrapper">
+                <img src="./img/phoneCTA1.svg" class="col-12 mb-3 d-none d-md-block" alt="070-4797-8099">
+                <img src="./img/phoneSMCTA.svg" class="col-12 mb-3 d-block d-sm-none" alt="070-4797-8099">
+                <div class="row">
+                    <div class="col-md-6 col-12 mb-3 mb-md-0 mx-3 mx-md-0">
+                        <img src="./img/lineCTA.svg" class="img-fluid w-100" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="LINE">
+                    </div>
+                    <div class="col-md-6 col-12 mx-3 mx-md-0">
+                        <img src="./img/inquiryCTA.svg" class="img-fluid w-100" onclick="scrollToSection('inquiry')" style="cursor:pointer;" alt="無料見積もりフォームはこちら">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="text-center">
+            <div class="container d-flex justify-content-center align-items-center">
+                <img src="./img/ctaPlans.svg" class="d-none d-md-block" style="max-width:100%; height:auto;" alt="お得な定額パック">
+                <img src="./img/ctaSMPlans.svg" class="d-block d-md-none mt-3" style="max-width:100%; height:auto;" alt="お得な定額パック">
+            </div>
+        </section>
+        <!-- <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
                 <div class="card card-call-to-action" style="min-height: 158px;">
                     <div class="card-body">
@@ -685,24 +682,12 @@ include './includes/header.php';
                                 </div>
                                 <div class="modal-body">
                                     <div class="container py-3">
-                                        <div class="row">
-                                            <div class="col-md-6 col-6 fw-bolder">
-                                                <div class="card mb-3 mb-md-0">
-                                                    <div class="card-body p-0">
-                                                        <img src="./img/ken_qr.jpg" class="img-fluid" alt="Ken Line QR CODE">
-                                                        <div class="card-footer">
-                                                            Ken Suzuki
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-6 fw-bolder">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
-                                                        <img src="./img/hotaru_qr.jpg" class="img-fluid" alt="Hotaru Line QR CODE">
-                                                        <div class="card-footer">
-                                                            Hotaru
-                                                        </div>
+                                        <div class="fw-bolder">
+                                            <div class="card">
+                                                <div class="card-body text-center p-0">
+                                                    <img src="./img/hotaru_qr.jpg" class="img-fluid" alt="Hotaru Line QR CODE">
+                                                    <div class="card-footer">
+                                                        Hotaru
                                                     </div>
                                                 </div>
                                             </div>
@@ -719,7 +704,7 @@ include './includes/header.php';
             </div>
             <div class="col-md-4">
                 <div class="card card-call-to-action" style="min-height: 158px;">
-                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0">
+                    <button href="#" onclick="scrollToSection('inquiry')" class="border-0" style="background-color: #FFFFFF;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3 col-3">
@@ -736,7 +721,7 @@ include './includes/header.php';
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -799,54 +784,92 @@ include './includes/header.php';
     </div>
 </section>
 
+<style>
+    /* Default styles for all screens */
+    .area {
+        min-height: 60vh;
+    }
+
+    /* Media query for smaller screens (adjust the max-width as needed) */
+    @media (max-width: 768px) {
+        .area {
+            min-height: 75vh;
+            /* Adjust the value for smaller screens */
+        }
+    }
+</style>
+
 <section class="area">
     <div class="container">
-        <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">解体工事対応エリア
+        <p class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">解体工事対応エリア</p>
+        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="chiba-tab" data-bs-toggle="tab" href="#chiba" role="tab" aria-controls="chiba" aria-selected="true">千葉県</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tokyo-tab" data-bs-toggle="tab" href="#tokyo" role="tab" aria-controls="tokyo" aria-selected="false">東京都</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="saitama-tab" data-bs-toggle="tab" href="#saitama" role="tab" aria-controls="saitama" aria-selected="false">埼玉県</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ibaraki-tab" data-bs-toggle="tab" href="#ibaraki" role="tab" aria-controls="ibaraki" aria-selected="false">茨城県</a>
+            </li>
+        </ul>
 
-        </p>
-        <div class="row">
-            <div class="col-md-6 mb-3">
+        <!-- Tab panes -->
+        <div class="tab-content mt-3 fw-bold py-5">
+            <div class="tab-pane fade show active" id="chiba" role="tabpanel" aria-labelledby="chiba-tab">
                 <div class="card border-success">
                     <div class="card-header fs-3 fw-bolder">
                         千葉県
                     </div>
                     <div class="card-body fs-5">
-                        ・ 千葉市・中央区・花見川区・稲毛区・若葉区・緑区・美浜区・銚子市・市川市・船橋市・館山市・木更津市・松戸市・野田市・茂原市・成田市・佐倉市・東金市・旭市・習志野市・柏市・ ・勝浦市・市原市・流山市・八千代市・我孫子市・鴨川市・鎌ヶ谷市・君津市・富津市・浦安市・四街道市・袖ヶ浦市・八街市・印西市・白井市・富里市・南房総市・匝瑳市・香取市・山武市・いすみ市 ・大網白里市・酒々井町・栄町・神崎町・多古町・東庄町・九十九里町・芝山町・横芝光町・一宮町・睦沢町・白子町・長柄町・長南町・大多喜町・御宿町・鋸南町
+                        千葉市・中央区・花見川区・稲毛区・若葉区・緑区・美浜区・銚子市・市川市・船橋市・館山市・木更津市・松戸市・野田市・茂原市・成田市・<br><br>
+                        佐倉市・東金市・旭市・習志野市・柏市・ ・勝浦市・市原市・流山市・八千代市・我孫子市・鴨川市・鎌ヶ谷市・君津市・富津市・浦安市・四街道市・袖ヶ浦市・八街市・印西市・白井市・富里市・南房総市・<br><br>
+                        匝瑳市・香取市・山武市・いすみ市 ・大網白里市・酒々井町・栄町・神崎町・多古町・東庄町・九十九里町・芝山町・横芝光町・一宮町・睦沢町・白子町・長柄町・長南町・大多喜町・御宿町・鋸南町
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card border-success mb-3" style="min-height: 364px;">
+            <div class="tab-pane fade" id="tokyo" role="tabpanel" aria-labelledby="tokyo-tab">
+                <div class="card border-success mb-3">
                     <div class="card-header fs-3 fw-bolder">
                         東京都
                     </div>
                     <div class="card-body fs-5">
-                        ・千代田区・中央区・港区・新宿区・文京区・台東区・墨田区・江東区・品川区・目黒区・大田区・世田谷区・渋谷区・中野区・杉並区・豊島区・北区・荒川区・板橋区・練馬区・足立区・葛飾区・江戸川区 ・八王子市・立川市・武蔵野市・三鷹市・青梅市・府中市・昭島市・調布市・町田市・小金井市・小平市・日野市・東村山市・国分寺市・国立市・福生市 ・狛江市・東大和市・清瀬市・東久留米市・武蔵村山市・多摩市・稲城市・羽村市・あきる野市・西東京市・瑞穂町・日の出町・ 檜原村・奥多摩町
+                        千代田区・中央区・港区・新宿区・文京区・台東区・墨田区・江東区・品川区・目黒区・大田区・世田谷区・渋谷区・中野区・杉並区・豊島区・北区・荒川区・板橋区・練馬区・足立区・葛飾区・江戸川区 <br><br>
+                        八王子市・立川市・武蔵野市・三鷹市・青梅市・府中市・昭島市・調布市・町田市・小金井市・小平市・日野市・東村山市・国分寺市・国立市・福生市 ・狛江市・東大和市・清瀬市・東久留米市・武蔵村山市・多摩市<br><br>
+                        稲城市・羽村市・あきる野市・西東京市・瑞穂町・日の出町・ 檜原村・奥多摩町
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="tab-pane fade" id="saitama" role="tabpanel" aria-labelledby="saitama-tab">
                 <div class="card border-success mb-3">
                     <div class="card-header fs-3 fw-bolder">
                         埼玉県
                     </div>
                     <div class="card-body fs-5">
-                        ・さいたま市・西区・北区・大宮区・見沼区・中央区・桜区・浦和区・南区・緑区・岩槻区・川越市・熊谷市・川口市・行田市・秩父市・所沢市・飯能市・加須市・本庄市・東松山市・春日部市・狭山市 ・羽生市・鴻巣市・深谷市・上尾市・草加市・越谷市・蕨市・戸田市・入間市・朝霞市・志木市・和光市・新座市・桶川市・久喜市・北本市・八潮市・富士見市・三郷市・蓮田市・坂戸市 ・幸手市・鶴ヶ島市・日高市・吉川市・ふじみ野市・白岡市・伊奈町・三芳町・毛呂山町・越生町・滑川町・嵐山町・小川町・川島町・吉見町・鳩山町・ときがわ町・横瀬町・皆野町・長瀞町 ・小鹿野町・東秩父村・美里町・神川町・上里町・寄居町・宮代町・杉戸町・松伏町 </div>
+                        さいたま市・西区・北区・大宮区・見沼区・中央区・桜区・浦和区・南区・緑区・岩槻区・川越市・熊谷市・川口市・行田市・秩父市・所沢市・飯能市・加須市・本庄市・東松山市<br><br>
+                        春日部市・狭山市 ・羽生市・鴻巣市・深谷市・上尾市・草加市・越谷市・蕨市・戸田市・入間市・朝霞市・志木市・和光市・新座市・桶川市・久喜市・北本市・八潮市・富士見市・三郷市・蓮田市・坂戸市<br><br>
+                        幸手市・鶴ヶ島市・日高市・吉川市・ふじみ野市・白岡市・伊奈町・三芳町・毛呂山町・越生町・滑川町・嵐山町・小川町・川島町・吉見町・鳩山町・ときがわ町・横瀬町・皆野町・長瀞町 ・小鹿野町・東秩父村・美里町・神川町・上里町・寄居町・宮代町・杉戸町・松伏町 </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card border-success" style="min-height: 423px;">
+            <div class="tab-pane fade" id="ibaraki" role="tabpanel" aria-labelledby="ibaraki-tab">
+                <div class="card border-success">
                     <div class="card-header fs-3 fw-bolder">
                         茨城県
                     </div>
                     <div class="card-body fs-5">
-                        ・水戸市・日立市・土浦市・古河市・石岡市・結城市・龍ヶ崎市・下妻市・常総市・常陸太田市・高萩市・北茨城市・笠間市・取手市・牛久市・つくば市・ひたちなか市・鹿嶋市・潮来市 ・守谷市・常陸大宮市・那珂市・筑西市・坂東市・稲敷市・かすみがうら市・桜川市・神栖市・行方市・鉾田市・つくばみらい市・小美玉市・茨城町・大洗町・城里町・東海村・大子町 ・美浦村・阿見町・河内町・八千代町・五霞町・境町・利根町 </div>
+                        水戸市・日立市・土浦市・古河市・石岡市・結城市・龍ヶ崎市・下妻市・常総市・常陸太田市・高萩市・北茨城市・笠間市・取手市・牛久市・つくば市・ひたちなか市 <br><br>
+                        鹿嶋市・潮来市 ・守谷市・常陸大宮市・那珂市・筑西市・坂東市・稲敷市・かすみがうら市・桜川市・神栖市・行方市・鉾田市・つくばみらい市・小美玉市・茨城町・大洗町・城里町・東海村<br><br>
+                        大子町 ・美浦村・阿見町・河内町・八千代町・五霞町・境町・利根町 </div>
                 </div>
             </div>
         </div>
+
+    </div>
 </section>
 <hr>
-
 
 <section class="container py-5" id="inquiry">
     <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</p>
@@ -934,22 +957,34 @@ include './includes/header.php';
     </div>
 </section>
 
-<div id="scrollCard" class="card border-primary col-md-6 col-7">
+<div id="scrollCard" class="card col-md-6 col-7 bg-dark border-dark">
     <div class="container">
-        <div class="card-body text-center">
-            <h5 class="card-title text-primary">Contact Us Now!</h5>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        070-4797-8099
-                    </div>
-                    <div class="col-md-6">
-                        a
+        <div class="card-body">
+            <div class="container d-none d-md-block">
+                <div class="wrapper d-flex justify-content-center align-items-center">
+                    <div class="row gap-2">
+                        <div class="col-md-3">
+                            <img src="./img/imgCrdScroll1.svg" onclick="scrollToTop()" alt="不用品回収代行サービス">
+                        </div>
+                        <div class="col-md-5">
+                            <img src="./img/imgCrdScroll2.svg" alt="">
+                        </div>
+                        <div class="col">
+                            <button class="btn mt-4 text-white fw-bolder p-3" style="background-color: #00C300;" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="LINE">LINE</button>
+                            <button class="btn mt-4 fw-bolder text-info p-3" style="background-color: white;" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="メール無料見積もり">
+                                <i class="fa-solid fa-envelope text-info"></i>
+                                メール無料見積もり
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <img src="./img/imgSmCrdScroll1.svg" class="d-sm-none d-block overflow-hidden" alt="">
         </div>
     </div>
+    <button class="btn d-none d-md-block" id="scrollTopBtn" onclick="scrollToTop()">
+        <img src="./icons/arrow-up-1.png" class="img-fluid" alt="">
+    </button>
 </div>
 <script src="./js/index.js"></script>
 <?php
