@@ -110,6 +110,7 @@ include './components/navbar.php';
             <th>Date Acquire</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Total</th>
             <th>Action</th>
         </thead>
         <tbody>
@@ -122,6 +123,7 @@ include './components/navbar.php';
                     <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
                     <td><?php echo $row["asset_quantity"] ?></td>
                     <td><?php echo number_format($row["asset_price"]) ?> YEN</td>
+                    <td><?php echo number_format($row["asset_price"] * $row["asset_quantity"]) ?> YEN</td>
                     <td>
                         <div class="wrapper d-flex justify-content-center align-items-center">
                             <form method="POST" class="col-md-12">

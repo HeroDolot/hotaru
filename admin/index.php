@@ -22,6 +22,13 @@ if (isset($_POST["submit_contract"])) {
     $sql = "UPDATE inquiry SET inquiry_status = 1 WHERE inquiry_id = $inquiry_id";
     mysqli_query($conn, $sql);
     if (mysqli_affected_rows($conn) == 1) {
+      $expenses = mysqli_query($conn,"SELECT * FROM expense_type WHERE expense_autoadd = 'on'");
+      while ($exp = $expenses->fetch_assoc()){
+        $exp_id = $exp["expense_id"];
+        $exp_price = ($contract <= 100000) ? 3000 : 5000;
+        mysqli_query($conn,"INSERT INTO expense_history (exp_history_inquiry_id, exp_history_expense_id, exp_history_price, expense_quantity)
+                                                 VALUES ($inquiry_id,9,$exp_price,1)");
+      }
       header("location:./?success=Inquiry Approved!");
     } else {
       header("location:./?error=Failed to update status!");

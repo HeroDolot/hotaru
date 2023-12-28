@@ -3,14 +3,14 @@
 session_start();
 include '../connection.php';
 
-if (!isset($_SESSION["user_email"])){
+if (!isset($_SESSION["user_email"])) {
     header("location:../login.php");
 }
 
-if (isset($_POST["delete_review"])){
-    $review_id = mysqli_real_escape_string($conn,$_POST["review_id"]);
-    mysqli_query($conn,"DELETE FROM reviews WHERE review_id = $review_id");
-    if (mysqli_affected_rows($conn) == 1){
+if (isset($_POST["delete_review"])) {
+    $review_id = mysqli_real_escape_string($conn, $_POST["review_id"]);
+    mysqli_query($conn, "DELETE FROM reviews WHERE review_id = $review_id");
+    if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=Review has been deleted!");
     } else {
         header("location:./fileupload.php?error=Review failed to delete!");
@@ -96,7 +96,9 @@ if (isset($_POST["delete_wo"])) {
 
 if (isset($_POST["submit_expense"])) {
     $expense_name = mysqli_real_escape_string($conn, $_POST["expense_name"]);
-    mysqli_query($conn, "INSERT INTO expense_type (expense_name) VALUES('$expense_name')");
+    $expense_autoadd = mysqli_real_escape_string($conn,$_POST["autoadd"]);
+    // var_dump($_POST);
+    mysqli_query($conn, "INSERT INTO expense_type (expense_name,expense_autoadd) VALUES('$expense_name','$expense_autoadd')");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=Expense type added");
     } else {
@@ -105,6 +107,7 @@ if (isset($_POST["submit_expense"])) {
 }
 
 if (isset($_POST["delete_expense"])) {
+    var_dump($_POST);
     $expense_id = mysqli_real_escape_string($conn, $_POST["expense_id"]);
     mysqli_query($conn, "UPDATE expense_type SET is_deleted = 1 WHERE expense_id = $expense_id");
     if (mysqli_affected_rows($conn) == 1) {
@@ -221,9 +224,9 @@ include './components/navbar.php';
                     <th>Title</th>
                     <th>Action</th>
                 </thead>
-                <tbody>
+                <tbody> 
                     <?php
-                    $result = mysqli_query($conn, "SELECT * FROM expense_type");
+                    $result = mysqli_query($conn, "SELECT * FROM expense_type WHERE is_deleted = 0");
                     while ($row = $result->fetch_assoc()) :
                     ?>
                         <tr>
