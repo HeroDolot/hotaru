@@ -16,7 +16,7 @@ include './includes/header.php';
 
 
 <div class="fixed-top">
-    <nav class="navbar navbar-expand-lg p-3 overflow-x-auto" id="scrollNavbar" style="background-color: rgba(0, 0, 0, 0.5); display:none;">
+    <nav class="navbar navbar-expand-lg p-1 overflow-x-auto" id="scrollNavbar" style="background-color: rgba(0, 0, 0, 0.5); display:none;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars text-white"></i>
@@ -52,10 +52,12 @@ include './includes/header.php';
     <div class="container-fluid">
         <div class="wrapper d-flex justify-content-between">
             <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-none d-md-block img-fluid mx-5">
-            <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-md-none d-sm-block img-fluid mx-3">
             <img src="./img/imgCrdScroll2.svg" class="img-fluid d-none d-md-block" alt="">
         </div>
         <!-- <marquee behavior="scroll" direction="right"><img src="./img/imgCrdScroll2.svg" alt=""></marquee> -->
+    </div>
+    <div class="wrapper d-flex justify-content-center align-items-center">
+        <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-md-none d-sm-block img-fluid">
     </div>
 </section>
 
@@ -330,19 +332,6 @@ include './includes/header.php';
                 私たちのサービス
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="card shadow mb-5">
-                        <div class="card-body">
-                            <img src="./img/sample-3.jpg" class="img-fluid rounded" alt="Image for Moving Services">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3 mb-md-5">
-                    <p class="fw-bolder fs-4 text-primary">引越しサービス</p>
-                    <p class="text-secondary">引越しは大変ですが、私たちはプロの手でスムーズに新しい場所へお引越しをサポートします。安心して新生活を始めましょう。</p>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6 d-none d-md-block">
                     <p class="fw-bolder fs-4 text-primary">廃棄物処理サービス</p>
                     <p class="text-secondary">環境に優しい廃棄物処理サービス。不要な物を効果的に処理し、エコフレンドリーな解決策を提供します。地球と共に未来につなげましょう。</p>
@@ -353,6 +342,19 @@ include './includes/header.php';
                             <img src="./img/throw.webp" class="img-fluid rounded" alt="Image for Disposal Services">
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow mb-5">
+                        <div class="card-body">
+                            <img src="./img/sample-3.jpg" class="img-fluid rounded" alt="Image for Moving Services">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3 mb-md-5">
+                    <p class="fw-bolder fs-4 text-primary">引越しサービス</p>
+                    <p class="text-secondary">引越しは大変ですが、私たちはプロの手でスムーズに新しい場所へお引越しをサポートします。安心して新生活を始めましょう。</p>
                 </div>
             </div>
             <div class="row">
@@ -417,18 +419,17 @@ include './includes/header.php';
 
                             if ($days > 0) {
                                 if ($days == 1) {
-                                    echo "Last update " . $days . " day ago.";
+                                    echo "最終更新 " . $days . " 日前。";
                                 } else {
-                                    echo "Last update " . $days . " days ago.";
+                                    echo "最終更新 " . $days . " 日前。";
                                 }
                             } else {
                                 if ($hours > 0) {
-                                    echo "Last update " . $hours . " hours ago.";
+                                    echo "最終更新 " . $hours . " 時間前。";
                                 } else {
-                                    echo "Last update " . $minutes . " minutes ago.";
+                                    echo "最終更新 " . $minutes . " 分前。";
                                 }
                             }
-
                             ?>
                         </small></p>
                 </div>
@@ -473,18 +474,17 @@ include './includes/header.php';
 
                                         if ($days > 0) {
                                             if ($days == 1) {
-                                                echo "Last update " . $days . " day ago.";
+                                                echo $days . " 日前に更新。";
                                             } else {
-                                                echo "Last update " . $days . " days ago.";
+                                                echo $days . " 日前に更新。";
                                             }
                                         } else {
                                             if ($hours > 0) {
-                                                echo "Last update " . $hours . " hours ago.";
+                                                echo $hours . " 時間前に更新。";
                                             } else {
-                                                echo "Last update " . $minutes . " minutes ago.";
+                                                echo $minutes . " 分前に更新。";
                                             }
                                         }
-
                                         ?>
                                     </small></p>
                             </div>
@@ -776,7 +776,7 @@ include './includes/header.php';
                     <div class="col-md-10 col-8">
                         <p class="fw-bolder text-primary text-center fs-4">ステップ4 - 支払い</p>
                         <hr style="border: 2px solid;" class="text-black">
-                        <p class="fw-bolder fs-5">作業完了時にお支払いが必要で、現金のみ受け付けております。</p>
+                        <p class="fw-bolder fs-5">作業完了時にお支払いが必要で、現金又はPayPay支払い又はお振込も受け付けております。</p>
                     </div>
                 </div>
             </div>
@@ -801,7 +801,7 @@ include './includes/header.php';
 
 <section class="area">
     <div class="container">
-        <p class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">解体工事対応エリア</p>
+        <p class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">対応エリア</p>
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="chiba-tab" data-bs-toggle="tab" href="#chiba" role="tab" aria-controls="chiba" aria-selected="true">千葉県</a>
@@ -814,6 +814,15 @@ include './includes/header.php';
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="ibaraki-tab" data-bs-toggle="tab" href="#ibaraki" role="tab" aria-controls="ibaraki" aria-selected="false">茨城県</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="kanagawa-tab" data-bs-toggle="tab" href="#kanagawa" role="tab" aria-controls="kanagawa" aria-selected="false">神奈川県</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="gunma-tab" data-bs-toggle="tab" href="#gunma" role="tab" aria-controls="gunma" aria-selected="false">群馬県</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tochigi-ken-tab" data-bs-toggle="tab" href="#tochigi-ken" role="tab" aria-controls="tochigi-ken" aria-selected="false">栃木県</a>
             </li>
         </ul>
 
@@ -865,9 +874,36 @@ include './includes/header.php';
                         大子町 ・美浦村・阿見町・河内町・八千代町・五霞町・境町・利根町 </div>
                 </div>
             </div>
-        </div>
+            <div class="tab-pane fade" id="kanagawa" role="tabpanel" aria-labelledby="kanagawa-tab">
+                <div class="card border-success">
+                    <div class="card-header fs-3 fw-bolder">
+                        神奈川県
+                    </div>
+                    <div class="card-body fs-5">
+                        相模原市 • 厚木市 • 大和市 • 海老名市 • 座間市 • 綾瀬市 • 愛川町 • 清川村 • 平塚市 • 藤沢市 • 茅ヶ崎市 • 秦野市 • 伊勢原市 • 寒川町 • 大磯町 • 二宮町 • 小田原市 • 南足柄市 • 中井町 • 大井町 • 松田町 • 山北町 • 開成町 • 箱根町 • 真鶴町 • 湯河原町
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="gunma" role="tabpanel" aria-labelledby="gunma-tab">
+                <div class="card border-success">
+                    <div class="card-header fs-3 fw-bolder">
+                        群馬県
+                    </div>
+                    <div class="card-body fs-5">
+                        安中市 • 伊勢崎市 • 板倉町 • 上野村 • 邑楽町 • 大泉町 • 太田市 • 片品村 • 川場村 • 神流町 • 甘楽町 • 桐生市 • 草津町 • 渋川市 • 下仁田町 • 昭和村 • 榛東村 • 高崎市 • 高山村 • 館林市 • 玉村町 • 千代田町 • 嬬恋村 • 富岡市 • 中之条町 • 長野原町 • 南牧村 • 沼田市 • 東吾妻町 • 藤岡市 • 前橋市 • みどり市 • みなかみ町 • 明和町 • 吉岡町 </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tochigi-ken" role="tabpanel" aria-labelledby="tochigi-ken-tab">
+                <div class="card border-success">
+                    <div class="card-header fs-3 fw-bolder">
+                        栃木県
+                    </div>
+                    <div class="card-body fs-5">
+                        足利市 • 市貝町 • 宇都宮市 • 大田原市 • 小山市 • 鹿沼市 • 上三川町 • さくら市 • 佐野市 • 塩谷町 • 下野市 • 高根沢町 • 栃木市 • 那珂川町 • 那須町 • 那須烏山市 • 那須塩原市 • 日光市 • 野木町 • 芳賀町 • 益子町 • 壬生町 • 真岡市 • 茂木町 • 矢板市 </div>
+                </div>
+            </div>
 
-    </div>
+        </div>
 </section>
 <hr>
 
@@ -895,34 +931,79 @@ include './includes/header.php';
                             <label for="floatingInputGroup1">連絡先番号 </label>
                         </div>
                         <div class="container mb-3">
-                            <small class="fw-bolder">ご希望は、お電話か、メールどちらが、ご希望ですか？</small>
+                            <small class="fw-bolder">ご希望は、電話のみ、メールのみ、ご希望ですか？</small>
                             <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Call" required>
-                                <label class="form-check-label" for="inlineRadio1">お電話か</label>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="電話のみ" required>
+                                <label class="form-check-label" for="inlineRadio1">電話のみ</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Mail" required>
-                                <label class="form-check-label" for="inlineRadio2">メールどちらが</label>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="メールのみ" required>
+                                <label class="form-check-label" for="inlineRadio2">メールのみ</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Call/Mail" required>
+                                <input class="form-check-input" style="border-color:#0D78FC;" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="どちらも" required>
                                 <label class="form-check-label" for="inlineRadio3">どちらも</label>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" name="clientRegion" aria-label="Floating label select example" required>
-                                <option selected disabled>地域を選択してください</option>
-                                <option value="Kanto">関東</option>
+                                <option selected disabled>地域を選択してください (Select Region)</option>
+                                <option value="北海道">北海道 (Hokkaido)</option>
+                                <option value="青森県">青森県 (Aomori)</option>
+                                <option value="岩手県">岩手県 (Iwate)</option>
+                                <option value="宮城県">宮城県 (Miyagi)</option>
+                                <option value="秋田県">秋田県 (Akita)</option>
+                                <option value="山形県">山形県 (Yamagata)</option>
+                                <option value="福島県">福島県 (Fukushima)</option>
+                                <option value="茨城県">茨城県 (Ibaraki)</option>
+                                <option value="栃木県">栃木県 (Tochigi)</option>
+                                <option value="群馬県">群馬県 (Gunma)</option>
+                                <option value="埼玉県">埼玉県 (Saitama)</option>
+                                <option value="千葉県">千葉県 (Chiba)</option>
+                                <option value="東京都">東京都 (Tokyo)</option>
+                                <option value="神奈川県">神奈川県 (Kanagawa)</option>
+                                <option value="新潟県">新潟県 (Niigata)</option>
+                                <option value="富山県">富山県 (Toyama)</option>
+                                <option value="石川県">石川県 (Ishikawa)</option>
+                                <option value="福井県">福井県 (Fukui)</option>
+                                <option value="山梨県">山梨県 (Yamanashi)</option>
+                                <option value="長野県">長野県 (Nagano)</option>
+                                <option value="岐阜県">岐阜県 (Gifu)</option>
+                                <option value="静岡県">静岡県 (Shizuoka)</option>
+                                <option value="愛知県">愛知県 (Aichi)</option>
+                                <option value="三重県">三重県 (Mie)</option>
+                                <option value="滋賀県">滋賀県 (Shiga)</option>
+                                <option value="京都府">京都府 (Kyoto)</option>
+                                <option value="大阪府">大阪府 (Osaka)</option>
+                                <option value="兵庫県">兵庫県 (Hyogo)</option>
+                                <option value="奈良県">奈良県 (Nara)</option>
+                                <option value="和歌山県">和歌山県 (Wakayama)</option>
+                                <option value="鳥取県">鳥取県 (Tottori)</option>
+                                <option value="島根県">島根県 (Shimane)</option>
+                                <option value="岡山県">岡山県 (Okayama)</option>
+                                <option value="広島県">広島県 (Hiroshima)</option>
+                                <option value="山口県">山口県 (Yamaguchi)</option>
+                                <option value="徳島県">徳島県 (Tokushima)</option>
+                                <option value="香川県">香川県 (Kagawa)</option>
+                                <option value="愛媛県">愛媛県 (Ehime)</option>
+                                <option value="高知県">高知県 (Kochi)</option>
+                                <option value="福岡県">福岡県 (Fukuoka)</option>
+                                <option value="佐賀県">佐賀県 (Saga)</option>
+                                <option value="長崎県">長崎県 (Nagasaki)</option>
+                                <option value="熊本県">熊本県 (Kumamoto)</option>
+                                <option value="大分県">大分県 (Oita)</option>
+                                <option value="宮崎県">宮崎県 (Miyazaki)</option>
+                                <option value="鹿児島県">鹿児島県 (Kagoshima)</option>
+                                <option value="沖縄県">沖縄県 (Okinawa)</option>
                             </select>
-                            <label for="floatingSelect">地域を選択</label>
+                            <label for="floatingSelect">地域を選択 (Select Region)</label>
                         </div>
-
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="clientWO" required>
                                 <option selected disabled value="">作業オーダーを選択してください</option>
                                 <?php
-                                $result = mysqli_query($conn, "SELECT * FROM work_order");
+                                $result = mysqli_query($conn, "SELECT * FROM work_order WHERE is_deleted = 0");
                                 while ($row = $result->fetch_assoc()) {
                                     echo '<option value="' . $row["work_id"] . '">' . $row["work_name"] . '</option>';
                                 }
@@ -971,7 +1052,7 @@ include './includes/header.php';
                         </div>
                         <div class="col">
                             <button class="btn mt-4 text-white fw-bolder p-3" style="background-color: #00C300;" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="LINE">LINE</button>
-                            <button class="btn mt-4 fw-bolder text-info p-3" style="background-color: white;" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="メール無料見積もり">
+                            <button class="btn mt-4 fw-bolder text-info p-3" style="background-color: white;" onclick="scrollToSection('inquiry')" alt="メール無料見積もり">
                                 <i class="fa-solid fa-envelope text-info"></i>
                                 メール無料見積もり
                             </button>

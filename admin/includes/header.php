@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotaru San</title>
-
+    <title>管理者ダッシュボード | 不用品回収代行サービス</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../../hotaru/node_modules/bootstrap/dist/css/bootstrap.css">
     <script src="../../hotaru/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <!-- Bootstrap -->
 
     <!-- FontaAwesome -->

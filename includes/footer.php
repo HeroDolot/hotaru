@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <h4 style="color:#C5F656; letter-spacing:5px;">不用品回収代行サービス</h4>
+        <div class="wrapper">
+          <h4 style="color:#C5F656; letter-spacing:5px; margin-bottom: -5px;">不用品回収代行サービス</h4>
+          <small style="color:#C5F656;">&copy;TRUE LINK COMPANY</small>
+        </div>
         <!-- <small>TRUE LINK COMPANY</small> -->
         <p>True Link Companyは、人々が本当の絆で平和な社会を築く手助けをすることを使命とし、その使命を迷わずに果たします。個々の出会いを繋ぎ合わせ、真っすぐな姿勢で様々な課題に取り組む企業を目指しています。</p>
       </div>

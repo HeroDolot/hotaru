@@ -1,10 +1,10 @@
-<title>Invoice Report - Hotaru Services</title>
+<title>請求書レポート - 不用品回収代行サービス</title>
 <?php
 // Start session and include connection
 session_start();
 include '../connection.php';
 
-if (!isset($_SESSION["user_email"])){
+if (!isset($_SESSION["user_email"])) {
     header("location:../login.php");
 }
 // Check if inquiry ID is set
@@ -88,17 +88,17 @@ if (isset($_GET["id"])) :
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <p class="fw-bolder" style="font-size: 55px;"><span class="text-primary">Hotaru</span> Services</p>
+                        <p class="fw-bolder" style="font-size: 55px;"><span class="text-primary">不用品回収代行サービス</p>
                     </div>
-                    <p class="text-secondary">Company Address</p>
+                    <p class="text-secondary">東京都台東区根岸3-16-14 チャームハイツ201号室</p>
                     <div class="form-check form-switch">
                         <input class="form-check-input" onchange="switchMode(this)" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Client Copy</label>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end mt-0 mt-md-5">
-                    <p class="text-info fw-bolder" style="font-size:25px;">INVOICE</p>
-                    <p class="text-secondary"><?php echo date("F d, Y", time()) ?></p>
+                    <p class="text-info fw-bolder" style="font-size: 25px;">請求書</p>
+                    <p class="text-secondary"><?php echo date('Y年m月d日') ?></p>
                 </div>
             </div>
 
@@ -110,14 +110,14 @@ if (isset($_GET["id"])) :
                     <table class="table text-center table-responsive align-middle">
                         <thead class="table-info">
                             <th>#</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><?php echo date("M d, Y", $acceptedInfo["accepted_start_date"]) ?></td>
-                                <td><?php echo date("M d, Y", $acceptedInfo["accepted_completed_date"]) ?></td>
+                                <td><?php echo date("Y年m月d日", $acceptedInfo["accepted_start_date"]) ?></td>
+                                <td><?php echo date("Y年m月d日", $acceptedInfo["accepted_completed_date"]) ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -125,18 +125,18 @@ if (isset($_GET["id"])) :
                 <div class="col-md-4">
                     <table class="table">
                         <thead class="table-primary">
-                            <th style="font-size: 17px;" colspan="2">Job Result</th>
+                            <th style="font-size: 17px;" colspan="2">仕事の状態</th>
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="fw-bolder">Status:</th>
+                                <th class="fw-bolder">状態：</th>
                                 <?php
                                 // Display status based on inquiry status
                                 if ($inquiryInfo["inquiry_status"] == 1) {
-                                    echo ' <td class="text-danger">Pending</td>';
+                                    echo ' <td class="text-danger">未完了</td>';
                                 }
                                 if ($inquiryInfo["inquiry_status"] == 2) {
-                                    echo ' <td class="text-success">Complete</td>';
+                                    echo ' <td class="text-success">完了</td>';
                                 } ?>
                             </tr>
                         </tbody>
@@ -149,59 +149,59 @@ if (isset($_GET["id"])) :
                 <div class="col-md-5">
                     <table class="table table-customer-information">
                         <thead class="table-info">
-                            <th style="font-size: 17px;" colspan="2">Customer Information</th>
+                            <th style="font-size: 17px;" colspan="2">顧客情報</th>
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="fw-bolder">Name:</th>
+                                <th class="fw-bolder">名前：</th>
                                 <td><?php echo $acceptedInfo["accepted_client_name"] ?></td>
                             </tr>
                             <tr>
-                                <th class="fw-bolder">Contact Number:</th>
+                                <th class="fw-bolder">連絡先番号：</th>
                                 <td><?php echo $inquiryInfo["client_number"] ?></td>
                             </tr>
                             <tr>
-                                <th class="fw-bolder">Call/Email</th>
-                                <td>Call</td>
+                                <th class="fw-bolder">電話/メール</th>
+                                <td>電話</td>
                             </tr>
                             <tr>
-                                <th class="fw-bolder">Address:</th>
+                                <th class="fw-bolder">住所：</th>
                                 <td><?php echo $acceptedInfo["accepted_location"] ?></td>
                             </tr>
                             <tr>
-                                <th class="fw-bolder">Contract Amount:</th>
-                                <td><?php echo number_format($acceptedInfo["accepted_contract"]) ?> YEN</td>
+                                <th class="fw-bolder">契約金額：</th>
+                                <td><?php echo number_format($acceptedInfo["accepted_contract"]) ?> 円</td>
                             </tr>
                             <tr>
-                                <th class="fw-bolder">Work Order:</th>
+                                <th class="fw-bolder">作業依頼：</th>
                                 <td>
                                     <?php
                                     $wo_id = $inquiryInfo["client_wo"];
-                                    echo mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];
+                                    echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $wo_id")->fetch_assoc()["work_name"];
                                     ?>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-7 mt-4 mt-md-0"> <!-- Added margin top for smaller screens -->
-                    <label for="context" class="fw-bolder">Work order Context</label>
+                <div class="col-md-7 mt-4 mt-md-0">
+                    <label for="context" class="fw-bolder">作業依頼のコンテキスト</label>
                     <textarea class="form-control" style="border: 2px solid black; width: 100%;" name="" id="context" cols="40" rows="7" readonly><?php echo $inquiryInfo["client_comment"] ?></textarea>
                 </div>
             </div>
             <table id="expense_table" class="table table-bordered table-responsive text-center">
                 <thead class="table-danger">
                     <tr>
-                        <th colspan="5">EXPENSES</th>
+                        <th colspan="5">経費</th>
                     </tr>
                 </thead>
                 <thead style="text-transform: uppercase;">
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>タイトル</th>
+                        <th>価格</th>
+                        <th>数量</th>
+                        <th>合計</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -227,11 +227,11 @@ if (isset($_GET["id"])) :
                 <tfoot>
                     <tr>
                         <th colspan="4"></th>
-                        <th>Total: <?php echo number_format($total); ?>¥</th>
+                        <th>合計：<?php echo number_format($total); ?> 円</th>
                     </tr>
                     <tr>
                         <th colspan="4"></th>
-                        <th>Total Profit: <?php echo number_format($acceptedInfo["accepted_contract"] - $total); ?>¥</th>
+                        <th>総利益：<?php echo number_format($acceptedInfo["accepted_contract"] - $total); ?> 円</th>
                     </tr>
                 </tfoot>
             </table>

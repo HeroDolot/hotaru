@@ -1,4 +1,4 @@
-<title>Admin Dashboard | File Upload</title>
+<title>管理者ダッシュボード | ファイルアップロード</title>
 <?php
 session_start();
 include '../connection.php';
@@ -11,9 +11,9 @@ if (isset($_POST["delete_review"])) {
     $review_id = mysqli_real_escape_string($conn, $_POST["review_id"]);
     mysqli_query($conn, "DELETE FROM reviews WHERE review_id = $review_id");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Review has been deleted!");
+        header("location:./fileupload.php?success=レビューが削除されました！");
     } else {
-        header("location:./fileupload.php?error=Review failed to delete!");
+        header("location:./fileupload.php?error=レビューの削除に失敗しました！");
     }
 }
 
@@ -30,9 +30,9 @@ if (isset($_POST["submit_review"])) {
 
     mysqli_query($conn, "INSERT INTO reviews (review_title,review_location,review_age,review_star,review_context,review_image,review_service) VALUES('$title','$location','$age',$star,'$context','$image',$service)");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Review has been added");
+        header("location:./fileupload.php?success=レビューが追加されました");
     } else {
-        header("location:./fileupload.php?error=Failed to add review");
+        header("location:./fileupload.php?error=レビューの追加に失敗しました");
     }
 }
 
@@ -46,9 +46,9 @@ if (isset($_POST["submit_update"])) {
 
     mysqli_query($conn, "INSERT INTO updates (update_location,update_title,update_description,update_image,update_date) VALUES('$update_location','$update_title','$update_description','$update_image',$update_date)");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Updates has been upload!");
+        header("location:./fileupload.php?success=アップデートが投稿されました！");
     } else {
-        header("location:./fileupload.php?error=Failed to post updates!");
+        header("location:./fileupload.php?error=アップデートの投稿に失敗しました！");
     }
 }
 
@@ -56,9 +56,9 @@ if (isset($_POST["delete_update"])) {
     $update_id = mysqli_real_escape_string($conn, $_POST["update_id"]);
     mysqli_query($conn, "DELETE FROM updates WHERE update_id = $update_id");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Updates has been deleted!");
+        header("location:./fileupload.php?success=アップデートが削除されました！");
     } else {
-        header("location:./fileupload.php?error=Failed to delete updates!");
+        header("location:./fileupload.php?error=アップデートの削除に失敗しました！");
     }
 }
 
@@ -68,9 +68,9 @@ if (isset($_POST["edit_update"])) {
     $update_description = mysqli_real_escape_string($conn, $_POST["update_description"]);
     mysqli_query($conn, "UPDATE updates SET update_title = '$update_title', update_description = '$update_description' WHERE update_id = $update_id");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Updates has been updated!");
+        header("location:./fileupload.php?success=アップデートが更新されました！");
     } else {
-        header("location:./fileupload.php?error=Failed to update updates!");
+        header("location:./fileupload.php?error=アップデートの更新に失敗しました！");
     }
 }
 
@@ -78,9 +78,9 @@ if (isset($_POST["submit_wo"])) {
     $work_title = mysqli_real_escape_string($conn, $_POST["work_title"]);
     mysqli_query($conn, "INSERT INTO work_order (work_name) VALUES('$work_title')");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Work order added");
+        header("location:./fileupload.php?success=作業オーダーが追加されました");
     } else {
-        header("location:./fileupload.php?error=Failed to add order!");
+        header("location:./fileupload.php?error=オーダーの追加に失敗しました");
     }
 }
 
@@ -88,21 +88,21 @@ if (isset($_POST["delete_wo"])) {
     $work_id = mysqli_real_escape_string($conn, $_POST["wo_id"]);
     mysqli_query($conn, "UPDATE work_order SET is_deleted = 1 WHERE work_id = $work_id");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Work order deleted");
+        header("location:./fileupload.php?success=作業オーダーが削除されました");
     } else {
-        header("location:./fileupload.php?error=Failed to delete order!");
+        header("location:./fileupload.php?error=オーダーの削除に失敗しました");
     }
 }
 
 if (isset($_POST["submit_expense"])) {
     $expense_name = mysqli_real_escape_string($conn, $_POST["expense_name"]);
-    $expense_autoadd = mysqli_real_escape_string($conn,$_POST["autoadd"]);
+    $expense_autoadd = mysqli_real_escape_string($conn, $_POST["autoadd"]);
     // var_dump($_POST);
     mysqli_query($conn, "INSERT INTO expense_type (expense_name,expense_autoadd) VALUES('$expense_name','$expense_autoadd')");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Expense type added");
+        header("location:./fileupload.php?success=経費タイプが追加されました");
     } else {
-        header("location:./fileupload.php?error=Failed to add Expense!");
+        header("location:./fileupload.php?error=経費の追加に失敗しました");
     }
 }
 
@@ -111,9 +111,9 @@ if (isset($_POST["delete_expense"])) {
     $expense_id = mysqli_real_escape_string($conn, $_POST["expense_id"]);
     mysqli_query($conn, "UPDATE expense_type SET is_deleted = 1 WHERE expense_id = $expense_id");
     if (mysqli_affected_rows($conn) == 1) {
-        header("location:./fileupload.php?success=Expense deleted");
+        header("location:./fileupload.php?success=経費が削除されました");
     } else {
-        header("location:./fileupload.php?error=Failed to delete expense!");
+        header("location:./fileupload.php?error=経費の削除に失敗しました");
     }
 }
 
@@ -145,8 +145,8 @@ include './components/navbar.php';
 <div class="container-fluid py-5 p-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb fw-bold fs-3">
-            <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">File Upload</li>
+            <li class="breadcrumb-item"><a href="./index.php">ホーム</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ファイルアップロード</li>
         </ol>
     </nav>
 </div>
@@ -164,22 +164,27 @@ include './components/navbar.php';
     <div class="row">
         <div class="col-md-6">
             <form method="POST" class="card">
-                <div class="card-header fw-bolder fs-4">Add Work Order</div>
+                <div class="card-header fw-bolder fs-4">作業オーダーの追加</div>
                 <div class="card-body">
                     <div class="mb-3 form-floating">
                         <input type="text" class="form-control" required name="work_title" placeholder="workOrderTitle" required>
-                        <label for="workOrderTitle">Work Order Title</label>
+                        <label for="workOrderTitle">作業オーダータイトル</label>
                     </div>
-                    <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                    <div class="mb-3 form-floating">
+                        <input type="text" class="form-control" required name="work_commission" placeholder="workCommission" required>
+                        <label for="workCommission">Commission</label>
+                    </div>
+                    <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">送信</button>
                 </div>
             </form>
         </div>
         <div class="col-md-6">
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
                 <thead>
-                    <th>Title</th>
-                    <th>Action</th>
+                    <th>タイトル</th>
+                    <th>アクション</th>
                 </thead>
+
                 <tbody>
                     <?php
                     $result = mysqli_query($conn, "SELECT * FROM work_order WHERE is_deleted = 0");
@@ -208,23 +213,23 @@ include './components/navbar.php';
     <div class="row">
         <div class="col-md-6">
             <form method="POST" class="card">
-                <div class="card-header fw-bolder fs-4">Add Expense</div>
+                <div class="card-header fw-bolder fs-4">経費の追加</div>
                 <div class="card-body">
                     <div class="mb-3 form-floating">
                         <input type="text" class="form-control" required name="expense_name" placeholder="workOrderTitle" required>
-                        <label for="workOrderTitle">Expense Title</label>
+                        <label for="workOrderTitle">経費タイトル</label>
                     </div>
-                    <button type="submit" name="submit_expense" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                    <button type="submit" name="submit_expense" class="btn btn-primary mt-3 col-md-4 col-5">送信</button>
                 </div>
             </form>
         </div>
         <div class="col-md-6">
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
                 <thead>
-                    <th>Title</th>
-                    <th>Action</th>
+                    <th>タイトル</th>
+                    <th>アクション</th>
                 </thead>
-                <tbody> 
+                <tbody>
                     <?php
                     $result = mysqli_query($conn, "SELECT * FROM expense_type WHERE is_deleted = 0");
                     while ($row = $result->fetch_assoc()) :
@@ -251,28 +256,28 @@ include './components/navbar.php';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-
             <div class="card">
-                <div class="card-header fw-bolder fs-4">File Upload</div>
+                <div class="card-header fw-bolder fs-4">ファイルアップロード</div>
                 <div class="card-body">
                     <form method="POST">
                         <div class="form-floating mb-3">
                             <select class="form-select" name="update_location" required id="floatingSelect" aria-label="Floating label select example">
-                                <option selected value="Main Blog">Main Blog</option>
-                                <option value="Sub Main Blog">Sub Main Blog</option>
-                                <option value="Secondary Blog">Secondary Blog</option>
-                                <option value="Promotion">Promotion</option>
+                                <option selected value="Main Blog">メインブログ</option>
+                                <option value="Sub Main Blog">サブメインブログ</option>
+                                <option value="Secondary Blog">セカンダリーブログ</option>
+                                <option value="Promotion">プロモーション</option>
                             </select>
-                            <label for="floatingSelect">Select Location</label>
+                            <label for="floatingSelect">場所を選択</label>
                         </div>
                         <div class="mb-3 form-floating">
                             <input type="text" class="form-control" required name="update_title" placeholder="fileUploadTitle" required>
-                            <label for="fileUploadTitle">Title</label>
+                            <label for="fileUploadTitle">タイトル</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Context</label>
+                            <textarea class="form-control" required placeholder="コンテキスト" name="update_description" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">コンテキスト</label>
                         </div>
+
                         <!-- <div class="form-floating mb-3" id="workOrderContainer">
                             <select class="form-select" id="workOrderSelect" aria-label="Floating label select example" required>
                                 <option selected disabled>Work Order</option>
@@ -287,8 +292,7 @@ include './components/navbar.php';
                             <!-- Image input for manual uploading -->
                             <input type="file" accept="image/*" onchange="previewFile()" required class="form-control" id="fileUploadImage" required>
                             <input type="hidden" name="update_image" id="update_image">
-                            <label for="fileUploadImage">Image Upload</label>
-
+                            <label for="fileUploadImage">画像アップロード</label>
                             <script>
                                 function previewFile() {
                                     const fileInput = document.getElementById('fileUploadImage');
@@ -311,9 +315,9 @@ include './components/navbar.php';
         <div class="col-md-6">
             <table class="table table-bordered table-hover table-info text-center">
                 <thead>
-                    <th>Location</th>
-                    <th>Title</th>
-                    <th>Action</th>
+                    <th>場所</th>
+                    <th>タイトル</th>
+                    <th>アクション</th>
                 </thead>
                 <tbody>
                     <?php
@@ -336,23 +340,23 @@ include './components/navbar.php';
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Blog ( <?php echo $row["update_title"] ?> )</h1>
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">ブログの編集 ( <?php echo $row["update_title"] ?> )</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <form method="POST">
                                                             <div class="modal-body">
                                                                 <div class="mb-3 form-floating">
                                                                     <input type="text" class="form-control" required name="update_title" value="<?php echo $row["update_title"] ?>" placeholder="fileUploadTitle" required>
-                                                                    <label for="fileUploadTitle">Title</label>
+                                                                    <label for="fileUploadTitle">タイトル</label>
                                                                 </div>
                                                                 <div class="mb-3 form-floating">
-                                                                    <textarea class="form-control" required placeholder="Context" name="update_description" style="height: 100px"><?php echo $row["update_description"] ?></textarea>
-                                                                    <label for="floatingTextarea2">Context</label>
+                                                                    <textarea class="form-control" required placeholder="コンテキスト" name="update_description" style="height: 100px"><?php echo $row["update_description"] ?></textarea>
+                                                                    <label for="floatingTextarea2">コンテキスト</label>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" name="edit_update" value="<?php echo $row["update_id"] ?>" class="btn btn-primary">Save changes</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                                                <button type="submit" name="edit_update" value="<?php echo $row["update_id"] ?>" class="btn btn-primary">変更を保存</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -390,22 +394,21 @@ include './components/navbar.php';
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-
                 <div class="card">
-                    <div class="card-header fw-bolder fs-4">Testimony</div>
+                    <div class="card-header fw-bolder fs-4">証言</div>
                     <div class="card-body">
                         <form method="POST">
                             <div class="mb-3 form-floating">
                                 <input type="text" class="form-control" name="title" required placeholder="Location" required>
-                                <label for="testimonyTitle">Title</label>
+                                <label for="testimonyTitle">タイトル</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <input type="text" class="form-control" name="location" required placeholder="Location" required>
-                                <label for="testimonyLocation">Location</label>
+                                <label for="testimonyLocation">場所</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <input type="text" class="form-control" name="age" required placeholder="Age" required>
-                                <label for="testimonyAge">Age</label>
+                                <label for="testimonyAge">年齢</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <select class="form-select" required id="floatingSelect" name="service" aria-label="Floating label select example">
@@ -416,23 +419,23 @@ include './components/navbar.php';
                                     }
                                     ?>
                                 </select>
-                                <label for="floatingSelect">Select Work Order</label>
+                                <label for="floatingSelect">作業オーダーを選択</label>
                             </div>
                             <div class="mb-3 form-floating">
                                 <input type="number" class="form-control" name="star" min="1" max="5" required placeholder="stars" required>
-                                <label for="testimonyTitle">Ratings / Stars</label>
+                                <label for="testimonyTitle">評価 / スター</label>
                             </div>
                             <input type="hidden" name="stars" id="star_rating">
                             <div class="mb-3 form-floating">
-                                <textarea class="form-control" required placeholder="Context" name="context" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Context</label>
+                                <textarea class="form-control" required placeholder="コンテキスト" name="context" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">コンテキスト</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <!-- Image input for manual uploading -->
+                                <!-- 手動アップロードのための画像入力 -->
                                 <input type="file" accept="image/*" onchange="previewFile1()" required class="form-control" id="fileUploadImage1" required>
                                 <input type="hidden" name="image" id="imagedata">
-                                <label for="fileUploadImage">Image Upload</label>
+                                <label for="fileUploadImage">画像アップロード</label>
 
                                 <script>
                                     function previewFile1() {
@@ -448,7 +451,7 @@ include './components/navbar.php';
                                     }
                                 </script>
                             </div>
-                            <button type="submit" name="submit_review" class="btn btn-primary mt-3 col-md-4 col-5">Submit</button>
+                            <button type="submit" name="submit_review" class="btn btn-primary mt-3 col-md-4 col-5">提出</button>
                         </form>
                     </div>
                 </div>
@@ -456,8 +459,8 @@ include './components/navbar.php';
             <div class="col-md-6">
                 <table class="table table-bordered table-hover table-info text-center">
                     <thead>
-                        <th>Title</th>
-                        <th>Action</th>
+                        <th>タイトル</th>
+                        <th>アクション</th>
                     </thead>
                     <tbody>
                         <?php

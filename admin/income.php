@@ -1,9 +1,9 @@
-<title>Admin Dashboard | Income</title>
+<title>管理者ダッシュボード | 収入</title>
 <?php
 session_start();
 include '../connection.php';
 
-if (!isset($_SESSION["user_email"])){
+if (!isset($_SESSION["user_email"])) {
     header("location:../login.php");
 }
 
@@ -27,8 +27,8 @@ $offset = ($page - 1) * $records_per_page;
 <div class="container-fluid py-5 p-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb fw-bold fs-3">
-            <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Income</li>
+            <li class="breadcrumb-item"><a href="./index.php">ホーム</a></li>
+            <li class="breadcrumb-item active" aria-current="page">収入</li>
         </ol>
     </nav>
 </div>
@@ -39,19 +39,19 @@ $offset = ($page - 1) * $records_per_page;
             <canvas id="salesChart"></canvas>
         </div>
         <div class="col-md-4 col-12 mt-5">
-            <h4 class="fw-bolder">Recent Work Orders</h4>
+            <h4 class="fw-bolder">最近の作業オーダー</h4>
             <table class="table table-responsive table-bordered table-info table-alternate">
                 <thead>
-                    <th>Name</th>
-                    <th>Date</th>
+                    <th>名前</th>
+                    <th>日付</th>
                     <th>WO</th>
-                    <th>Income</th>
-                    <th>Action</th>
+                    <th>収入</th>
+                    <th>アクション</th>
                 </thead>
                 <tbody>
                     <?php
-                        $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2 LIMIT $records_per_page OFFSET $offset");
-                        while ($row = $result->fetch_assoc()) :
+                    $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2 LIMIT $records_per_page OFFSET $offset");
+                    while ($row = $result->fetch_assoc()) :
                         $inquiry_id = $row["inquiry_id"];
                         $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
                         $wo_id = $row["client_wo"];
@@ -142,7 +142,7 @@ $offset = ($page - 1) * $records_per_page;
     const data = {
         labels: months,
         datasets: [{
-            label: 'Sales',
+            label: '販売',
             data: salesData,
             borderColor: 'rgb(75, 192, 192)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',

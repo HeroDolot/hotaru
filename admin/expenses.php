@@ -1,5 +1,4 @@
-<title>Admin Dashboard | Expenses</title>
-
+<title>管理者ダッシュボード | 経費</title>
 <?php
 session_start();
 include '../connection.php';
@@ -31,8 +30,8 @@ $result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $ite
 <div class="container-fluid py-5 p-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb fw-bold fs-3">
-            <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Expenses</li>
+            <li class="breadcrumb-item"><a href="./index.php">ホーム</a></li>
+            <li class="breadcrumb-item active" aria-current="page">経費</li>
         </ol>
     </nav>
 </div>
@@ -40,14 +39,14 @@ $result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $ite
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-12 mt-5">
-            <h4 class="fw-bolder">Recent Expenses</h4>
+            <h4 class="fw-bolder">最近の経費</h4>
             <table class="table table-responsive table-bordered table-danger table-alternate">
                 <thead>
                     <th>#</th>
-                    <th>TITLE</th>
-                    <th>PRICE</th>
-                    <th>QUANTITY</th>
-                    <th>TOTAL</th>
+                    <th>タイトル</th>
+                    <th>価格</th>
+                    <th>数量</th>
+                    <th>合計</th>
                 </thead>
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) : ?>

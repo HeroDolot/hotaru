@@ -1,10 +1,10 @@
-<title>Admin Dashboard | Overview</title>
+<title>管理者ダッシュボード | 概要</title>
 <?php
 session_start();
 include '../connection.php';
 
-if (!isset($_SESSION["user_email"])){
-    header("location:../login.php");
+if (!isset($_SESSION["user_email"])) {
+  header("location:../login.php");
 }
 
 if (isset($_POST["submit_contract"])) {
@@ -22,11 +22,11 @@ if (isset($_POST["submit_contract"])) {
     $sql = "UPDATE inquiry SET inquiry_status = 1 WHERE inquiry_id = $inquiry_id";
     mysqli_query($conn, $sql);
     if (mysqli_affected_rows($conn) == 1) {
-      $expenses = mysqli_query($conn,"SELECT * FROM expense_type WHERE expense_autoadd = 'on'");
-      while ($exp = $expenses->fetch_assoc()){
+      $expenses = mysqli_query($conn, "SELECT * FROM expense_type WHERE expense_autoadd = 'on'");
+      while ($exp = $expenses->fetch_assoc()) {
         $exp_id = $exp["expense_id"];
-        $exp_price = ($contract <= 100000) ? 3000 : 5000;
-        mysqli_query($conn,"INSERT INTO expense_history (exp_history_inquiry_id, exp_history_expense_id, exp_history_price, expense_quantity)
+        $exp_price = ($contract <= 100000) ? 1000 : 2000;
+        mysqli_query($conn, "INSERT INTO expense_history (exp_history_inquiry_id, exp_history_expense_id, exp_history_price, expense_quantity)
                                                  VALUES ($inquiry_id,9,$exp_price,1)");
       }
       header("location:./?success=Inquiry Approved!");
@@ -57,7 +57,7 @@ include './components/navbar.php';
 <div class="container-fluid py-5 p-5">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active fw-bold fs-3" aria-current="page">Overview</li>
+      <li class="breadcrumb-item active fw-bold fs-3" aria-current="page">概要</li>
     </ol>
   </nav>
 </div>
@@ -73,7 +73,7 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-solid fa-arrow-trend-up fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(9deg); margin-left:20px;"></i>
               <div class="col-md-9 col">
-                <h4>Net Worth</h4>
+                <h4>純資産</h4>
               </div>
             </div>
             <div class="card-footer p-0">
@@ -83,7 +83,7 @@ include './components/navbar.php';
                   <?php
                   $total = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0")->fetch_assoc()["total"];
                   $expense = 0;
-                  
+
                   $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
                   while ($row = $acceptedInfo->fetch_assoc()) {
                     $inq_id = $row["accepted_inquiry_id"];
@@ -107,7 +107,6 @@ include './components/navbar.php';
                     $purchaseYear = date("Y", $asset["asset_date_acquired"]);
                     $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
                     $expense = $expense + $supersubtotal;;
-                    
                   }
 
                   $total = $total - $expense;
@@ -128,12 +127,12 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-regular fa-file fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
               <div class="col-md-9 col">
-                <h4>Reports</h4>
+                <h4>レポート</h4>
               </div>
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./reports.php" class="btn btn-transparent text-white">View Details</a>
+                <a href="./reports.php" class="btn btn-transparent text-white">詳細を表示</a>
               </div>
             </div>
           </div>
@@ -145,7 +144,7 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-solid fa-clock fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
               <div class="col-md-9 col">
-                <h4>Pending</h4>
+                <h4>保留中</h4>
               </div>
               <div class="col-md-3 col-3">
                 <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn, "SELECT COUNT(*) as total FROM inquiry WHERE inquiry_status = 1")->fetch_assoc()["total"]; ?></h4>
@@ -153,7 +152,7 @@ include './components/navbar.php';
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./pending.php" class="btn btn-transparent text-white">View Details</a>
+                <a href="./pending.php" class="btn btn-transparent text-white">詳細を表示</a>
               </div>
             </div>
           </div>
@@ -165,12 +164,12 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-solid fa-yen-sign fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
               <div class="col-md-9 col">
-                <h4>Income</h4>
+                <h4>収入</h4>
               </div>
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./income.php" class="btn btn-transparent text-white">View Details</a>
+                <a href="./income.php" class="btn btn-transparent text-white">詳細を表示</a>
               </div>
             </div>
           </div>
@@ -182,12 +181,12 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-solid fa-money-bills fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
               <div class="col-md-9 col">
-                <h4>Expenses</h4>
+                <h4>支出</h4>
               </div>
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./expenses.php" class="btn btn-transparent text-white">View Details</a>
+                <a href="./expenses.php" class="btn btn-transparent text-white">詳細を表示</a>
               </div>
             </div>
           </div>
@@ -199,7 +198,7 @@ include './components/navbar.php';
             <div class="row p-3">
               <i class="fa-solid fa-warehouse fa-xl text-white text-end" style="font-size: 100px; opacity: 0.5; transform: rotate(20deg); margin-left:30px;"></i>
               <div class="col-md-9 col">
-                <h4>Assets</h4>
+                <h4>資産</h4>
               </div>
               <div class="col-md-3 col-3">
                 <h4 class="fw-bolder" style="margin-left: 10px;"><?php echo mysqli_query($conn, "SELECT COUNT(*) as total FROM assets")->fetch_assoc()["total"] ?></h4>
@@ -207,7 +206,7 @@ include './components/navbar.php';
             </div>
             <div class="card-footer p-0">
               <div class="m-1">
-                <a href="./assets.php" class="btn btn-transparent text-white">View Details</a>
+                <a href="./assets.php" class="btn btn-transparent text-white">詳細を表示</a>
               </div>
             </div>
           </div>
@@ -230,17 +229,17 @@ include './components/navbar.php';
           <table class="table table-bordered table-hover text-center">
             <thead class="table-info">
               <tr>
-                <th colspan="6" class="fw-bolder">INQUIRIES</th>
+                <th colspan="6" class="fw-bolder">お問い合わせ</th>
               </tr>
             </thead>
             <thead class="table-info">
               <tr>
-                <th>Name</th>
-                <th>Phone Number</th>
-                <th>Region</th>
-                <th>Work Order</th>
-                <th>Preferred Contact</th>
-                <th>Action</th>
+                <th>名前</th>
+                <th>電話番号</th>
+                <th>地域</th>
+                <th>作業依頼</th>
+                <th>希望の連絡手段</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody class="align-middle">
@@ -273,43 +272,42 @@ include './components/navbar.php';
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Approving</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">承認中</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <!-- Form inside the modal -->
+                              <!-- モーダル内のフォーム -->
                               <form method="POST">
                                 <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
                                 <div class="mb-3 form-floating">
-                                  <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="Client Name" value="<?php echo $inquiry['client_name']; ?>" readonly>
-                                  <label for="clientName">Client Name</label>
+                                  <input type="text" class="form-control fw-bolder" required id="clientName" name="name" placeholder="クライアント名" value="<?php echo $inquiry['client_name']; ?>" readonly>
+                                  <label for="clientName">クライアント名</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                  <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="Location">
-                                  <label for="clientLocation">Location</label>
+                                  <input type="text" class="form-control fw-bolder" required id="clientLocation" name="location" placeholder="場所">
+                                  <label for="clientLocation">場所</label>
                                 </div>
                                 <div class="mb-3 form-floating">
                                   <input type="date" class="form-control fw-bolder" min="<?php echo date('Y-m-d'); ?>" required id="dateStart" name="start_date">
-                                  <label for="dateStart">Date Start</label>
+                                  <label for="dateStart">開始日</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                  <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="Contract Amount">
-                                  <label for="contractAmount">Contract Amount</label>
+                                  <input type="number" class="form-control fw-bolder" required id="contractAmount" name="contract" placeholder="契約金額">
+                                  <label for="contractAmount">契約金額</label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" readonly><?php echo $inquiry["client_comment"] ?></textarea>
-                                  <label for="floatingTextarea2">Context</label>
+                                  <textarea class="form-control" placeholder="ここにコメントを残してください" id="floatingTextarea2" style="height: 100px" readonly><?php echo $inquiry["client_comment"] ?></textarea>
+                                  <label for="floatingTextarea2">コンテキスト</label>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" name="submit_contract" class="btn btn-primary">Submit Contract</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                              <button type="submit" name="submit_contract" class="btn btn-primary">契約を提出</button>
                               </form>
                             </div>
                           </div>
                         </div>
                       </div>
-
                     </td>
                   </tr>
                 <?php endif; ?>
@@ -353,7 +351,7 @@ include './components/navbar.php';
       </div>
       <div class="card">
         <div class="card-header fw-bolder fs-4 text-center text-white bg-success">
-          Work Order
+          作業指示書
         </div>
         <canvas id="myDoughnutChart"></canvas>
       </div>
@@ -371,9 +369,9 @@ include './components/navbar.php';
 <script>
   function confirmDelete(event) {
 
-    var confirmation = prompt("Are you sure you want to delete? Type 'confirm' to proceed.");
+    var confirmation = prompt("削除してもよろしいですか？続行するには 'confirm' と入力してください。");
     if (confirmation && confirmation.toLowerCase() === 'confirm') {} else {
-      alert("Deletion canceled.");
+      alert("削除がキャンセルされました。");
       event.preventDefault();
     }
   }
@@ -436,7 +434,6 @@ include './components/navbar.php';
             $subtotal = $subtotal + $supersubtotal;
           }
         }
-      
       }
 
 
@@ -467,21 +464,21 @@ include './components/navbar.php';
     data: {
       labels: months,
       datasets: [{
-          label: 'Income',
+          label: '収入',
           backgroundColor: 'rgba(75, 192, 192, 0.7)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
           data: incomeData
         },
         {
-          label: 'Expenses',
+          label: '支出',
           backgroundColor: 'rgba(255, 99, 132, 0.7)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1,
           data: expensesData
         },
         {
-          label: 'Profit',
+          label: '利益',
           backgroundColor: 'rgba(99, 255, 132, 0.7)',
           borderColor: 'rgba(99, 255, 132, 1)',
           borderWidth: 1,
@@ -522,7 +519,7 @@ include './components/navbar.php';
     var dateTime = japanTime.toLocaleString('ja-JP', options);
 
     // Update the clock element
-    document.getElementById('clock').textContent = "Japan Date and Time: " + dateTime;
+    document.getElementById('clock').textContent = "日本の日時: " + dateTime;
   }
 
   // Update the clock every second
@@ -577,7 +574,7 @@ include './components/navbar.php';
   const doughnutData = {
     labels: [
       <?php
-      $result = mysqli_query($conn, "SELECT * FROM work_order");
+      $result = mysqli_query($conn, "SELECT * FROM work_order WHERE is_deleted < 1");
       while ($row = $result->fetch_assoc()) {
         echo "'" . $row["work_name"] . "',";
       }
@@ -587,7 +584,7 @@ include './components/navbar.php';
       label: 'Accumulated',
       data: [
         <?php
-        $res = mysqli_query($conn, "SELECT * FROM work_order");
+        $res = mysqli_query($conn, "SELECT * FROM work_order WHERE is_deleted = 0");
         while ($resRow = $res->fetch_assoc()) {
           $count = 0;
           $work_id = $resRow["work_id"];
@@ -608,6 +605,7 @@ include './components/navbar.php';
     type: 'doughnut',
     data: doughnutData,
   };
+
 
   // Line Chart Data and Configuration
   const lineData = {
@@ -635,7 +633,7 @@ include './components/navbar.php';
       ?>
     ],
     datasets: [{
-      label: 'Page Visitor Volume',
+      label: 'ページ訪問者数',
       data: [
         0,
         <?php

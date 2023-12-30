@@ -1,5 +1,5 @@
-<?php 
-include './includes/header.php'; 
+<?php
+include './includes/header.php';
 include "./connection.php";
 
 if (isset($_POST['userLoginSubmit'])) {
@@ -45,21 +45,21 @@ mysqli_close($conn);
             <div class="container d-flex justify-content-center align-items-center vh-100 vh-sm-0">
                 <div class="card col-md-8 col-9 shadow-lg">
                     <div class="card-header fw-bolder fs-3 p-4 bg-primary text-white text-center">
-                        <a href="./index.php" class="text-white text-decoration-none">Hotaru Services</a>
+                        <a href="./index.php" class="text-white text-decoration-none">不用品回収代行サービス</a>
                     </div>
                     <div class="card-body">
                         <form action="/hotaru/login.php" method="POST">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" name="user_email" placeholder="name@example.com">
-                                <label for="floatingInput">Email address</label>
+                                <label for="floatingInput">メールアドレス</label>
                             </div>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" name="user_password" placeholder="Password">
-                                <label for="floatingPassword">Password</label>
+                                <input type="password" class="form-control" id="floatingPassword" name="user_password" placeholder="パスワード">
+                                <label for="floatingPassword">パスワード</label>
                             </div>
                             <div class="wrapper d-flex justify-content-center align-items-center">
-                                <button type="submit" name="userLoginSubmit" class="btn btn-primary mt-3 col-md-5 col-6 fw-bolder">Login</button>
-                            </div>  
+                                <button type="submit" name="userLoginSubmit" class="btn btn-primary mt-3 col-md-5 col-6 fw-bolder">ログイン</button>
+                            </div>
                         </form>
                     </div>
                 </div>

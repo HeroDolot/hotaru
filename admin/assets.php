@@ -1,9 +1,9 @@
-<title>Admin Dashboard | Assets</title>
+<title>管理者ダッシュボード | 資産</title>
 <?php
 session_start();
 include '../connection.php';
 
-if (!isset($_SESSION["user_email"])){
+if (!isset($_SESSION["user_email"])) {
     header("location:../login.php");
 }
 $recordsPerPage = 5; // Adjust the number of records per page as needed
@@ -39,127 +39,128 @@ include './includes/header.php';
 include './components/navbar.php';
 ?>
 
-<div class="container-fluid py-5 p-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb fw-bold fs-3">
-            <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Assets</li>
-        </ol>
-    </nav>
-</div>
+<section style="min-height: 49vh;">
+    <div class="container-fluid py-5 p-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb fw-bold fs-3">
+                <li class="breadcrumb-item"><a href="./index.php">ホーム</a></li>
+                <li class="breadcrumb-item active" aria-current="page">資産</li>
+            </ol>
+        </nav>
+    </div>
 
-<div class="container">
-    <div class="wrapper mb-3 mt-md-0">
-        <?php
-        if (isset($_GET["success"])) {
-            echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
-        }
+    <div class="container">
+        <div class="wrapper mb-3 mt-md-0">
+            <?php
+            if (isset($_GET["success"])) {
+                echo '<div class="alert alert-success" role="alert">' . mysqli_real_escape_string($conn, $_GET["success"]) . '</div>';
+            }
 
-        if (isset($_GET["error"])) {
-            echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
-        }
+            if (isset($_GET["error"])) {
+                echo '<div class="alert alert-danger" role="alert">' . mysqli_real_escape_string($conn, $_GET["error"]) . '</div>';
+            }
 
-        ?>
-        <div class="d-flex justify-content-between">
-            <h4 class="fw-bolder text-primary">Hotaru Services Assets</h4>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
-                <i class="fa-solid fa-plus"></i>
-            </button>
+            ?>
+            <div class="d-flex justify-content-between">
+                <h4 class="fw-bolder text-primary">不用品回収代行サービス 資産</h4>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- Modal -->
+                <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addItemModalLabel">アイテムを追加</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">名前</label>
+                                        <input type="text" class="form-control" required name="name" placeholder="アイテム名">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dateAcquired" class="form-label">取得日</label>
+                                        <input type="date" class="form-control" required name="dateAcquired">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="quantity" class="form-label">数量</label>
+                                        <input type="number" class="form-control" required name="quantity" placeholder="数量">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">価格</label>
+                                        <input type="text" class="form-control" required name="price" placeholder="価格">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                    <button type="submit" name="add_item" class="btn btn-primary">保存</button>
+                                </div>
+                            </form>
                         </div>
-                        <form method="POST">
-                            <div class="modal-body">
-
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" required name="name" placeholder="Item Name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="dateAcquired" class="form-label">Date Acquired</label>
-                                    <input type="date" class="form-control" required name="dateAcquired">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="quantity" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" required name="quantity" placeholder="Quantity">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="price" class="form-label">Price</label>
-                                    <input type="text" class="form-control" required name="price" placeholder="Price">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="add_item" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>F
                     </div>
                 </div>
             </div>
         </div>
+        <table class="table table-responsive table-bordered table-info table-alternate align-middle">
+            <thead>
+                <th>名前</th>
+                <th>取得日</th>
+                <th>数量</th>
+                <th>価格</th>
+                <th>合計</th>
+                <th>アクション</th>
+            </thead>
+            <tbody>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM assets LIMIT $offset, $recordsPerPage");
+                while ($row = $result->fetch_assoc()) :
+                ?>
+                    <tr>
+                        <td><?php echo $row["asset_name"] ?></td>
+                        <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
+                        <td><?php echo $row["asset_quantity"] ?></td>
+                        <td><?php echo number_format($row["asset_price"]) ?> YEN</td>
+                        <td><?php echo number_format($row["asset_price"] * $row["asset_quantity"]) ?> YEN</td>
+                        <td>
+                            <div class="wrapper d-flex justify-content-center align-items-center">
+                                <form method="POST" class="col-md-12">
+                                    <button type="submit" name="delete_asset" value="<?php echo $row["asset_id"] ?>" class="btn btn-danger col-12 col-md-5">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endwhile ?>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <?php
+                $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM assets")) / $recordsPerPage);
+
+                // Previous Page Link
+                if ($page > 1) {
+                    echo "<li class='page-item'><a class='page-link' href='?page=" . ($page - 1) . "'>Previous</a></li>";
+                }
+
+                // Page Links
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+                }
+
+                // Next Page Link
+                if ($page < $totalPages) {
+                    echo "<li class='page-item'><a class='page-link' href='?page=" . ($page + 1) . "'>Next</a></li>";
+                }
+                ?>
+            </ul>
+        </nav>
     </div>
-    <table class="table table-responsive table-bordered table-info table-alternate align-middle">
-        <thead>
-            <th>Name</th>
-            <th>Date Acquire</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM assets LIMIT $offset, $recordsPerPage");
-            while ($row = $result->fetch_assoc()) :
-            ?>
-                <tr>
-                    <td><?php echo $row["asset_name"] ?></td>
-                    <td><?php echo date("M d, Y", $row["asset_date_acquired"]) ?></td>
-                    <td><?php echo $row["asset_quantity"] ?></td>
-                    <td><?php echo number_format($row["asset_price"]) ?> YEN</td>
-                    <td><?php echo number_format($row["asset_price"] * $row["asset_quantity"]) ?> YEN</td>
-                    <td>
-                        <div class="wrapper d-flex justify-content-center align-items-center">
-                            <form method="POST" class="col-md-12">
-                                <button type="submit" name="delete_asset" value="<?php echo $row["asset_id"] ?>" class="btn btn-danger col-12 col-md-5">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            <?php endwhile ?>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <?php
-            $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM assets")) / $recordsPerPage);
-
-            // Previous Page Link
-            if ($page > 1) {
-                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page - 1) . "'>Previous</a></li>";
-            }
-
-            // Page Links
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
-            }
-
-            // Next Page Link
-            if ($page < $totalPages) {
-                echo "<li class='page-item'><a class='page-link' href='?page=" . ($page + 1) . "'>Next</a></li>";
-            }
-            ?>
-        </ul>
-    </nav>
-</div>
+</section>
 
 
 <?php
