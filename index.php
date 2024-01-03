@@ -393,13 +393,13 @@ include './includes/header.php';
     <div class="row">
         <!-- MAIN BLOG -->
         <?php
-        $row = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'")->fetch_assoc();
-
-        ?>
+        $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
+        while ($row = $result->fetch_assoc()):
+        ?>  
         <div class="col-md-7">
             <div class="card mb-3">
                 <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
+                <div class="card-body"> `               
                     <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
                     <p class="card-text"><?php echo $row["update_description"] ?></p>
                     <p class="card-text"><small class="text-body-secondary">
@@ -435,6 +435,7 @@ include './includes/header.php';
                 </div>
             </div>
         </div>
+        <?php endwhile; ?>
         <!-- MAIN BLOG -->
 
         <!-- SUB MAIN BLOG -->
