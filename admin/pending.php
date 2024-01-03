@@ -35,11 +35,11 @@ if (isset($_POST["decline"])) {
 if (isset($_POST["submit_expense"])) {
     var_dump($_POST);
     $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
-    $expense_type_id = mysqli_real_escape_string($conn, $_POST["expense_type"]);
+    $expense_title = mysqli_real_escape_string($conn, $_POST["expense_name"]);
     $expense_price = mysqli_real_escape_string($conn, $_POST["expense_price"]);
     $expense_quantity = mysqli_real_escape_string($conn, $_POST["expense_quantity"]);
 
-    mysqli_query($conn, "INSERT INTO expense_history (exp_history_inquiry_id,exp_history_expense_id,exp_history_price,expense_quantity) VALUES($inquiry_id,$expense_type_id,$expense_price,$expense_quantity)");
+    mysqli_query($conn, "INSERT INTO expenses (expense_inquiry_id,expense_title,expense_price,expense_quantity) VALUES($inquiry_id,'$expense_title',$expense_price,$expense_quantity)");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./pending.php?success=Expense added to client");
     } else {
@@ -145,29 +145,34 @@ include './components/navbar.php';
                                             <form method="POST">
                                                 <input type="hidden" name="inquiry_id" value="<?php echo $inq_id ?>">
                                                 <div class="modal-body">
-                                                    <div class="form-floating mb-3">
-                                                        <select class="form-select" name="expense_type" id="floatingSelect" aria-label="Floating label select example">
-                                                            <option selected disabled value="">経費を選択</option>
-                                                            <?php
-                                                            $result_expenses = mysqli_query($conn, "SELECT * FROM expense_type");
-                                                            while ($row_expense = $result_expenses->fetch_assoc()) {
-                                                                echo '<option value="' . $row_expense["expense_id"] . '">' . $row_expense["expense_name"] . '</option>';
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                        <label for="floatingSelect">経費</label>
+
+                                                    <div class="col mb-3">
+                                                        <div class="form-floating">
+                                                            <select class="form-select" id="floatingSelect" name="expense_name" required aria-label="Floating label select example">
+                                                                <option value="" disabled selected>Select Expenses</option>
+                                                                <?php
+                                                                $result = mysqli_query($conn, "SELECT * FROM expense_type WHERE is_deleted = 0");
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    echo "<option value='" . $row["expense_name"] . "'>" . $row["expense_name"] . "</option>";
+                                                                }
+
+                                                                ?>
+                                                            </select>
+                                                            <label for="floatingSelect">Expense Type</label>
+                                                        </div>
                                                     </div>
+
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-floating" id="floatingPrice">
-                                                                <input type="text" class="form-control" name="expense_price" id="" placeholder="Price">
+                                                                <input type="number" class="form-control" min="1" name="expense_price" id="" placeholder="Price" required>
                                                                 <label for="floatingPrice">価格</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="form-floating" id="floatingQuantity">
-                                                                <input type="text" class="form-control" name="expense_quantity" id="" placeholder="Quantity">
-                                                                <label for="floatingQuantity">数量</label>
+                                                            <div class="form-floating" id="floatingPrice">
+                                                                <input type="number" class="form-control" min="1" name="expense_quantity" id="" placeholder="Quantity" required>
+                                                                <label for="floatingPrice">Quantity</label>
                                                             </div>
                                                         </div>
                                                     </div>

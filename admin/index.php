@@ -22,7 +22,16 @@ if (isset($_POST["submit_contract"])) {
     $sql = "UPDATE inquiry SET inquiry_status = 1 WHERE inquiry_id = $inquiry_id";
     mysqli_query($conn, $sql);
     if (mysqli_affected_rows($conn) == 1) {
-      header("location:./?success=Inquiry Approved!");
+
+      // START Add the commission to expense history
+      $client_wo = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_id = $inquiry_id")->fetch_assoc()["client_wo"];
+      $work_order = mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $client_wo")->fetch_assoc();
+      $work_title = $work_order["work_name"];
+      $work_commission = $work_order["work_commission"];
+      mysqli_query($conn,"INSERT INTO expenses (expense_inquiry_id,expense_title,expense_price,expense_quantity) VALUES($inquiry_id,'Work Order: $work_title',$work_commission,1)");
+      if (mysqli_affected_rows($conn) == 1){
+        header("location:./?success=Inquiry Approved!");
+      }
     } else {
       header("location:./?error=Failed to update status!");
     }
@@ -80,7 +89,7 @@ include './components/navbar.php';
                   $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
                   while ($row = $acceptedInfo->fetch_assoc()) {
                     $inq_id = $row["accepted_inquiry_id"];
-                    $expenseResult = mysqli_query($conn, "SELECT (exp_history_price * expense_quantity) as totalExpense FROM expense_history WHERE exp_history_inquiry_id = $inq_id");
+                    $expenseResult = mysqli_query($conn, "SELECT (expense_price * expense_quantity) as totalExpense FROM expenses WHERE expense_inquiry_id = $inq_id");
 
                     // Check if the query was successful
                     if ($expenseResult) {
@@ -421,9 +430,9 @@ include './components/navbar.php';
         $startMonth = date("m", $acceptedInfo["accepted_start_date"]);
         $startYear = date("Y", $acceptedInfo["accepted_start_date"]);
         if ($startMonth == $i && $startYear == $currentYear) {
-          $expenseInfo = mysqli_query($conn, "SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+          $expenseInfo = mysqli_query($conn, "SELECT * FROM expenses WHERE expense_inquiry_id = $inquiry_id");
           while ($expense = $expenseInfo->fetch_assoc()) {
-            $supersubtotal = $expense["exp_history_price"] * $expense["expense_quantity"];
+            $supersubtotal = $expense["expense_price"] * $expense["expense_quantity"];
             $subtotal = $subtotal + $supersubtotal;
           }
         }

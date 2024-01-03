@@ -928,7 +928,7 @@ include './includes/header.php';
                             <label for="floatingInputGroup1">名前</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInputGroup1" name="clientNumber" placeholder="Contact Number" required>
+                            <input type="tel" pattern="[0-9]{11}" maxlength="11" class="form-control" id="floatingInputGroup1" name="clientNumber" placeholder="Contact Number" required>
                             <label for="floatingInputGroup1">連絡先番号 </label>
                         </div>
                         <div class="container mb-3">

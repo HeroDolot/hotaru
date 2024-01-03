@@ -76,11 +76,12 @@ if (isset($_POST["edit_update"])) {
 
 if (isset($_POST["submit_wo"])) {
     $work_title = mysqli_real_escape_string($conn, $_POST["work_title"]);
-    mysqli_query($conn, "INSERT INTO work_order (work_name) VALUES('$work_title')");
+    $work_commission = mysqli_real_escape_string($conn, $_POST["work_commission"]);
+    mysqli_query($conn, "INSERT INTO work_order (work_name,work_commission) VALUES('$work_title',$work_commission)");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=作業オーダーが追加されました");
     } else {
-        header("location:./fileupload.php?error=オーダーの追加に失敗しました");
+        header("location:./fileupload.php?error=オーダーの追加に失敗しました"); 
     }
 }
 
@@ -96,9 +97,8 @@ if (isset($_POST["delete_wo"])) {
 
 if (isset($_POST["submit_expense"])) {
     $expense_name = mysqli_real_escape_string($conn, $_POST["expense_name"]);
-    $expense_autoadd = mysqli_real_escape_string($conn, $_POST["autoadd"]);
     // var_dump($_POST);
-    mysqli_query($conn, "INSERT INTO expense_type (expense_name,expense_autoadd) VALUES('$expense_name','$expense_autoadd')");
+    mysqli_query($conn, "INSERT INTO expense_type (expense_name) VALUES('$expense_name')");
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=経費タイプが追加されました");
     } else {
@@ -171,7 +171,7 @@ include './components/navbar.php';
                         <label for="workOrderTitle">作業オーダータイトル</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="text" class="form-control" required name="work_commission" placeholder="workCommission" required>
+                        <input type="number" class="form-control" min="1" required name="work_commission" placeholder="workCommission" required>
                         <label for="workCommission">Commission</label>
                     </div>
                     <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">送信</button>
@@ -182,6 +182,7 @@ include './components/navbar.php';
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
                 <thead>
                     <th>タイトル</th>
+                    <th>Commission</th>
                     <th>アクション</th>
                 </thead>
 
@@ -192,6 +193,7 @@ include './components/navbar.php';
                     ?>
                         <tr>
                             <td><?php echo $row["work_name"] ?></td>
+                            <td><?php echo number_format($row["work_commission"]) ?> YEN</td>
                             <td>
                                 <form method="POST">
                                     <input type="hidden" name="wo_id" value="<?php echo $row["work_id"] ?>">
