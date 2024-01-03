@@ -184,7 +184,7 @@ if (isset($_GET["id"])) :
                     $result = mysqli_query($conn, "SELECT * FROM expenses WHERE expense_inquiry_id = $inquiry_id");
                     while ($row = $result->fetch_assoc()) :
                         $count++;
-                        $subtotal = $row["expense_price"];
+                        $subtotal = $row["expense_price"] * $row["expense_quantity"]; // Fix: Multiply by quantity
                         $total = $total + $subtotal;
                     ?>
                         <tr>

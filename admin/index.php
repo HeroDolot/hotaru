@@ -24,12 +24,12 @@ if (isset($_POST["submit_contract"])) {
     if (mysqli_affected_rows($conn) == 1) {
 
       // START Add the commission to expense history
-      $client_wo = mysqli_query($conn,"SELECT * FROM inquiry WHERE inquiry_id = $inquiry_id")->fetch_assoc()["client_wo"];
-      $work_order = mysqli_query($conn,"SELECT * FROM work_order WHERE work_id = $client_wo")->fetch_assoc();
+      $client_wo = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_id = $inquiry_id")->fetch_assoc()["client_wo"];
+      $work_order = mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $client_wo")->fetch_assoc();
       $work_title = $work_order["work_name"];
       $work_commission = $work_order["work_commission"];
-      mysqli_query($conn,"INSERT INTO expenses (expense_inquiry_id,expense_title,expense_price,expense_quantity) VALUES($inquiry_id,'Work Order: $work_title',$work_commission,1)");
-      if (mysqli_affected_rows($conn) == 1){
+      mysqli_query($conn, "INSERT INTO expenses (expense_inquiry_id,expense_title,expense_price,expense_quantity) VALUES($inquiry_id,'Work Order: $work_title',$work_commission,1)");
+      if (mysqli_affected_rows($conn) == 1) {
         header("location:./?success=Inquiry Approved!");
       }
     } else {
@@ -83,13 +83,22 @@ include './components/navbar.php';
                 <p class="p-1">
                   <!-- <a href="./reports.php" class="btn btn-transparent text-white fw-bolder"> -->
                   <?php
-                  $total = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0")->fetch_assoc()["total"];
+                  // Assuming $conn is your database connection
+
+                  // Initialize total and expense variables
+                  $total = 0;
                   $expense = 0;
 
+                  // Calculate accepted contracts total
+                  $totalResult = mysqli_query($conn, "SELECT SUM(accepted_contract) as total FROM accepted WHERE accepted_completed_date != 0");
+                  $totalRow = $totalResult->fetch_assoc();
+                  $total = $totalRow["total"];
+
+                  // Calculate expenses for accepted contracts
                   $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_completed_date != 0");
                   while ($row = $acceptedInfo->fetch_assoc()) {
                     $inq_id = $row["accepted_inquiry_id"];
-                    $expenseResult = mysqli_query($conn, "SELECT (expense_price * expense_quantity) as totalExpense FROM expenses WHERE expense_inquiry_id = $inq_id");
+                    $expenseResult = mysqli_query($conn, "SELECT SUM(expense_price * expense_quantity) as totalExpense FROM expenses WHERE expense_inquiry_id = $inq_id");
 
                     // Check if the query was successful
                     if ($expenseResult) {
@@ -97,25 +106,26 @@ include './components/navbar.php';
 
                       // Check if the result is not null before accessing its values
                       if ($expenseRow !== null && array_key_exists("totalExpense", $expenseRow)) {
-                        $expense = $expense + $expenseRow["totalExpense"];
+                        $expense += $expenseRow["totalExpense"];
                       }
                     }
                   }
 
-                  $currentYear = date("Y");
+                  // Calculate expenses for assets
                   $assetInfo = mysqli_query($conn, "SELECT * FROM assets");
                   while ($asset = $assetInfo->fetch_assoc()) {
-                    $purchaseMonth = date("m", $asset["asset_date_acquired"]);
-                    $purchaseYear = date("Y", $asset["asset_date_acquired"]);
+                    $purchaseMonth = date("m", strtotime($asset["asset_date_acquired"]));
+                    $purchaseYear = date("Y", strtotime($asset["asset_date_acquired"]));
                     $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
-                    $expense = $expense + $supersubtotal;;
+                    $expense += $supersubtotal;
                   }
 
-                  $total = $total - $expense;
+                  // Calculate the final total
+                  $total -= $expense;
 
-                  echo number_format($total) . " YEN";
+                  // Display the result
+                  echo number_format($total) . "円";
                   ?>
-
                 </p>
 
               </div>
