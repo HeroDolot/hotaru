@@ -23,7 +23,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $itemsPerPage;
 
 // Fetch data for the current page
-$result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $itemsPerPage");
+$result = mysqli_query($conn, "SELECT * FROM expenses LIMIT $offset, $itemsPerPage");
 
 ?>
 
@@ -51,11 +51,11 @@ $result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $ite
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <tr>
-                            <td><?php echo $row["exp_history_id"] ?></td>
-                            <td><?php echo mysqli_query($conn, "SELECT * FROM expense_type WHERE expense_id = {$row['exp_history_expense_id']}")->fetch_assoc()["expense_name"]; ?></td>
-                            <td><?php echo number_format($row["exp_history_price"]) ?>¥</td>
+                            <td><?php echo $row["expense_id"] ?></td>
+                            <td><?php echo $row["expense_title"] ?></td>
+                            <td><?php echo number_format($row["expense_price"]) ?>¥</td>
                             <td><?php echo number_format($row["expense_quantity"]) ?></td>
-                            <td><?php echo number_format($row["exp_history_price"] * $row["expense_quantity"]) ?>¥</td>
+                            <td><?php echo number_format($row["expense_price"] * $row["expense_quantity"]) ?>¥</td>
                         </tr>
                     <?php endwhile ?>
                 </tbody>
@@ -65,7 +65,7 @@ $result = mysqli_query($conn, "SELECT * FROM expense_history LIMIT $offset, $ite
                 <ul class="pagination">
                     <?php
                     // Calculate the total number of pages
-                    $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM expense_history")) / $itemsPerPage);
+                    $totalPages = ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM expenses")) / $itemsPerPage);
 
                     // Generate pagination links
                     for ($i = 1; $i <= $totalPages; $i++) :

@@ -208,17 +208,16 @@ if (isset($_GET["id"])) :
                     <?php
                     $total = 0;
                     $count = 0;
-                    $result = mysqli_query($conn, "SELECT * FROM expense_history WHERE exp_history_inquiry_id = $inquiry_id");
+                    $result = mysqli_query($conn, "SELECT * FROM expenses WHERE expense_inquiry_id = $inquiry_id");
                     while ($row = $result->fetch_assoc()) :
                         $count++;
-                        $expense_history_id = $row["exp_history_expense_id"];
-                        $subtotal = $row["exp_history_price"] * $row["expense_quantity"];
+                        $subtotal = $row["expense_price"] * $row["expense_quantity"];
                         $total = $total + $subtotal;
                     ?>
                         <tr>
                             <td><?php echo $count ?></td>
-                            <td><?php echo mysqli_query($conn, "SELECT * FROM expense_type WHERE expense_id = $expense_history_id")->fetch_assoc()["expense_name"] ?></td>
-                            <td><?php echo $row["exp_history_price"] ?>¥</td>
+                            <td><?php echo $row["expense_title"]?></td>
+                            <td><?php echo $row["expense_price"] ?>¥</td>
                             <td><?php echo $row["expense_quantity"]; ?></td>
                             <td><?php echo number_format($subtotal) ?>¥</td>
                         </tr>
