@@ -301,7 +301,6 @@ include './components/navbar.php';
                 <!-- Content for Monthly Reports tab goes here -->
                 <div class="container mt-5">
                     <div class="table-responsive">
-
                         <table class="table table-bordered table-warning align-middle text-center">
                             <thead>
                                 <th>Date</th>
@@ -326,6 +325,7 @@ include './components/navbar.php';
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
