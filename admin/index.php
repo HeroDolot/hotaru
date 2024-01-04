@@ -430,85 +430,89 @@ include './components/navbar.php';
   var expensesData = [
     <?php
     $currentYear = date("Y");
-    $subtotal = 0;
     for ($i = 1; $i <= 12; $i++) {
-      $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
-      $total = 0;
-      while ($row = $result->fetch_assoc()) {
-        $inquiry_id = $row["inquiry_id"];
-        $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
-        $startMonth = date("m", $acceptedInfo["accepted_start_date"]);
-        $startYear = date("Y", $acceptedInfo["accepted_start_date"]);
-        if ($startMonth == $i && $startYear == $currentYear) {
-          $expenseInfo = mysqli_query($conn, "SELECT * FROM expenses WHERE expense_inquiry_id = $inquiry_id");
-          while ($expense = $expenseInfo->fetch_assoc()) {
-            $supersubtotal = $expense["expense_price"] * $expense["expense_quantity"];
-            $subtotal = $subtotal + $supersubtotal;
-          }
+        $result = mysqli_query($conn, "SELECT * FROM inquiry WHERE inquiry_status >= 2");
+        $total = 0;
+        $subtotal = 0; // Reset subtotal for each month
+
+        while ($row = $result->fetch_assoc()) {
+            $inquiry_id = $row["inquiry_id"];
+            $acceptedInfo = mysqli_query($conn, "SELECT * FROM accepted WHERE accepted_inquiry_id = $inquiry_id")->fetch_assoc();
+            $startMonth = date("m", $acceptedInfo["accepted_start_date"]);
+            $startYear = date("Y", $acceptedInfo["accepted_start_date"]);
+
+            if ($startMonth == $i && $startYear == $currentYear) {
+                $expenseInfo = mysqli_query($conn, "SELECT * FROM expenses WHERE expense_inquiry_id = $inquiry_id");
+
+                while ($expense = $expenseInfo->fetch_assoc()) {
+                    $supersubtotal = $expense["expense_price"] * $expense["expense_quantity"];
+                    $subtotal = $subtotal + $supersubtotal;
+                }
+            }
         }
-      }
 
+        $assetInfo = mysqli_query($conn, "SELECT * FROM assets");
+        while ($asset = $assetInfo->fetch_assoc()) {
+            $purchaseMonth = date("m", $asset["asset_date_acquired"]);
+            $purchaseYear = date("Y", $asset["asset_date_acquired"]);
 
-      $assetInfo = mysqli_query($conn, "SELECT * FROM assets");
-      while ($asset = $assetInfo->fetch_assoc()) {
-        $purchaseMonth = date("m", $asset["asset_date_acquired"]);
-        $purchaseYear = date("Y", $asset["asset_date_acquired"]);
-        if ($purchaseMonth == $i && $purchaseYear == $currentYear) {
-          $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
-          $subtotal = $subtotal + $supersubtotal;;
+            if ($purchaseMonth == $i && $purchaseYear == $currentYear) {
+                $supersubtotal = $asset["asset_price"] * $asset["asset_quantity"];
+                $subtotal = $subtotal + $supersubtotal;
+            }
         }
-      }
 
-      $total = $total + $subtotal;
+        $total = $total + $subtotal;
 
-      echo $total . ",";
+        echo $total . ",";
     }
     ?>
-  ];
+];
 
-  // Calculate Profit
-  var profitData = incomeData.map((income, index) => income - expensesData[index]);
+// Calculate Profit
+var profitData = incomeData.map((income, index) => income - expensesData[index]);
 
-  // Create a bar chart
-  var ctx = document.getElementById('monthlyChart').getContext('2d');
-  var myChart = new Chart(ctx, {
+// Create a bar chart
+var ctx = document.getElementById('monthlyChart').getContext('2d');
+var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: months,
-      datasets: [{
-          label: '収入',
-          backgroundColor: 'rgba(75, 192, 192, 0.7)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-          data: incomeData
-        },
-        {
-          label: '支出',
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1,
-          data: expensesData
-        },
-        {
-          label: '利益',
-          backgroundColor: 'rgba(99, 255, 132, 0.7)',
-          borderColor: 'rgba(99, 255, 132, 1)',
-          borderWidth: 1,
-          data: profitData
-        }
-      ]
+        labels: months,
+        datasets: [{
+                label: '収入',
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: incomeData
+            },
+            {
+                label: '支出',
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: expensesData
+            },
+            {
+                label: '利益',
+                backgroundColor: 'rgba(99, 255, 132, 0.7)',
+                borderColor: 'rgba(99, 255, 132, 1)',
+                borderWidth: 1,
+                data: profitData
+            }
+        ]
     },
     options: {
-      scales: {
-        x: {
-          stacked: false
-        },
-        y: {
-          stacked: false
+        scales: {
+            x: {
+                stacked: false
+            },
+            y: {
+                stacked: false
+            }
         }
-      }
     }
-  });
+});
+
 
 
   function updateClock() {
