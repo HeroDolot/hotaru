@@ -60,11 +60,11 @@ include './includes/header.php';
                                 <tbody>
                                     <!-- (get from select option work orders) -->
                                     <tr>
-                                        <th>Work order 1</th>
+                                        <th>Moving Services</th>
                                         <td>4</td>
                                     </tr>
                                     <tr>
-                                        <th>Work order 2</th>
+                                        <th>Cleaning Services</th>
                                         <td>8</td>
                                     </tr>
                                     <tr>
@@ -94,7 +94,7 @@ include './includes/header.php';
                             <tr>
                                 <td>1(justnumber)</td>
                                 <td>December 1, 2024</td>
-                                <td>House Relocation</td>
+                                <td>Moving Services</td>
                                 <td>¥20,000</td>
                                 <td>¥1,000</td>
                                 <td>¥3,000</td>

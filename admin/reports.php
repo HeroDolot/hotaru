@@ -301,24 +301,34 @@ include './components/navbar.php';
                 <!-- Content for Monthly Reports tab goes here -->
                 <div class="container mt-5">
                     <div class="table-responsive">
-
                         <table class="table table-bordered table-warning align-middle text-center">
                             <thead>
                                 <th>Date</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <th>December 2024</th>
-                                <th>
-                                    <a href="./monthlyReport.php" target="_blank" class="btn btn-info mb-3 mb-md-0">
-                                        <i class="fa-solid fa-eye text-white"></i>
-                                    </a>
-                                </th>
+                                <?php
+                                // Retrieve and display monthly reports dynamically
+                                $result = mysqli_query($conn, "SELECT DISTINCT MONTH(FROM_UNIXTIME(accepted_start_date)) AS month, YEAR(FROM_UNIXTIME(accepted_start_date)) AS year FROM accepted");
+                                while ($row = $result->fetch_assoc()) :
+                                    $month = date('F', mktime(0, 0, 0, $row["month"], 1));
+                                    $year = $row["year"];
+                                ?>
+                                    <tr>
+                                        <td><?php echo "$month $year"; ?></td>
+                                        <td>
+                                            <a href="./monthlyReport.php?month=<?php echo $row["month"]; ?>&year=<?php echo $row["year"]; ?>" target="_blank" class="btn btn-info mb-3 mb-md-0">
+                                                <i class="fa-solid fa-eye text-white"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
