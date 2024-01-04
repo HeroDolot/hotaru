@@ -60,7 +60,7 @@ $result = mysqli_query($conn, $query);
                     ?>
                         <tr>
                             <td><?php echo $row["accepted_client_name"] ?></td>
-                            <td><?php echo $inqInfo["client_name"] ?></td>
+                            <td><?php echo $inqInfo["client_number"] ?></td>
                             <td><?php echo $inqInfo["client_email"] ?></td>
                             <td><?php echo $inqInfo["client_region"] ?></td>
                             <td><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $inqWo")->fetch_assoc()["work_name"] ?></td>
