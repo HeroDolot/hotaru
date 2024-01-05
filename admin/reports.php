@@ -308,13 +308,13 @@ include './components/navbar.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $result = mysqli_query($conn, "SELECT DATE_FORMAT(FROM_UNIXTIME(accepted_completed_date), '%Y年%m月') AS month_year FROM accepted GROUP BY month_year");
+                                $result = mysqli_query($conn, "SELECT DATE_FORMAT(FROM_UNIXTIME(accepted_completed_date), '%Y年%M月') AS month_year, DATE_FORMAT(FROM_UNIXTIME(accepted_completed_date), '%M %Y') AS orig_month_year FROM accepted GROUP BY month_year");
                                 while ($row = $result->fetch_assoc()) :
                                 ?>
                                     <tr>
                                         <th><?php echo $row["month_year"] ?></th>
                                         <th>
-                                            <a href="./monthlyReport.php?query=<?php echo $row["month_year"] ?>" target="_blank" class="btn btn-info mb-3 mb-md-0">
+                                            <a href="./monthlyReport.php?query=<?php echo $row["orig_month_year"] ?>" target="_blank" class="btn btn-info mb-3 mb-md-0">
                                                 <i class="fa-solid fa-eye text-white"></i>
                                             </a>
                                         </th>
