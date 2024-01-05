@@ -58,3 +58,6 @@
 </body>
 
 </html>
+<script>
+  AOS.init();
+</script>

@@ -81,7 +81,7 @@ if (isset($_POST["submit_wo"])) {
     if (mysqli_affected_rows($conn) == 1) {
         header("location:./fileupload.php?success=作業オーダーが追加されました");
     } else {
-        header("location:./fileupload.php?error=オーダーの追加に失敗しました"); 
+        header("location:./fileupload.php?error=オーダーの追加に失敗しました");
     }
 }
 
@@ -172,7 +172,7 @@ include './components/navbar.php';
                     </div>
                     <div class="mb-3 form-floating">
                         <input type="number" class="form-control" min="1" required name="work_commission" placeholder="workCommission" required>
-                        <label for="workCommission">Commission</label>
+                        <label for="workCommission">コミッション</label>
                     </div>
                     <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">送信</button>
                 </div>
@@ -182,10 +182,9 @@ include './components/navbar.php';
             <table class="table table-alternate table-responsive table-bordered table-info text-center">
                 <thead>
                     <th>タイトル</th>
-                    <th>Commission</th>
+                    <th>コミッション</th>
                     <th>アクション</th>
                 </thead>
-
                 <tbody>
                     <?php
                     $result = mysqli_query($conn, "SELECT * FROM work_order WHERE is_deleted = 0");

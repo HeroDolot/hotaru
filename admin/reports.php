@@ -23,10 +23,10 @@ include './components/navbar.php';
     <div class="container mt-5">
         <ul class="nav nav-tabs" id="currentReportsTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="work-order-tab" data-toggle="tab" href="#work-order-content" role="tab" aria-controls="work-order" aria-selected="true">Work Order</a>
+                <a class="nav-link active" id="work-order-tab" data-toggle="tab" href="#work-order-content" role="tab" aria-controls="work-order" aria-selected="true">作業依頼</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">Monthly Report</a>
+                <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">月次レポート</a>
             </li>
         </ul>
 
@@ -303,22 +303,22 @@ include './components/navbar.php';
                     <div class="table-responsive">
                         <table class="table table-bordered table-warning align-middle text-center">
                             <thead>
-                                <th>Date</th>
-                                <th>Action</th>
+                                <th>日付</th>
+                                <th>アクション</th>
                             </thead>
                             <tbody>
-                                <?php 
-                                $result = mysqli_query($conn,"SELECT DATE_FORMAT(FROM_UNIXTIME(accepted_completed_date), '%M %Y') AS month_year FROM accepted GROUP BY month_year");
-                                while ($row = $result->fetch_assoc()):
+                                <?php
+                                $result = mysqli_query($conn, "SELECT DATE_FORMAT(FROM_UNIXTIME(accepted_completed_date), '%Y年%m月') AS month_year FROM accepted GROUP BY month_year");
+                                while ($row = $result->fetch_assoc()) :
                                 ?>
-                                <tr>
-                                    <th><?php echo $row["month_year"]?></th>
-                                    <th>
-                                        <a href="./monthlyReport.php?query=<?php echo $row["month_year"]?>" target="_blank" class="btn btn-info mb-3 mb-md-0">
-                                            <i class="fa-solid fa-eye text-white"></i>
-                                        </a>
-                                    </th>
-                                </tr>
+                                    <tr>
+                                        <th><?php echo $row["month_year"] ?></th>
+                                        <th>
+                                            <a href="./monthlyReport.php?query=<?php echo $row["month_year"] ?>" target="_blank" class="btn btn-info mb-3 mb-md-0">
+                                                <i class="fa-solid fa-eye text-white"></i>
+                                            </a>
+                                        </th>
+                                    </tr>
                                 <?php endwhile ?>
                             </tbody>
                         </table>

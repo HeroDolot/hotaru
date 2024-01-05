@@ -100,7 +100,7 @@ include './includes/header.php';
         <div class="container">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 194px; background-color: #FFFFFF;">
+                    <div class="card shadow" style="min-height: 194px; background-color: #FFFFFF;" data-aos="zoom-in-right" data-aos-duration="400" data-aos-offset="100" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/handle-with-care.png" alt="Handle With Care Icon">
@@ -112,7 +112,7 @@ include './includes/header.php';
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;" data-aos="zoom-in-left" data-aos-duration="400" data-aos-offset="100" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/cash.png" alt="Affordable Icon">
@@ -125,7 +125,7 @@ include './includes/header.php';
                 </div>
                 <div class="w-100 d-md-none"></div> <!-- Add a clearfix for smaller screens -->
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;" data-aos="zoom-in-right" data-aos-duration="400" data-aos-offset="200" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/truck-fast.png" alt="Fast Icon">
@@ -137,7 +137,7 @@ include './includes/header.php';
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;" data-aos="zoom-in-left" data-aos-duration="400" data-aos-offset="200" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/secure.png" alt="Secure Icon">
@@ -149,7 +149,7 @@ include './includes/header.php';
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFFFFF;" data-aos="zoom-in-right" data-aos-duration="400" data-aos-offset="300" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/language.png" alt="Bilingual Icon">
@@ -161,7 +161,7 @@ include './includes/header.php';
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;">
+                    <div class="card shadow" style="min-height: 178px; background-color: #FFF469;" data-aos="zoom-in-left" data-aos-duration="400" data-aos-offset="300" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="card-img-top text-center">
                                 <img src="./icons/group.png" alt="Professional Team Icon">
@@ -328,15 +328,15 @@ include './includes/header.php';
 <section class="section-second" id="section-second">
     <div class="container-fluid pb-5" style="background-color: #f2f2f2; min-height: 1080px;">
         <div class="container">
-            <div class="text-primary text-start fw-bolder mt-4 mb-3 py-5" style="font-size:44px; letter-spacing:5px;">
+            <div class="text-primary text-start fw-bolder mt-4 mb-3 py-5" style="font-size:44px; letter-spacing:5px;" data-aos="fade-in" data-aos-duration="300" data-aos-offset="200" data-aos-easing="ease-in-sine">
                 私たちのサービス
             </div>
             <div class="row">
-                <div class="col-md-6 d-none d-md-block">
+                <div class="col-md-6 d-none d-md-block" data-aos="fade-right" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <p class="fw-bolder fs-4 text-primary">廃棄物処理サービス</p>
                     <p class="text-secondary">環境に優しい廃棄物処理サービス。不要な物を効果的に処理し、エコフレンドリーな解決策を提供します。地球と共に未来につなげましょう。</p>
                 </div>
-                <div class="col-md-6 d-none d-md-block mb-5">
+                <div class="col-md-6 d-none d-md-block mb-5" data-aos="fade-left" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <div class="card shadow">
                         <div class="card-body">
                             <img src="./img/throw.webp" class="img-fluid rounded" alt="Image for Disposal Services">
@@ -346,26 +346,26 @@ include './includes/header.php';
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card shadow mb-5">
+                    <div class="card shadow mb-5" data-aos="fade-right" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <img src="./img/sample-3.jpg" class="img-fluid rounded" alt="Image for Moving Services">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3 mb-md-5">
+                <div class="col-md-6 mb-3 mb-md-5" data-aos="fade-left" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <p class="fw-bolder fs-4 text-primary">引越しサービス</p>
                     <p class="text-secondary">引越しは大変ですが、私たちはプロの手でスムーズに新しい場所へお引越しをサポートします。安心して新生活を始めましょう。</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 d-sm-block d-md-none">
+                <div class="col-md-6 d-sm-block d-md-none" data-aos="fade-right" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <div class="card shadow mb-5">
                         <div class="card-body">
                             <img src="./img/throw.webp" class="img-fluid rounded" alt="Image for Disposal Services">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 d-sm-block d-md-none mb-3 mb-md-5">
+                <div class="col-md-6 d-sm-block d-md-none mb-3 mb-md-5" data-aos="fade-left" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                     <p class="fw-bolder fs-4 text-primary">廃棄物処理サービス</p>
                     <p class="text-secondary">環境にやさしい廃棄物処理サービス。不要なものをスムーズに手配し、エコフレンドリーな方法でリサイクルいたします。地球環境への貢献を共にしましょう。</p>
                 </div>
@@ -394,47 +394,47 @@ include './includes/header.php';
         <!-- MAIN BLOG -->
         <?php
         $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
-        while ($row = $result->fetch_assoc()):
-        ?>  
-        <div class="col-md-7">
-            <div class="card mb-3">
-                <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="...">
-                <div class="card-body"> `               
-                    <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
-                    <p class="card-text"><?php echo $row["update_description"] ?></p>
-                    <p class="card-text"><small class="text-body-secondary">
-                            <?php
-                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+        while ($row = $result->fetch_assoc()) :
+        ?>
+            <div class="col-md-7">
+                <div class="card mb-3">
+                    <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="...">
+                    <div class="card-body"> `
+                        <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
+                        <p class="card-text"><?php echo $row["update_description"] ?></p>
+                        <p class="card-text"><small class="text-body-secondary">
+                                <?php
+                                $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
 
-                            // Current timestamp
-                            $currentTimestamp = time();
+                                // Current timestamp
+                                $currentTimestamp = time();
 
-                            // Calculate the difference in seconds
-                            $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+                                // Calculate the difference in seconds
+                                $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
 
-                            // Convert seconds to minutes and hours
-                            $minutes = floor($timeDifferenceSeconds / 60);
-                            $hours = floor($timeDifferenceSeconds / 3600);
-                            $days = floor($hours / 24);
+                                // Convert seconds to minutes and hours
+                                $minutes = floor($timeDifferenceSeconds / 60);
+                                $hours = floor($timeDifferenceSeconds / 3600);
+                                $days = floor($hours / 24);
 
-                            if ($days > 0) {
-                                if ($days == 1) {
-                                    echo "最終更新 " . $days . " 日前。";
+                                if ($days > 0) {
+                                    if ($days == 1) {
+                                        echo "最終更新 " . $days . " 日前。";
+                                    } else {
+                                        echo "最終更新 " . $days . " 日前。";
+                                    }
                                 } else {
-                                    echo "最終更新 " . $days . " 日前。";
+                                    if ($hours > 0) {
+                                        echo "最終更新 " . $hours . " 時間前。";
+                                    } else {
+                                        echo "最終更新 " . $minutes . " 分前。";
+                                    }
                                 }
-                            } else {
-                                if ($hours > 0) {
-                                    echo "最終更新 " . $hours . " 時間前。";
-                                } else {
-                                    echo "最終更新 " . $minutes . " 分前。";
-                                }
-                            }
-                            ?>
-                        </small></p>
+                                ?>
+                            </small></p>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endwhile; ?>
         <!-- MAIN BLOG -->
 
@@ -549,7 +549,7 @@ include './includes/header.php';
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-        <p class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</p>
+    <p id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</p>
         <hr>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
@@ -559,7 +559,7 @@ include './includes/header.php';
                 while ($row = $result->fetch_assoc()) :
                     $service_id = $row["review_service"];
                 ?>
-                    <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;">
+                    <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;" data-aos="fade-in" data-aos-duration="500" data-aos-offset="450" data-aos-easing="ease-in-sine">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5 col-7">
@@ -1072,3 +1072,25 @@ include './includes/header.php';
 <?php
 include './includes/footer.php'
 ?>
+<script>
+// Get the text content of the paragraph
+var text = document.getElementById('animatedText').innerText;
+
+// Clear the original content
+document.getElementById('animatedText').innerHTML = '';
+
+// Create a span for each letter and apply data-aos attributes with delay
+text.split('').forEach(function (letter, index) {
+  var span = document.createElement('span');
+  span.innerText = letter;
+  span.style.display = 'inline-block'; // Make each letter a block to apply spacing
+  span.setAttribute('data-aos', 'fade-in');
+  span.setAttribute('data-aos-duration', '100');
+  span.setAttribute('data-aos-offset', '200');
+  span.setAttribute('data-aos-easing', 'ease-in-sine');
+  span.setAttribute('data-aos-delay', 100 * index); // Delay each letter by 100 milliseconds
+
+  // Append the span to the original paragraph
+  document.getElementById('animatedText').appendChild(span);
+});
+</script>
