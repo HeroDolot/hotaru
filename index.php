@@ -398,11 +398,11 @@ include './includes/header.php';
         ?>
             <div class="col-md-7">
                 <div class="card mb-3">
-                    <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="...">
+                    <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="引っ越しブログ">
                     <div class="card-body"> `
-                        <h5 class="card-title"><?php echo $row["update_title"] ?></h5>
-                        <p class="card-text"><?php echo $row["update_description"] ?></p>
-                        <p class="card-text"><small class="text-body-secondary">
+                        <h1 class="card-title"><?php echo $row["update_title"] ?></h1>
+                        <h3 class="card-text"><?php echo $row["update_description"] ?></h3>
+                        <h4 class="card-text"><small class="text-body-secondary">
                                 <?php
                                 $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
 
@@ -431,7 +431,7 @@ include './includes/header.php';
                                     }
                                 }
                                 ?>
-                            </small></p>
+                            </small></h4>
                     </div>
                 </div>
             </div>
@@ -449,16 +449,16 @@ include './includes/header.php';
                     <div class="card-body p-0">
                         <div class="row g-1">
                             <div class="col-md-7">
-                                <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="">
+                                <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="引っ越しブログ">
                             </div>
                             <div class="col-md-5">
                                 <div class="wrapper">
-                                    <p class="card-header"><?php echo $row["update_title"] ?></p>
-                                    <p class="p-2"><?php echo $row["update_description"] ?></p>
+                                    <h1 class="card-header"><?php echo $row["update_title"] ?></h1>
+                                    <h4 class="p-2"><?php echo $row["update_description"] ?></h4>
                                 </div>
                             </div>
                             <div class="card-footer m-0">
-                                <p class="card-text"><small class="text-body-secondary">
+                                <h5 class="card-text"><small class="text-body-secondary">
                                         <?php
                                         $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
 
@@ -487,7 +487,7 @@ include './includes/header.php';
                                             }
                                         }
                                         ?>
-                                    </small></p>
+                                    </small></h5>
                             </div>
                         </div>
                     </div>
@@ -514,7 +514,7 @@ include './includes/header.php';
                 while ($row = $result->fetch_assoc()) :
                 ?>
                     <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                        <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="...">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="引っ越しブログ">
                         <div class="carousel-caption">
                             <div class="card">
                                 <div class="card-body">
@@ -549,7 +549,7 @@ include './includes/header.php';
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-    <p id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</p>
+    <h1 id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</h1>
         <hr>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
@@ -564,8 +564,7 @@ include './includes/header.php';
                             <div class="row">
                                 <div class="col-md-5 col-7">
                                     <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
-                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="">
-
+                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="引っ越し体験談">
                                     <div class="row container fw-bolder fs-4">
                                         <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
                                         <div class="col-md-4 col-9">
@@ -619,8 +618,8 @@ include './includes/header.php';
     <div class="py-5">
         <div class="container text-center">
             <div class="wrapper">
-                <img src="./img/phoneCTA1.svg" class="col-12 mb-3 d-none d-md-block" alt="070-4797-8099">
-                <img src="./img/phoneSMCTA.svg" class="col-12 mb-3 d-block d-sm-none" alt="070-4797-8099">
+                <img src="./img/phoneCTA1.svg" class="col-12 mb-3 d-none d-md-block" alt="070-4797-8099 不用品回収代行サービス">
+                <img src="./img/phoneSMCTA.svg" class="col-12 mb-3 d-block d-sm-none" alt="070-4797-8099 不用品回収代行サービス">
                 <div class="row">
                     <div class="col-md-6 col-12 mb-3 mb-md-0 mx-3 mx-md-0">
                         <img src="./img/lineCTA.svg" class="img-fluid w-100" onclick="window.open('https://lin.ee/7inPVNB', '_blank')" style="cursor: pointer;" alt="LINE">
@@ -731,48 +730,52 @@ include './includes/header.php';
         <p class="fw-bolder text-primary mt-5" style="font-size:44px; letter-spacing:5px;">フロー</p>
         <div class="container d-flex align-items-center justify-content-center py-3">
             <div class="col-md-7">
+                <!-- Step 1 -->
                 <div class="row mb-5">
                     <div class="col-md-2 col-4">
-                        <img src="./icons/flow-mobile-phone.png" class="img-fluid" alt="Mobile Phone Icon">
+                        <img src="./icons/flow-mobile-phone.png" class="img-fluid" alt="お問い合わせアイコン">
                     </div>
                     <div class="col-md-10 col-8">
                         <p class="fw-bolder text-primary text-center fs-4">ステップ1 - お問い合わせ</p>
                         <hr style="border: 2px solid;" class="text-black">
                         <p class="fw-bolder fs-5">電話、メール、LINEでのご予約を承っています。</p>
                         <div class="wrapper justify-content-center align-items-center d-flex">
-                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="Arrow Down Icon">
+                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="次への矢印アイコン">
                         </div>
                     </div>
                 </div>
+                <!-- Step 2 -->
                 <div class="row mb-5">
                     <div class="col-md-2 col-4">
-                        <img src="./icons/flow-schedule.png" class="img-fluid" alt="Schedule Icon">
+                        <img src="./icons/flow-schedule.png" class="img-fluid" alt="スケジュールアイコン">
                     </div>
                     <div class="col-md-10 col-8">
                         <p class="fw-bolder text-primary text-center fs-4">ステップ2 - スケジュール確認</p>
                         <hr style="border: 2px solid;" class="text-black">
                         <p class="fw-bolder fs-5">契約価格の見積もりとスケジュールの確認のため、ご連絡させていただきます。</p>
                         <div class="wrapper justify-content-center align-items-center d-flex">
-                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="Arrow Down Icon">
+                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="次への矢印アイコン">
                         </div>
                     </div>
                 </div>
+                <!-- Step 3 -->
                 <div class="row mb-5">
                     <div class="col-md-2 col-4">
-                        <img src="./icons/flow-start-work.png" class="img-fluid" alt="Start Work Icon">
+                        <img src="./icons/flow-start-work.png" class="img-fluid" alt="作業開始アイコン">
                     </div>
                     <div class="col-md-10 col-8">
                         <p class="fw-bolder text-primary text-center fs-4">ステップ3 - 作業開始</p>
                         <hr style="border: 2px solid;" class="text-black">
                         <p class="fw-bolder fs-5">作業当日、到着予定時刻をお知らせするために事前にお電話いたします。効率的かつスムーズに作業を完了させることを目指します。</p>
                         <div class="wrapper justify-content-center align-items-center d-flex">
-                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="Arrow Down Icon">
+                            <img src="./icons/flow-arrow-down.png" style="height: 60px; width:75px;" alt="次への矢印アイコン">
                         </div>
                     </div>
                 </div>
+                <!-- Step 4 -->
                 <div class="row">
                     <div class="col-md-2 col-4">
-                        <img src="./icons/flow-payment-yen.png" class="img-fluid" alt="Payment Icon">
+                        <img src="./icons/flow-payment-yen.png" class="img-fluid" alt="支払いアイコン">
                     </div>
                     <div class="col-md-10 col-8">
                         <p class="fw-bolder text-primary text-center fs-4">ステップ4 - 支払い</p>
@@ -784,6 +787,7 @@ include './includes/header.php';
         </div>
     </div>
 </section>
+
 
 <style>
     /* Default styles for all screens */
@@ -802,7 +806,7 @@ include './includes/header.php';
 
 <section class="area">
     <div class="container">
-        <p class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">対応エリア</p>
+        <h1 class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">対応エリア</h1>
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="chiba-tab" data-bs-toggle="tab" href="#chiba" role="tab" aria-controls="chiba" aria-selected="true">千葉県</a>
@@ -909,10 +913,10 @@ include './includes/header.php';
 <hr>
 
 <section class="container py-5" id="inquiry">
-    <p class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</p>
+    <h1 class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</h1>
     <div class="row">
         <div class="col-md-7">
-            <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="inquiry">
+        <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="お問い合わせ | Inquiry">
             <div class="card" style="background-color: #f3f3f3;">
                 <div class="card-header fw-bolder fs-3">
                     問い合わせる

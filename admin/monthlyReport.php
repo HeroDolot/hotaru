@@ -91,7 +91,7 @@ include './includes/header.php';
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
-                                    <th class="text-center" colspan="2">Assets</th>
+                                    <th class="text-center" colspan="3">Assets</th>
                                 </thead>
                                 <tbody>
                                     <?php

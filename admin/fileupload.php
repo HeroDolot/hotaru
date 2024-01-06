@@ -171,7 +171,7 @@ include './components/navbar.php';
                         <label for="workOrderTitle">作業オーダータイトル</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="number" class="form-control" min="1" required name="work_commission" placeholder="workCommission" required>
+                        <input type="number" class="form-control" min="1000" required name="work_commission" placeholder="workCommission" required>
                         <label for="workCommission">コミッション</label>
                     </div>
                     <button type="submit" name="submit_wo" class="btn btn-primary mt-3 col-md-4 col-5">送信</button>
