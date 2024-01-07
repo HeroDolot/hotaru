@@ -52,12 +52,12 @@ include './includes/header.php';
     <div class="container-fluid">
         <div class="wrapper d-flex justify-content-between">
             <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-none d-md-block img-fluid mx-5">
-            <img src="./img/imgCrdScroll2.svg" class="img-fluid d-none d-md-block" alt="">
+            <img src="./img/imgCrdScroll2.svg" class="img-fluid d-none d-md-block" alt="古物商許可証 引越しサービス">
         </div>
         <!-- <marquee behavior="scroll" direction="right"><img src="./img/imgCrdScroll2.svg" alt=""></marquee> -->
     </div>
     <div class="wrapper d-flex justify-content-center align-items-center">
-        <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-md-none d-sm-block img-fluid">
+        <img src="./img/不用品回収代行サービス©TRUE LINK COMPANY.svg" class="d-md-none d-sm-block img-fluid" alt="引越しサービス">
     </div>
 </section>
 
@@ -389,159 +389,161 @@ include './includes/header.php';
 
 
 <section class="container py-5" id="blog">
-    <p class="text-primary fw-bolder mb-2" style="font-size:44px; letter-spacing:5px;">ブログ</p>
-    <div class="row">
-        <!-- MAIN BLOG -->
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
-        while ($row = $result->fetch_assoc()) :
-        ?>
-            <div class="col-md-7">
-                <div class="card mb-3">
-                    <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="引っ越しブログ">
-                    <div class="card-body"> `
-                        <h1 class="card-title"><?php echo $row["update_title"] ?></h1>
-                        <h3 class="card-text"><?php echo $row["update_description"] ?></h3>
-                        <h4 class="card-text"><small class="text-body-secondary">
-                                <?php
-                                $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
-
-                                // Current timestamp
-                                $currentTimestamp = time();
-
-                                // Calculate the difference in seconds
-                                $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
-
-                                // Convert seconds to minutes and hours
-                                $minutes = floor($timeDifferenceSeconds / 60);
-                                $hours = floor($timeDifferenceSeconds / 3600);
-                                $days = floor($hours / 24);
-
-                                if ($days > 0) {
-                                    if ($days == 1) {
-                                        echo "最終更新 " . $days . " 日前。";
-                                    } else {
-                                        echo "最終更新 " . $days . " 日前。";
-                                    }
-                                } else {
-                                    if ($hours > 0) {
-                                        echo "最終更新 " . $hours . " 時間前。";
-                                    } else {
-                                        echo "最終更新 " . $minutes . " 分前。";
-                                    }
-                                }
-                                ?>
-                            </small></h4>
-                    </div>
-                </div>
-            </div>
-        <?php endwhile; ?>
-        <!-- MAIN BLOG -->
-
-        <!-- SUB MAIN BLOG -->
-        <div class="col-md-5">
+    <article>
+        <p class="text-primary fw-bolder mb-2" style="font-size:44px; letter-spacing:5px;">ブログ</p>
+        <div class="row">
+            <!-- MAIN BLOG -->
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit 3");
+            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
             while ($row = $result->fetch_assoc()) :
             ?>
+                <div class="col-md-7">
+                    <div class="card mb-3">
+                        <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="引っ越しブログ">
+                        <div class="card-body"> `
+                            <h1 class="card-title"><?php echo $row["update_title"] ?></h1>
+                            <h3 class="card-text"><?php echo $row["update_description"] ?></h3>
+                            <h4 class="card-text"><small class="text-body-secondary">
+                                    <?php
+                                    $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
 
-                <div class="card mb-3">
-                    <div class="card-body p-0">
-                        <div class="row g-1">
-                            <div class="col-md-7">
-                                <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="引っ越しブログ">
-                            </div>
-                            <div class="col-md-5">
-                                <div class="wrapper">
-                                    <h1 class="card-header"><?php echo $row["update_title"] ?></h1>
-                                    <h4 class="p-2"><?php echo $row["update_description"] ?></h4>
-                                </div>
-                            </div>
-                            <div class="card-footer m-0">
-                                <h5 class="card-text"><small class="text-body-secondary">
-                                        <?php
-                                        $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+                                    // Current timestamp
+                                    $currentTimestamp = time();
 
-                                        // Current timestamp
-                                        $currentTimestamp = time();
+                                    // Calculate the difference in seconds
+                                    $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
 
-                                        // Calculate the difference in seconds
-                                        $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+                                    // Convert seconds to minutes and hours
+                                    $minutes = floor($timeDifferenceSeconds / 60);
+                                    $hours = floor($timeDifferenceSeconds / 3600);
+                                    $days = floor($hours / 24);
 
-                                        // Convert seconds to minutes and hours
-                                        $minutes = floor($timeDifferenceSeconds / 60);
-                                        $hours = floor($timeDifferenceSeconds / 3600);
-                                        $days = floor($hours / 24);
-
-                                        if ($days > 0) {
-                                            if ($days == 1) {
-                                                echo $days . " 日前に更新。";
-                                            } else {
-                                                echo $days . " 日前に更新。";
-                                            }
+                                    if ($days > 0) {
+                                        if ($days == 1) {
+                                            echo "最終更新 " . $days . " 日前。";
                                         } else {
-                                            if ($hours > 0) {
-                                                echo $hours . " 時間前に更新。";
-                                            } else {
-                                                echo $minutes . " 分前に更新。";
-                                            }
+                                            echo "最終更新 " . $days . " 日前。";
                                         }
-                                        ?>
-                                    </small></h5>
-                            </div>
+                                    } else {
+                                        if ($hours > 0) {
+                                            echo "最終更新 " . $hours . " 時間前。";
+                                        } else {
+                                            echo "最終更新 " . $minutes . " 分前。";
+                                        }
+                                    }
+                                    ?>
+                                </small></h4>
                         </div>
                     </div>
                 </div>
+            <?php endwhile; ?>
+            <!-- MAIN BLOG -->
 
-            <?php endwhile ?>
-
-        </div>
-    </div>
-    <!-- SUB MAIN BLOG -->
-
-    <hr>
-    <!-- SECONDARY BLOG -->
-    <!-- CONVERT TO CAROUSEL -->
-    <div class="text-primary fw-bolder mt-4 mb-3">
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
-        ?>
-        <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
-            <div class="carousel-inner">
-
+            <!-- SUB MAIN BLOG -->
+            <div class="col-md-5">
                 <?php
-                $first = true;
+                $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit 3");
                 while ($row = $result->fetch_assoc()) :
                 ?>
-                    <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                        <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="引っ越しブログ">
-                        <div class="carousel-caption">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-footer">
-                                        <h5><?php echo $row["update_title"] ?></h5>
-                                        <p><?php echo $row["update_description"] ?></p>
+
+                    <div class="card mb-3">
+                        <div class="card-body p-0">
+                            <div class="row g-1">
+                                <div class="col-md-7">
+                                    <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="引っ越しブログ">
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="wrapper">
+                                        <h1 class="card-header"><?php echo $row["update_title"] ?></h1>
+                                        <h4 class="p-2"><?php echo $row["update_description"] ?></h4>
+                                    </div>
+                                </div>
+                                <div class="card-footer m-0">
+                                    <h5 class="card-text"><small class="text-body-secondary">
+                                            <?php
+                                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
+
+                                            // Current timestamp
+                                            $currentTimestamp = time();
+
+                                            // Calculate the difference in seconds
+                                            $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
+
+                                            // Convert seconds to minutes and hours
+                                            $minutes = floor($timeDifferenceSeconds / 60);
+                                            $hours = floor($timeDifferenceSeconds / 3600);
+                                            $days = floor($hours / 24);
+
+                                            if ($days > 0) {
+                                                if ($days == 1) {
+                                                    echo $days . " 日前に更新。";
+                                                } else {
+                                                    echo $days . " 日前に更新。";
+                                                }
+                                            } else {
+                                                if ($hours > 0) {
+                                                    echo $hours . " 時間前に更新。";
+                                                } else {
+                                                    echo $minutes . " 分前に更新。";
+                                                }
+                                            }
+                                            ?>
+                                        </small></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endwhile ?>
+
+            </div>
+        </div>
+        <!-- SUB MAIN BLOG -->
+
+        <hr>
+        <!-- SECONDARY BLOG -->
+        <!-- CONVERT TO CAROUSEL -->
+        <div class="text-primary fw-bolder mt-4 mb-3">
+            <?php
+            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
+            ?>
+            <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <?php
+                    $first = true;
+                    while ($row = $result->fetch_assoc()) :
+                    ?>
+                        <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
+                            <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="引っ越しブログ">
+                            <div class="carousel-caption">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-footer">
+                                            <h5><?php echo $row["update_title"] ?></h5>
+                                            <p><?php echo $row["update_description"] ?></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php
-                    $first = false;
-                endwhile;
-                ?>
+                    <?php
+                        $first = false;
+                    endwhile;
+                    ?>
 
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#updateCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#updateCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#updateCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#updateCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-    </div>
+    </article>  
 </section>
 
 <style>
@@ -549,7 +551,7 @@ include './includes/header.php';
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-    <h1 id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</h1>
+        <h1 id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</h1>
         <hr>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
@@ -916,7 +918,7 @@ include './includes/header.php';
     <h1 class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</h1>
     <div class="row">
         <div class="col-md-7">
-        <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="お問い合わせ | Inquiry">
+            <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="お問い合わせ | Inquiry">
             <div class="card" style="background-color: #f3f3f3;">
                 <div class="card-header fw-bolder fs-3">
                     問い合わせる
@@ -1077,24 +1079,24 @@ include './includes/header.php';
 include './includes/footer.php'
 ?>
 <script>
-// Get the text content of the paragraph
-var text = document.getElementById('animatedText').innerText;
+    // Get the text content of the paragraph
+    var text = document.getElementById('animatedText').innerText;
 
-// Clear the original content
-document.getElementById('animatedText').innerHTML = '';
+    // Clear the original content
+    document.getElementById('animatedText').innerHTML = '';
 
-// Create a span for each letter and apply data-aos attributes with delay
-text.split('').forEach(function (letter, index) {
-  var span = document.createElement('span');
-  span.innerText = letter;
-  span.style.display = 'inline-block'; // Make each letter a block to apply spacing
-  span.setAttribute('data-aos', 'fade-in');
-  span.setAttribute('data-aos-duration', '100');
-  span.setAttribute('data-aos-offset', '200');
-  span.setAttribute('data-aos-easing', 'ease-in-sine');
-  span.setAttribute('data-aos-delay', 100 * index); // Delay each letter by 100 milliseconds
+    // Create a span for each letter and apply data-aos attributes with delay
+    text.split('').forEach(function(letter, index) {
+        var span = document.createElement('span');
+        span.innerText = letter;
+        span.style.display = 'inline-block'; // Make each letter a block to apply spacing
+        span.setAttribute('data-aos', 'fade-in');
+        span.setAttribute('data-aos-duration', '100');
+        span.setAttribute('data-aos-offset', '200');
+        span.setAttribute('data-aos-easing', 'ease-in-sine');
+        span.setAttribute('data-aos-delay', 100 * index); // Delay each letter by 100 milliseconds
 
-  // Append the span to the original paragraph
-  document.getElementById('animatedText').appendChild(span);
-});
+        // Append the span to the original paragraph
+        document.getElementById('animatedText').appendChild(span);
+    });
 </script>

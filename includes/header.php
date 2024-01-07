@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>便利な不用品回収代行サービス | 日本全国のプロフェッショナルな引越しサービス</title>
-
+    <meta name="description" content="不用品回収代行サービスは、不要な物品の取り扱いに関する便利で手頃な解決策を提供する専門家チームです。引越しサービスも含め、当社のエキスパートチームがスムーズなプロセスを確保し、お客様に快適さと安心感を提供します。効率的な不要品の撤去から環境に配慮した処分まで、お客様の満足度を優先し、手頃な価格を維持します。不用品回収代行サービスを選び、お部屋の片付けを信頼性の高いハッスルフリーな解決策にし、引越し体験をシンプルにしましょう。">
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "name": "TRUE LINK COMPANY",
+      "description": "True Link Companyは、人々が本当の絆で平和な社会を築く手助けをすることを使命とし、その使命を迷わずに果たします。個々の出会いを繋ぎ合わせ、真っすぐな姿勢で様々な課題に取り組む企業を目指しています。",
+      "address": {
+        "@type": "PostalAddress",
+        "postalCode": "110-0003",
+        "addressCountry": "JP",
+        "addressRegion": "東京都",
+        "addressLocality": "台東区根岸",
+        "streetAddress": "3-16-14 チャームハイツ201号室"
+      },
+      "telephone": "070-4797-8099",
+      "email": "co.truelink@gmail.com",
+      "openingHoursSpecification": {
+        "opens": "00:00",
+        "closes": "24:00"
+      }
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "Your Latitude",
+        "longitude": "Your Longitude"
+      },
+      "priceRange": "4900~",
+      "url": "https://example.com",
+      "sameAs": [
+        "https://www.facebook.com/yourpage",
+        "https://twitter.com/yourpage",
+        "https://fuyouhin.support/company/detail/YTyZwfiN/",
+        "https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro",
+        "https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr"
+      ]
+    }
+    </script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../../hotaru/node_modules/bootstrap/dist/css/bootstrap.css">
     <script src="../../hotaru/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
