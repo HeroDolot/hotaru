@@ -1,5 +1,6 @@
 <?php
-include './includes/header.php';
+session_start();
+
 include "./connection.php";
 
 if (isset($_POST['userLoginSubmit'])) {
@@ -15,13 +16,12 @@ if (isset($_POST['userLoginSubmit'])) {
         // Check if a matching user is found
         if (mysqli_num_rows($result) > 0) {
             // Start a session and set session variables
-            session_start();
+            
             $_SESSION['user_email'] = $user_email;
             // You can set more session variables as needed
 
             // Redirect to a logged-in page
-            header('Location: ../../hotaru/admin/index.php');
-            exit();
+            header('location: ../../hotaru/admin/index.php');
         } else {
             echo "Invalid email or password. Please try again.";
         }
@@ -32,6 +32,7 @@ if (isset($_POST['userLoginSubmit'])) {
 
 // Close the database connection when done
 mysqli_close($conn);
+include './includes/header.php';
 ?>
 
 <div class="row">

@@ -8,7 +8,7 @@ if (!isset($_SESSION["user_email"])) {
 }
 
 if (isset($_POST["submit_contract"])) {
-  var_dump($_POST);
+  // var_dump($_POST);
   $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
   $name = mysqli_real_escape_string($conn, $_POST["name"]);
   $location = mysqli_real_escape_string($conn, $_POST["location"]);
@@ -41,7 +41,7 @@ if (isset($_POST["submit_contract"])) {
 }
 
 if (isset($_POST["inquiry_decline"])) {
-  var_dump($_POST);
+  // var_dump($_POST);
   $inquiry_id = mysqli_real_escape_string($conn, $_POST["inquiry_id"]);
   $sql = "UPDATE inquiry SET inquiry_status = -1 WHERE inquiry_id = $inquiry_id";
   mysqli_query($conn, $sql);
