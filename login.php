@@ -21,7 +21,7 @@ if (isset($_POST['userLoginSubmit'])) {
             // You can set more session variables as needed
 
             // Redirect to a logged-in page
-            header('location: ../../hotaru/admin/index.php');
+            header('location:./admin/index.php');
         } else {
             echo "Invalid email or password. Please try again.";
         }
@@ -38,7 +38,7 @@ include './includes/header.php';
 <div class="row">
     <div class="col-md-6">
         <div class="container">
-            <img src="../hotaru/img/moved.webp" class="img-fluid d-none d-md-block" alt="">
+            <img src="./img/moved.webp" class="img-fluid d-none d-md-block" alt="">
         </div>
     </div>
     <div class="col-md-6">
@@ -49,7 +49,7 @@ include './includes/header.php';
                         <a href="./index.php" class="text-white text-decoration-none">不用品回収代行サービス</a>
                     </div>
                     <div class="card-body">
-                        <form action="/hotaru/login.php" method="POST">
+                        <form method="POST">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" name="user_email" placeholder="name@example.com">
                                 <label for="floatingInput">メールアドレス</label>
