@@ -62,12 +62,12 @@ include './includes/header.php';
 </section>
 
 
-<section class="female-introduction d-none d-md-block">
-  <img src="../img/imageIntroduction.png" alt="Introduction Image" class="img-fluid">
+<section class="image-introduction d-none d-md-block">
+  <img src="./img/imageIntroduction.png" alt="Introduction Image" class="img-fluid">
 </section>
 
-<section class="female-introduction-mobile d-sm-none d-md-none">
-  <img src="../img/imageSMIntroduction.png" alt="Mobile Introduction Image" class="img-fluid">
+<section class="image-introduction-mobile d-sm-none d-md-none">
+  <img src="./img/imageSMIntroduction.png" alt="Mobile Introduction Image" class="img-fluid">
 </section>
 
 
