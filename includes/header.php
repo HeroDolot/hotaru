@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>便利な不用品回収代行サービス | 日本全国のプロフェッショナルな引越しサービス</title>
-    <meta name="description" content="不用品回収代行サービスは、不要な物品の取り扱いに関する便利で手頃な解決策を提供する専門家チームです。引越しサービスも含め、当社のエキスパートチームがスムーズなプロセスを確保し、お客様に快適さと安心感を提供します。効率的な不要品の撤去から環境に配慮した処分まで、お客様の満足度を優先し、手頃な価格を維持します。不用品回収代行サービスを選び、お部屋の片付けを信頼性の高いハッスルフリーな解決策にし、引越し体験をシンプルにしましょう。">
+    <meta name="description" content="不用品回収代行サービスは、不要な物品をスムーズに処理するプロフェッショナルなチームです。引越しサービスも含め、当社のエキスパートが快適で安心なプロセスを提供します。効率的な不要品の撤去から環境への配慮まで、お客様の満足度を最優先にし、手頃な価格を提供します。不用品回収代行サービスや不要品解消を選ぶことで、信頼性の高いハッスルフリーな解決策が得られ、お部屋の片付けや引越し体験がシンプルになります">
     <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -34,17 +34,18 @@
       "priceRange": "4900~",
       "url": "https://example.com",
       "sameAs": [
-        "https://www.facebook.com/yourpage",
-        "https://twitter.com/yourpage",
         "https://fuyouhin.support/company/detail/YTyZwfiN/",
         "https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro",
         "https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr"
       ]
     }
     </script>
+    <link rel="icon" href="./icons/bear.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./icons/bear.png" type="image/x-icon">
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href=".//node_modules/bootstrap/dist/css/bootstrap.css">
-    <script src=".//node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
@@ -73,9 +74,9 @@
     <!-- Google Fonts -->
 
     <!-- Custom CSS -->
-    <!-- <link rel="stylesheet" href=".//styles/scratch.css"> -->
-    <!-- <link rel="stylesheet" href=".//styles/main.css"> -->
-    <link rel="stylesheet" href=".//styles/main.scss">
+    <!-- <link rel="stylesheet" href="./styles/scratch.css"> -->
+    <!-- <link rel="stylesheet" href="./styles/main.css"> -->
+    <link rel="stylesheet" href="./styles/main.css">
     <style>
         /* Default font for desktop and laptop screens */
 

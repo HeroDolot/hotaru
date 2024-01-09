@@ -27,7 +27,7 @@
         <?php
         $currentYear = date('Y');
         ?>
-        <p class="text-white"><a href="../../hotaru/login.php" style="text-decoration: none; color:white; cursor:default;">&copy;</a> 2023 - <?php echo $currentYear; ?> TRUE LINK COMPANY. All rights reserved.</p>
+        <p class="text-white"><a href="./login.php" style="text-decoration: none; color:white; cursor:default;">&copy;</a> 2023 - <?php echo $currentYear; ?> TRUE LINK COMPANY. All rights reserved.</p>
       </div>
       <div class="col-lg-3 d-md-none d-block">
         <p class="fw-bolder">古物商許可証: 第306612320825号</p>
@@ -37,9 +37,9 @@
           <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
           <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li> -->
           <!-- <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li> -->
-          <li class="list-inline-item"><a href="https://fuyouhin.support/company/detail/YTyZwfiN/" target="_blank"><i><img src="../../hotaru/icons/fuyouhin.png" width="21px" alt="Fuyouhin Logo"></i></a></li>
-          <li class="list-inline-item"><a href="https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro" target="_blank"><i><img src="../../hotaru/icons/zehitomo.png" width="25px" alt="Zehitomo Logo"></i></a></li>
-          <li class="list-inline-item"><a href="https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr" target="_blank"><i><img src="../../hotaru/icons/instagram.png" width="25px" alt="Instagram Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://fuyouhin.support/company/detail/YTyZwfiN/" target="_blank"><i><img src="./icons/fuyouhin.png" width="21px" alt="Fuyouhin Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.zehitomo.com/profile/true-link-compa-LxViLcZlZ/pro" target="_blank"><i><img src="./icons/zehitomo.png" width="25px" alt="Zehitomo Logo"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.instagram.com/truelink_company?igshid=NGVhN2U2NjQ0Yg%3D%3D&utm_source=qr" target="_blank"><i><img src="./icons/instagram.png" width="25px" alt="Instagram Logo"></i></a></li>
         </ul>
       </div>
       <div class="col-lg-3 d-none d-md-block">

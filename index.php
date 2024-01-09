@@ -63,12 +63,14 @@ include './includes/header.php';
 
 
 <section class="female-introduction d-none d-md-block">
-
+  <img src="../img/imageIntroduction.png" alt="Introduction Image" class="img-fluid">
 </section>
 
 <section class="female-introduction-mobile d-sm-none d-md-none">
-
+  <img src="../img/imageSMIntroduction.png" alt="Mobile Introduction Image" class="img-fluid">
 </section>
+
+
 
 
 <!-- 
@@ -96,7 +98,7 @@ include './includes/header.php';
 
 <section class="why-Hotaru" id="why-Hotaru" style="min-height: 810px; background-color:#FFFFFF;">
     <div class="container py-5">
-        <p class="text-primary fw-bolder" style="font-size: 17px; text-transform:uppercase;">なぜ私たちを選ぶのですか？</p>
+        <h1 class="text-primary fw-bolder">なぜ私たちを選ぶのですか？</h1>
         <div class="container">
             <div class="row g-3">
                 <div class="col-md-6">
@@ -346,9 +348,9 @@ include './includes/header.php';
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card shadow mb-5" data-aos="fade-right" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
+                    <div class="card shadow mb-5 p-0" data-aos="fade-right" data-aos-duration="500" data-aos-offset="300" data-aos-easing="ease-in-sine">
                         <div class="card-body">
-                            <img src="./img/sample-3.jpg" class="img-fluid rounded" alt="Image for Moving Services">
+                            <img src="./img/hikkoshi.jpg" class="img-fluid rounded" alt="Image for Moving Services">
                         </div>
                     </div>
                 </div>
@@ -389,31 +391,32 @@ include './includes/header.php';
 
 
 <section class="container py-5" id="blog">
-    <article>
-        <p class="text-primary fw-bolder mb-2" style="font-size:44px; letter-spacing:5px;">ブログ</p>
-        <div class="row">
-            <!-- MAIN BLOG -->
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
-            while ($row = $result->fetch_assoc()) :
-            ?>
-                <div class="col-md-7">
-                    <div class="card mb-3">
-                        <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="引っ越しブログ">
-                        <div class="card-body"> `
-                            <h1 class="card-title"><?php echo $row["update_title"] ?></h1>
-                            <h3 class="card-text"><?php echo $row["update_description"] ?></h3>
-                            <h4 class="card-text"><small class="text-body-secondary">
+    <?php
+    $mainBlogResult = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Main Blog'");
+    $subMainBlogResult = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit 3");
+    $secondaryBlogResult = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
+
+    // Check if there is data for the main blog, sub main blog, and secondary blog
+    if ($mainBlogResult->num_rows > 0 || $subMainBlogResult->num_rows > 0 || $secondaryBlogResult->num_rows > 0) :
+    ?>
+        <article>
+            <p class="text-primary fw-bolder mb-2" style="font-size:44px; letter-spacing:5px;">ブログ</p>
+            <div class="row">
+                <!-- MAIN BLOG -->
+                <?php
+                while ($row = $mainBlogResult->fetch_assoc()) :
+                ?>
+                    <div class="col-md-7">
+                        <div class="card mb-3">
+                            <img src="<?php echo $row["update_image"] ?>" class="card-img-top img-fluid" alt="引っ越しブログ">
+                            <div class="card-body">
+                                <h2 class="card-title"><?php echo $row["update_title"] ?></h2>
+                                <h3 class="card-text"><?php echo $row["update_description"] ?></h3>
+                                <h3 class="card-text"><small class="text-body-secondary">
                                     <?php
-                                    $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
-
-                                    // Current timestamp
+                                    $blogPostTimestamp = $row["update_date"];
                                     $currentTimestamp = time();
-
-                                    // Calculate the difference in seconds
                                     $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
-
-                                    // Convert seconds to minutes and hours
                                     $minutes = floor($timeDifferenceSeconds / 60);
                                     $hours = floor($timeDifferenceSeconds / 3600);
                                     $days = floor($hours / 24);
@@ -432,44 +435,36 @@ include './includes/header.php';
                                         }
                                     }
                                     ?>
-                                </small></h4>
+                                </small></h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endwhile; ?>
-            <!-- MAIN BLOG -->
+                <?php endwhile; ?>
+                <!-- MAIN BLOG -->
 
-            <!-- SUB MAIN BLOG -->
-            <div class="col-md-5">
-                <?php
-                $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Sub Main Blog' limit 3");
-                while ($row = $result->fetch_assoc()) :
-                ?>
-
-                    <div class="card mb-3">
-                        <div class="card-body p-0">
-                            <div class="row g-1">
-                                <div class="col-md-7">
-                                    <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="引っ越しブログ">
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="wrapper">
-                                        <h1 class="card-header"><?php echo $row["update_title"] ?></h1>
-                                        <h4 class="p-2"><?php echo $row["update_description"] ?></h4>
+                <!-- SUB MAIN BLOG -->
+                <div class="col-md-5">
+                    <?php
+                    while ($row = $subMainBlogResult->fetch_assoc()) :
+                    ?>
+                        <div class="card mb-3">
+                            <div class="card-body p-0">
+                                <div class="row g-1">
+                                    <div class="col-md-7">
+                                        <img src="<?php echo $row["update_image"] ?>" class="img-fluid rounded" alt="引っ越しブログ">
                                     </div>
-                                </div>
-                                <div class="card-footer m-0">
-                                    <h5 class="card-text"><small class="text-body-secondary">
+                                    <div class="col-md-5">
+                                        <div class="wrapper">
+                                            <h2 class="card-header"><?php echo $row["update_title"] ?></h2>
+                                            <h3 class="p-2"><?php echo $row["update_description"] ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer m-0">
+                                        <h5 class="card-text"><small class="text-body-secondary">
                                             <?php
-                                            $blogPostTimestamp = $row["update_date"]; // Replace this with your blog post's timestamp
-
-                                            // Current timestamp
+                                            $blogPostTimestamp = $row["update_date"];
                                             $currentTimestamp = time();
-
-                                            // Calculate the difference in seconds
                                             $timeDifferenceSeconds = $currentTimestamp - $blogPostTimestamp;
-
-                                            // Convert seconds to minutes and hours
                                             $minutes = floor($timeDifferenceSeconds / 60);
                                             $hours = floor($timeDifferenceSeconds / 3600);
                                             $days = floor($hours / 24);
@@ -489,132 +484,136 @@ include './includes/header.php';
                                             }
                                             ?>
                                         </small></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <?php endwhile ?>
-
-            </div>
-        </div>
-        <!-- SUB MAIN BLOG -->
-
-        <hr>
-        <!-- SECONDARY BLOG -->
-        <!-- CONVERT TO CAROUSEL -->
-        <div class="text-primary fw-bolder mt-4 mb-3">
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM updates WHERE update_location = 'Secondary Blog'");
-            ?>
-            <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
-                    <?php
-                    $first = true;
-                    while ($row = $result->fetch_assoc()) :
-                    ?>
-                        <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
-                            <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="引っ越しブログ">
-                            <div class="carousel-caption">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-footer">
-                                            <h5><?php echo $row["update_title"] ?></h5>
-                                            <p><?php echo $row["update_description"] ?></p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                        $first = false;
-                    endwhile;
-                    ?>
-
+                    <?php endwhile; ?>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#updateCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#updateCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <!-- SUB MAIN BLOG -->
             </div>
+        </article>
+    <?php endif; ?>
+
+    <!-- SECONDARY BLOG -->
+   <?php if ($secondaryBlogResult->num_rows > 0) : ?>
+    <hr>
+    <div class="text-primary fw-bolder mt-4 mb-3">
+        <div id="updateCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <?php
+                $first = true;
+                while ($row = $secondaryBlogResult->fetch_assoc()) :
+                ?>
+                    <div class="carousel-item<?php echo $first ? ' active' : '' ?>">
+                        <img src="<?php echo $row["update_image"] ?>" class="d-block img-fluid" style="height: 75vh; width:100%;" alt="引っ越しブログ">
+                        <div class="carousel-caption">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-footer">
+                                        <h5><?php echo $row["update_title"] ?></h5>
+                                        <p><?php echo $row["update_description"] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    $first = false;
+                endwhile;
+                ?>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#updateCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#updateCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    </article>  
+    </div>
+<?php endif; ?>
 </section>
+
 
 <style>
 
 </style>
 <section class="testimony bg-half-blue" id="testimony" style="min-height: 1080px;">
     <div class="container text-white py-5">
-        <h1 id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</h1>
+        <h2 id="animatedText" class="fw-bolder" style="font-size:55px; letter-spacing:5px;">VOICE</h2>
         <hr>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-7">
 
                 <?php
                 $result = mysqli_query($conn, "SELECT * FROM reviews WHERE is_deleted = 0 limit 3");
-                while ($row = $result->fetch_assoc()) :
-                    $service_id = $row["review_service"];
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) :
+                        $service_id = $row["review_service"];
                 ?>
-                    <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;" data-aos="fade-in" data-aos-duration="500" data-aos-offset="450" data-aos-easing="ease-in-sine">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5 col-7">
-                                    <!--<img src="./icons/testi-male.png" class="img-fluid" alt="">-->
-                                    <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="引っ越し体験談">
-                                    <div class="row container fw-bolder fs-4">
-                                        <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
-                                        <div class="col-md-4 col-9">
-                                            <p><?php echo $row["review_age"] ?>歳</p>
-                                        </div>
-                                        <div class="col-md-8 col-12">
-                                            <div class="star-rating">
-                                                <?php
-                                                if ($row["review_star"] >= 1) {
-                                                    echo '<label for="star1">&#9733;</label>';
-                                                }
-                                                if ($row["review_star"] >= 2) {
-                                                    echo '<label for="star2">&#9733;</label>';
-                                                }
-                                                if ($row["review_star"] >= 3) {
-                                                    echo '<label for="star3">&#9733;</label>';
-                                                }
-                                                if ($row["review_star"] >= 4) {
-                                                    echo '<label for="star4">&#9733;</label>';
-                                                }
-                                                if ($row["review_star"] == 5) {
-                                                    echo '<label for="star5">&#9733;</label>';
-                                                }
-                                                ?>
+                        <div class="card text-white fw-bolder mb-3" style="background-color: #EF6F6C;" data-aos="fade-in" data-aos-duration="500" data-aos-offset="450" data-aos-easing="ease-in-sine">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5 col-7">
+                                        <img src="<?php echo $row["review_image"]; ?>" class="img-fluid rounded" alt="引っ越し体験談">
+                                        <div class="row container fw-bolder fs-4">
+                                            <p class="fs-5"><?php echo mysqli_query($conn, "SELECT * FROM work_order WHERE work_id = $service_id")->fetch_assoc()["work_name"]; ?></p>
+                                            <div class="col-md-4 col-9">
+                                                <p><?php echo $row["review_age"] ?>歳</p>
+                                            </div>
+                                            <div class="col-md-8 col-12">
+                                                <div class="star-rating">
+                                                    <?php
+                                                    if ($row["review_star"] >= 1) {
+                                                        echo '<label for="star1">&#9733;</label>';
+                                                    }
+                                                    if ($row["review_star"] >= 2) {
+                                                        echo '<label for="star2">&#9733;</label>';
+                                                    }
+                                                    if ($row["review_star"] >= 3) {
+                                                        echo '<label for="star3">&#9733;</label>';
+                                                    }
+                                                    if ($row["review_star"] >= 4) {
+                                                        echo '<label for="star4">&#9733;</label>';
+                                                    }
+                                                    if ($row["review_star"] == 5) {
+                                                        echo '<label for="star5">&#9733;</label>';
+                                                    }
+                                                    ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-7 col-5 p-0 m-0">
-                                    <div class="container mt-3">
-                                        <p class="fw-bolder fs-3"><?php echo $row["review_title"] ?></p>
-                                        <hr style="border: 1px solid white;">
-                                        <p style="font-family: 'Passion One', sans-serif; font-size:35px;">"</p>
-                                        <p style="margin-top: -10px;"><?php echo $row["review_context"] ?></p>
-                                        <p class="text-end" style="font-family: 'Passion One', sans-serif; font-size:35px; margin-top:-20px; margin-right: 25px;">"</p>
+                                    <div class="col-md-7 col-5 p-0 m-0">
+                                        <div class="container mt-3">
+                                            <p class="fw-bolder fs-3"><?php echo $row["review_title"] ?></p>
+                                            <hr style="border: 1px solid white;">
+                                            <p style="font-family: 'Passion One', sans-serif; font-size:35px;">"</p>
+                                            <p style="margin-top: -10px;"><?php echo $row["review_context"] ?></p>
+                                            <p class="text-end" style="font-family: 'Passion One', sans-serif; font-size:35px; margin-top:-20px; margin-right: 25px;">"</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
                 <?php endwhile ?>
-
+                <?php
+                } else {
+                    // If there is no data, hide the section
+                    echo '<style>#testimony { display: none; }</style>';
+                }
+                ?>
 
             </div>
         </div>
     </div>
 </section>
+
 
 <section class="call-to-action-section overflow-hidden img-fluid" style="min-height: 700px;;">
     <div class="py-5">
@@ -808,7 +807,7 @@ include './includes/header.php';
 
 <section class="area">
     <div class="container">
-        <h1 class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">対応エリア</h1>
+        <h2 class="fw-bolder mt-5 text-success" style="font-size:44px; letter-spacing:5px;">対応エリア</h2>
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="chiba-tab" data-bs-toggle="tab" href="#chiba" role="tab" aria-controls="chiba" aria-selected="true">千葉県</a>
@@ -915,7 +914,7 @@ include './includes/header.php';
 <hr>
 
 <section class="container py-5" id="inquiry">
-    <h1 class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</h1>
+    <h2 class="fw-bolder mt-5" style="font-size:44px; letter-spacing:5px;">問い合わせる</h2>
     <div class="row">
         <div class="col-md-7">
             <img src="./img/inquiry-img.jpg" class="img-fluid d-md-none d-sm-block" alt="お問い合わせ | Inquiry">

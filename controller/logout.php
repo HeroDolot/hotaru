@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redirect to the login page
-header('Location: ../../hotaru/index.php'); // Change to your login page URL
+header('Location: ../../index.php'); // Change to your login page URL
 exit();
 ?>

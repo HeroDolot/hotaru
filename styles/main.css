@@ -35,50 +35,21 @@
 }
 
 .female-introduction {
-  background: url("../img/imageIntroduction.svg") no-repeat center;
+  /*background: url("../img/imageIntroduction.svg") no-repeat center;*/
   background-size: cover;
   background-position: center center; /* Center the image */
-  min-height: 876.5px;
+  /*min-height: 876.5px;*/
 }
 
 .female-introduction-mobile {
-  background: url("../img/imageSMIntroduction.svg") no-repeat center;
+  /*background: url("../img/imageSMIntroduction.svg") no-repeat center;*/
   background-size: cover;
   width: 100%;
   background-position: center center; /* Center the image */
-  min-height: 813.5px;
+  /*min-height: 813.5px;*/
 }
 
-.section-first {
-  position: relative;
-  background: url("../img/hero-img.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 809px;
-  overflow: hidden;
-  /* Ensure the overlay doesn't overflow */
-}
 
-.overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  /* Adjust the alpha value for the desired opacity */
-  z-index: 1;
-  /* Ensure the overlay is above the background image */
-}
-
-.section-first .container {
-  position: relative;
-  z-index: 2;
-  /* Ensure the text is above the overlay */
-  color: white;
-  /* Adjust text color for readability */
-  text-align: center;
-  padding: 20px;
-}
 
 .section-second {
   position: relative;

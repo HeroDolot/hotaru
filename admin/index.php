@@ -65,9 +65,9 @@ include './components/navbar.php';
 </div>
 
 
-<div class="container">
+<div class="container overflow-hidden">
   <div id="clock" class="fw-bolder fs-6"></div>
-  <div class="wrapper overflow-hidden">
+  <div class="wrapper">
     <div class="row mb-5 d-flex justify-content-center align-items-center">
       <div class="col-md-4 col-6 mt-5">
         <div class="card bg-info rounded-2" style="max-width: 20rem; min-height:122px;">
@@ -280,8 +280,16 @@ include './components/navbar.php';
                         </button>
                       </form>
 
-                      <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                      
+                    </td>
+                  </tr>
+                <?php endif; ?>
+              <?php endwhile; ?>
+            </tbody>
+          </table>
+          </div>
+                <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLabel">承認中</h5>
@@ -320,13 +328,6 @@ include './components/navbar.php';
                           </div>
                         </div>
                       </div>
-                    </td>
-                  </tr>
-                <?php endif; ?>
-              <?php endwhile; ?>
-            </tbody>
-          </table>
-
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <?php
@@ -352,7 +353,7 @@ include './components/navbar.php';
         </div>
       </div>
     </div>
-  </div>
+ 
   <div class="row">
     <div class="col-md-8 col-12 mb-5 mb-md-0">
       <div class="fw-bolder text-danger" id='calendar'></div>
@@ -370,13 +371,7 @@ include './components/navbar.php';
     </div>
   </div>
 </div>
-<div class="wrapper">
-  <div class="row">
-    <div class="col-md-12 mt-5">
-    </div>
-  </div>
-</div>
-
+ </div>
 
 <script>
   function confirmDelete(event) {
